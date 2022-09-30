@@ -1,0 +1,13 @@
+{
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "update.showReleaseNotes": false,
+    "telemetry.telemetryLevel": "off",
+    "git.autofetch": true,
+    "workbench.startupEditor": "none",
+    "window.menuBarVisibility": "toggle",
+    "extensions.ignoreRecommendations": true,
+    "editor.formatOnSave": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false
+}
