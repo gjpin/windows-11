@@ -14,6 +14,18 @@ winget upgrade --all --accept-source-agreements --accept-package-agreements
 wsl --install
 
 ################################################
+##### Services
+################################################
+
+# Disable Windows Search (indexing)
+Stop-Service -Name "wsearch"
+Set-Service -Name "wsearch" -StartupType Disabled
+
+# Disable Connected User Experiences and Telemtetry
+Stop-Service -Name "DiagTrack"
+Set-Service -Name "DiagTrack" -StartupType Disabled
+
+################################################
 ##### Firewall
 ################################################
 
