@@ -17,6 +17,10 @@
 - Disable unwanted features
 - Install extensions from Chrome store
 
+## Security
+- Virtualization-based protection of code integrity
+- System Guard Secure Launch
+
 ## Misc
 - Disable turbo boost when running on battery
 - Disable Windows Search (indexing)
