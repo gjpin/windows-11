@@ -14,10 +14,6 @@ winget upgrade --all --accept-source-agreements --accept-package-agreements
 # Install WSL
 wsl --install
 
-# Disable Windows Search (indexing)
-Stop-Service -Name "wsearch"
-Set-Service -Name "wsearch" -StartupType Disabled
-
 # Disallow wake timers
 powercfg /setdcvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
 powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
@@ -41,12 +37,8 @@ if ($HardwareType -eq 2) {
 }
 
 ################################################
-##### Telemetry / Privacy enhancements
+##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
-
-# Disable Connected User Experiences and Telemetry service
-Stop-Service -Name "DiagTrack"
-Set-Service -Name "DiagTrack" -StartupType Disabled
 
 # Disable Windows Customer Experience Program (Proxy) task
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Autochk" -TaskName "Proxy"
@@ -62,14 +54,6 @@ Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvem
 
 # Disable Windows Error Reporting task
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Windows Error Reporting" -TaskName "QueueReporting"
-
-# Disable Windows Error Reporting service
-Stop-Service -Name "WerSvc"
-Set-Service -Name "WerSvc" -StartupType Disabled
-
-# Disable Problem Reports Control Panel Support service
-Stop-Service -Name "wercplsupport"
-Set-Service -Name "wercplsupport" -StartupType Disabled
 
 ################################################
 ##### Firewall
@@ -274,7 +258,7 @@ winget install -e --id Git.Git
 winget install -e --id GitHub.GitHubDesktop
 winget install -e --id VideoLAN.VLC
 winget install -e --id Insomnia.Insomnia
-winget install -e --id Spotify.Spotify
+winget install -e --id --force Spotify.Spotify
 winget install -e --id DominikReichl.KeePass
 winget install -e --id TheDocumentFoundation.LibreOffice
 winget install -e --id tailscale.tailscale
