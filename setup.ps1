@@ -115,6 +115,7 @@ Remove-Item "$env:USERPROFILE\apps\LGPO\LGPO.zip"
 # https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
 # https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies
 # https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-security-configuration-framework/windows-security-baselines
+# https://learn.microsoft.com/en-us/windows/security/threat-protection/device-guard/enable-virtualization-based-protection-of-code-integrity
 
 # Create policies directories
 New-Item -Path $env:USERPROFILE\apps\LGPO\policies -ItemType directory
