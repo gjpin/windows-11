@@ -8,15 +8,19 @@ New-Item -Path $env:USERPROFILE\scripts -ItemType directory
 New-Item -Path $env:USERPROFILE\src -ItemType directory
 New-Item -Path $env:USERPROFILE\.ssh -ItemType directory
 
-# Upgrade packages and accept winget's msstore source agreement
-winget upgrade --all --accept-source-agreements --accept-package-agreements
-
-# Install WSL
-wsl --install
-
 # Disallow wake timers
 powercfg /setdcvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
 powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
+
+################################################
+##### Setup WSL
+################################################
+
+# Enable WSL
+wsl --install --inbox --web-download --no-distribution
+
+# Install Ubuntu 22.04
+winget install -e --source winget --id Canonical.Ubuntu.2204 --accept-source-agreements --accept-package-agreements
 
 ################################################
 ##### Disable turbo boost when running on battery
@@ -90,7 +94,7 @@ Add-Content $env:WINDIR\system32\Drivers\etc\hosts "`n`n$hosts_ipv6"
 New-Item -Path $env:USERPROFILE\apps\LGPO -ItemType directory
 
 # Download LGPO
-Invoke-RestMethod `
+Invoke-WebRequest `
     -Uri "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/LGPO.zip" `
     -OutFile "$env:USERPROFILE\apps\LGPO\LGPO.zip"
 
@@ -118,11 +122,11 @@ New-Item -Path $env:USERPROFILE\apps\LGPO\policies\Machine -ItemType directory
 New-Item -Path $env:USERPROFILE\apps\LGPO\policies\User -ItemType directory
 
 # Download policies
-Invoke-RestMethod `
+Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/policies/machine.txt" `
     -OutFile "$env:USERPROFILE\apps\LGPO\policies\machine.txt"
 
-Invoke-RestMethod `
+Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/policies/user.txt" `
     -OutFile "$env:USERPROFILE\apps\LGPO\policies\user.txt"
 
@@ -209,7 +213,7 @@ $response.Dispose()
 $version = $realTagUrl.split('/')[-1].Trim('v')
 $filename = "syncthing-windows-amd64-v$version.zip"
 $downloadUrl = $realTagUrl.Replace('tag', 'download') + '/' + $filename
-Invoke-RestMethod `
+Invoke-WebRequest `
     -Uri "$downloadUrl" `
     -OutFile "$env:USERPROFILE\apps\$filename"
 
@@ -237,7 +241,7 @@ New-NetFirewallRule -DisplayName 'Syncthing - TCP' -Program "$env:USERPROFILE\ap
 New-NetFirewallRule -DisplayName 'Syncthing - UDP' -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Profile Private -Direction Inbound -Action Allow -Protocol UDP -LocalPort 22000,21027
 
 # Download autoupdater script
-Invoke-RestMethod `
+Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/syncthing-autoupdater.ps1" `
     -OutFile "$env:USERPROFILE\scripts\syncthing-autoupdater.ps1"
 
@@ -253,16 +257,20 @@ Register-ScheduledTask -TaskName "Syncthing autoupdater" -InputObject $task
 ##### Install applications
 ################################################
 
-winget install -e --id Microsoft.PowerShell
-winget install -e --id Git.Git
-winget install -e --id GitHub.GitHubDesktop
-winget install -e --id VideoLAN.VLC
-winget install -e --id Insomnia.Insomnia
-winget install -e --id --force Spotify.Spotify
-winget install -e --id DominikReichl.KeePass
-winget install -e --id TheDocumentFoundation.LibreOffice
-winget install -e --id tailscale.tailscale
-winget install -e --id Bitwarden.Bitwarden
+# Applicatons with --force are only used in packages which URL is not versioned
+# and the hash may not match
+
+winget install -e --source winget --id Microsoft.PowerShell
+winget install -e --source winget --id Git.Git
+winget install -e --source winget --id GitHub.GitHubDesktop
+winget install -e --source winget --id VideoLAN.VLC
+winget install -e --source winget --id Insomnia.Insomnia
+winget install -e --source winget --force --id Spotify.Spotify 
+winget install -e --source winget --id DominikReichl.KeePass
+winget install -e --source winget --id TheDocumentFoundation.LibreOffice
+winget install -e --source winget --id Joplin.Joplin
+winget install -e --source winget --id tailscale.tailscale
+winget install -e --source winget --id Bitwarden.Bitwarden
 
 ################################################
 ##### VSCode
@@ -275,7 +283,7 @@ winget install -e --id Microsoft.VisualStudioCode
 New-Item -Path $env:USERPROFILE\AppData\Roaming\Code\User -ItemType directory
 
 # Import VSCode settings
-Invoke-RestMethod `
+Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/configs/vscode.json" `
     -OutFile "$env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
 

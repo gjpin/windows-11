@@ -27,7 +27,7 @@ if ($latestVersion -ne $installedVersion) {
     $version = $realTagUrl.split('/')[-1].Trim('v')
     $filename = "syncthing-windows-amd64-v$version.zip"
     $downloadUrl = $realTagUrl.Replace('tag', 'download') + '/' + $filename
-    Invoke-RestMethod `
+    Invoke-WebRequest `
         -Uri "$downloadUrl" `
         -OutFile "$env:USERPROFILE\apps\$filename"
 
