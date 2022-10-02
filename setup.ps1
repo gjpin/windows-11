@@ -5,6 +5,7 @@
 # Create user directories
 New-Item -Path $env:USERPROFILE\apps -ItemType directory
 New-Item -Path $env:USERPROFILE\scripts -ItemType directory
+New-Item -Path $env:USERPROFILE\src -ItemType directory
 New-Item -Path $env:USERPROFILE\.ssh -ItemType directory
 
 # Upgrade packages and accept winget's msstore source agreement
@@ -16,6 +17,10 @@ wsl --install
 # Disable Windows Search (indexing)
 Stop-Service -Name "wsearch"
 Set-Service -Name "wsearch" -StartupType Disabled
+
+# Disallow wake timers
+powercfg /setdcvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
+powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
 
 ################################################
 ##### Disable turbo boost when running on battery
