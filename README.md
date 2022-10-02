@@ -10,6 +10,7 @@
 
 ## Restricted traffic (through local group policy)
 - Apply [Windows Restricted Traffic Limited Functionality Baseline](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services), with exceptions for security/updates
+  - Exceptions are commented, in order to keep it easy to keep track of diffs
 
 ## Microsoft Edge (through local group policy)
 - Enhance default security and privacy

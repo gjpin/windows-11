@@ -13,6 +13,10 @@ winget upgrade --all --accept-source-agreements --accept-package-agreements
 # Install WSL
 wsl --install
 
+# Disable Windows Search (indexing)
+Stop-Service -Name "wsearch"
+Set-Service -Name "wsearch" -StartupType Disabled
+
 ################################################
 ##### Disable turbo boost when running on battery
 ################################################
@@ -32,16 +36,35 @@ if ($HardwareType -eq 2) {
 }
 
 ################################################
-##### Services
+##### Telemetry / Privacy enhancements
 ################################################
 
-# Disable Windows Search (indexing)
-Stop-Service -Name "wsearch"
-Set-Service -Name "wsearch" -StartupType Disabled
-
-# Disable Connected User Experiences and Telemtetry
+# Disable Connected User Experiences and Telemetry service
 Stop-Service -Name "DiagTrack"
 Set-Service -Name "DiagTrack" -StartupType Disabled
+
+# Disable Windows Customer Experience Program (Proxy) task
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Autochk" -TaskName "Proxy"
+
+# Disable Windows Customer Experience Program (Microsoft Compatibility Appraiser) task
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "Microsoft Compatibility Appraiser"
+
+# Disable Windows Customer Experience Program (Consolidator) task
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program" -TaskName "Consolidator"
+
+# Disable Windows Customer Experience Program (UsbCeip) task
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program" -TaskName "UsbCeip"
+
+# Disable Windows Error Reporting task
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Windows Error Reporting" -TaskName "QueueReporting"
+
+# Disable Windows Error Reporting service
+Stop-Service -Name "WerSvc"
+Set-Service -Name "WerSvc" -StartupType Disabled
+
+# Disable Problem Reports Control Panel Support service
+Stop-Service -Name "wercplsupport"
+Set-Service -Name "wercplsupport" -StartupType Disabled
 
 ################################################
 ##### Firewall
