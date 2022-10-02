@@ -18,6 +18,9 @@
 - Install extensions from Chrome store
 
 ## Misc
+- Disable turbo boost when running on battery
+- Disable Windows Search (indexing)
+- Disallow wake timers
 - Remove preinstalled apps using winget and Remove-AppxPackage
 - Install applications
 - Disable bing search, chat/widget icons, etc
