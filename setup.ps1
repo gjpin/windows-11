@@ -23,24 +23,6 @@ wsl --install --inbox --web-download --no-distribution
 winget install -e --source winget --id Canonical.Ubuntu.2204 --accept-source-agreements --accept-package-agreements
 
 ################################################
-##### Disable turbo boost when running on battery
-################################################
-
-# References:
-# https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystem
-# https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/hardware/power/power-performance-tuning#processor-performance-boost-mode
-# https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options
-
-# Get hardware type
-$HardwareType = (Get-WmiObject -Class Win32_ComputerSystem -Property PCSystemType).PCSystemType
-
-# If device is mobile, disable turbo boost when running on battery
-if ($HardwareType -eq 2) {
-    Powercfg -setdcvalueindex scheme_current sub_processor PERFBOOSTMODE 0
-    Powercfg -setactive scheme_current
-}
-
-################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
 
