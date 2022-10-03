@@ -13,16 +13,6 @@ powercfg /setdcvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd
 powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
 
 ################################################
-##### Setup WSL
-################################################
-
-# Enable WSL
-wsl --install --inbox --web-download --no-distribution
-
-# Install Ubuntu 22.04
-winget install -e --source winget --id Canonical.Ubuntu.2204 --accept-source-agreements --accept-package-agreements
-
-################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
 
@@ -183,6 +173,16 @@ foreach ($app in $apps)
 Remove-Item -Force "$env:USERPROFILE\OneDrive"
 
 ################################################
+##### Setup WSL
+################################################
+
+# Enable WSL
+wsl --install --inbox --web-download --no-distribution
+
+# Install Ubuntu 22.04
+winget install -e --source winget --id Canonical.Ubuntu.2204 --accept-source-agreements --accept-package-agreements
+
+################################################
 ##### Syncthing
 ################################################
 
@@ -260,7 +260,7 @@ winget install -e --source winget --id Bitwarden.Bitwarden
 ################################################
 
 # Install VSCode
-winget install -e --id Microsoft.VisualStudioCode
+winget install -e --source winget --id Microsoft.VisualStudioCode
 
 # Create VSCode settings directory
 New-Item -Path $env:USERPROFILE\AppData\Roaming\Code\User -ItemType directory
