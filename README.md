@@ -36,7 +36,7 @@
 
 ## Others
 ### Syncthing (installation + autostart autoupdate)
-```
+```powershell
 # Download latest syncthing version
 # https://copdips.com/2019/12/Using-Powershell-to-retrieve-latest-package-url-from-github-releases.html
 $url = 'https://github.com/syncthing/syncthing/releases/latest'
@@ -89,7 +89,7 @@ Register-ScheduledTask -TaskName "Syncthing autoupdater" -InputObject $task
 ```
 
 ### Disable turbo boost when running on battery
-```
+```powershell
 # References:
 # https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-computersystem
 # https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/hardware/power/power-performance-tuning#processor-performance-boost-mode
