@@ -35,7 +35,7 @@
 - Install Powershell and Remote WSL extensions
 
 ## Others
-### Syncthing (installation + autostart autoupdate)
+### Syncthing (installation + autostart + autoupdate)
 ```powershell
 # Download latest syncthing version
 # https://copdips.com/2019/12/Using-Powershell-to-retrieve-latest-package-url-from-github-releases.html
