@@ -35,9 +35,6 @@ Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Windows Error Reporting" -Ta
 ##### Firewall
 ################################################
 
-# Block all inbound connections on Public networks (no exceptions)
-netsh advfirewall set public firewallpolicy blockinboundalways,allowoutbound
-
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
 $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
 $ips = $ips | Where-Object {$_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"}

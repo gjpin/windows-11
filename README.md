@@ -1,8 +1,9 @@
 # Windows 11 setup
 
 ## Firewall
-- Block all inbound connections on Public networks (no exceptions)
-- Block IPs from [WindowsSpyBlocker](https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt) list
+- Shield up mode (all profiles)
+- Disable unicast responses to multicast and broadcast traffic (all profiles)
+- Block outgoing connections to [WindowsSpyBlocker](https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt) IPs
 
 ## Hosts
 - Add hosts file to Windows Defender exclusion list
