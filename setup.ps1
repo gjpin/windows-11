@@ -430,6 +430,11 @@ winget install -e --source winget --id tailscale.tailscale
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Nextcloud.NextcloudDesktop
 
+# Disable startup apps
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name 'Spotify' -Value ([byte[]](0x33,0x32,0xFF))
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name 'Steam' -Value ([byte[]](0x33,0x32,0xFF))
+Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name 'EpicGamesLauncher' -Value ([byte[]](0x33,0x32,0xFF))
+
 ################################################
 ##### VSCode
 ################################################
