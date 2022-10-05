@@ -38,7 +38,238 @@ Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Windows Error Reporting" -Ta
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
 $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
 $ips = $ips | Where-Object {$_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"}
-New-NetFirewallRule -DisplayName 'WindowsSpyBlocker' -Profile Any -Direction Outbound -Action Block -Protocol Any -LocalPort Any -RemoteAddress $ips
+New-NetFirewallRule -DisplayName "Spy" -Group "WindowsSpyBlocker" `
+    -Program Any `
+    -Service Any -Protocol Any `
+    -LocalAddress Any -RemoteAddress $ips `
+    -LocalPort Any -RemotePort Any `
+    -Enabled True -Action Block -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# References:
+# https://github.com/metablaster/WindowsFirewallRuleset
+
+# Allow Windows services and applications through firewall (outbound)
+New-NetFirewallRule -DisplayName "Service Host" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\svchost.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Service Initiated Healing" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\sihclient.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Device Census" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\DeviceCensus.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Windows Defender" -Group "Windows Services" `
+    -Program "%ALLUSERSPROFILE%\Microsoft\Windows Defender\Platform\MsMpEng.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Windows Defender CLI" -Group "Windows Services" `
+    -Program "%ALLUSERSPROFILE%\Microsoft\Windows Defender\Platform\MpCmdRun.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Malicious Software Removal Tool" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\MRT.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Activation Client" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\slui.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "KMS Connection Broker" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\SppExtComObj.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "nslookup" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\nslookup.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "curl" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\curl.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Smartscreen" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\smartscreen.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Update Session Orchestrator" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\usoclient.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "SSH" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\OpenSSH\ssh.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Windows Security Health Service" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\SecurityHealthService.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Windows UAC" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\consent.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "ICMP" -Group "Windows Services" `
+    -Program "SYSTEM" `
+    -Service Any -Protocol ICMPv4 `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Microsoft Edge" -Group "Windows Services" `
+    -Program "%PROGRAMFILES(x86)%\Microsoft\Edge\Application\msedge.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Microsoft Edge - Update" -Group "Windows Services" `
+    -Program "%PROGRAMFILES(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Allow user applications through firewall (outbound)
+## Winget
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Microsoft.DesktopAppInstaller_*x64__8wekyb3d8bbwe -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$wingetPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+New-NetFirewallRule -DisplayName "Winget" -Group "User Applications" `
+    -Program "$wingetPath\winget.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Powershell
+New-NetFirewallRule -DisplayName "Powershell 64bit" -Group "User Applications" `
+    -Program "%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Powershell ISE 64bit" -Group "User Applications" `
+    -Program "%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell_ise.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Powershell 32bit" -Group "User Applications" `
+    -Program "%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Powershell ISE 32bit" -Group "User Applications" `
+    -Program "%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell_ise.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Powershell Core" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\PowerShell\7\pwsh.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Git and Github Desktop
+$VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Local\GitHubDesktop" -Filter app-* -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$githubPath = "$env:USERPROFILE\AppData\Local\GitHubDesktop\$VersionFolder"
+New-NetFirewallRule -DisplayName "Github Desktop" -Group "User Applications" `
+    -Program "$githubPath\GitHubDesktop.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Github Desktop - Remote HTTPS" -Group "User Applications" `
+    -Program "$githubPath\resources\app\git\mingw64\bin\git-remote-https.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Github Desktop - Update" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\GitHubDesktop\Update.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Git - curl" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Git\mingw64\bin\curl.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Git" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Git\mingw64\bin\git.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Git - Remote HTTPS" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Git\mingw64\libexec\git-core\git-remote-https.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Git - SSH" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Git\usr\bin\ssh.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## VSCode
+New-NetFirewallRule -DisplayName "Visual Studio Code" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\Code.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Spotify
+New-NetFirewallRule -DisplayName "Spotify" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Roaming\Spotify\Spotify.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Steam
+New-NetFirewallRule -DisplayName "Steam" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam Service" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Common Files\Steam\SteamService.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam Web Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\bin\cef\cef.win7x64\steamwebhelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Epic Games Launcher
+New-NetFirewallRule -DisplayName "Epic Games Launcher 64bit" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesLauncher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Epic Games Launcher 32bit" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Epic Games Web Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Engine\Binaries\Win64\EpicWebHelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Joplin
+New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Nextcloud
+New-NetFirewallRule -DisplayName "Nextcloud" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Nextcloud\nextcloud.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Nextcloud Web Engine" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Nextcloud\QtWebEngineProcess.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Tailscale
+New-NetFirewallRule -DisplayName "Tailscale" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Tailscale IPN\tailscale.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Tailscale IPN" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Tailscale IPN\tailscale-ipn.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Tailscale Daemon" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Tailscale IPN\tailscaled.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Bitwarden
+New-NetFirewallRule -DisplayName "Bitwarden" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\Bitwarden\Bitwarden.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Insomnia
+$VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Local\insomnia" -Filter app-* -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$insomniaPath = "$env:USERPROFILE\AppData\Local\insomnia\$VersionFolder"
+New-NetFirewallRule -DisplayName "Insomnia" -Group "User Applications" `
+    -Program "$insomniaPath\Insomnia.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Insomnia - Update" -Group "User Applications" `
+    -Program "$insomniaPath\Update.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Insomnia - Update" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\insomnia\Update.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Update group policy settings
+gpupdate /target:Computer
 
 ################################################
 ##### Hosts

@@ -1,8 +1,15 @@
 # Windows 11 setup
 
 ## Firewall
-- Shield up mode (all profiles)
-- Disable unicast responses to multicast and broadcast traffic (all profiles)
+- Firewall can only be configured through Group Policy due to:
+  - Disallowed globally open ports user preference merge
+  - Disallowed authenticated applications user preference merge
+  - Disallowed local firewall rule policy merge
+  - Disallowed local IPsec policy merge
+- Block inbound/outbound traffic by default
+  - Exceptions are in Firewall section of the Powershell script
+- Shield up mode
+- Disable unicast responses to multicast and broadcast traffic
 - Block outgoing connections to [WindowsSpyBlocker](https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt) IPs
 
 ## Hosts
