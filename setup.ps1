@@ -173,10 +173,7 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
 $ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
 New-NetFirewallRule -DisplayName "WindowsSpyBlocker" -Group "WindowsSpyBlocker" `
-    -Program Any `
-    -Service Any -Protocol Any `
     -LocalAddress Any -RemoteAddress $ips `
-    -LocalPort Any -RemotePort Any `
     -Enabled True -Action Block -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # References:
