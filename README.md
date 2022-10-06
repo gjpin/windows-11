@@ -112,3 +112,6 @@ if ($HardwareType -eq 2) {
     Powercfg -setactive scheme_current
 }
 ```
+
+### Run Powershell script without changing global execution policy
+powershell.exe -ExecutionPolicy Unrestricted -File "$env:USERPROFILE\scripts\update-firewall-rules.ps1"

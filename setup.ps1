@@ -38,7 +38,7 @@ Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Windows Error Reporting" -Ta
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
 $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
 $ips = $ips | Where-Object {$_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"}
-New-NetFirewallRule -DisplayName "Spy" -Group "WindowsSpyBlocker" `
+New-NetFirewallRule -DisplayName "WindowsSpyBlocker" -Group "WindowsSpyBlocker" `
     -Program Any `
     -Service Any -Protocol Any `
     -LocalAddress Any -RemoteAddress $ips `
@@ -152,7 +152,7 @@ New-NetFirewallRule -DisplayName "Powershell Core" -Group "User Applications" `
     -Program "%PROGRAMFILES%\PowerShell\7\pwsh.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-## Git and Github Desktop
+## Github Desktop
 $VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Local\GitHubDesktop" -Filter app-* -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $githubPath = "$env:USERPROFILE\AppData\Local\GitHubDesktop\$VersionFolder"
@@ -168,6 +168,7 @@ New-NetFirewallRule -DisplayName "Github Desktop - Update" -Group "User Applicat
     -Program "$env:USERPROFILE\AppData\Local\GitHubDesktop\Update.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Git
 New-NetFirewallRule -DisplayName "Git - curl" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Git\mingw64\bin\curl.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
@@ -270,6 +271,11 @@ New-NetFirewallRule -DisplayName "Insomnia - Update" -Group "User Applications" 
 
 # Update group policy settings
 gpupdate /target:Computer
+
+# Helper script to update dynamic firewall rules
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/update-firewall-rules.ps1" `
+    -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
 
 ################################################
 ##### Hosts
