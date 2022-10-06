@@ -54,11 +54,29 @@
 ### List blocked executables by firewall
 ```powershell
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
-Get-EventLog security -newest 100 -InstanceId 5157 -Message *Destination* |  Select @{Name="message";Expression={ $_.ReplacementStrings[1] }}
+Get-EventLog security -newest 10 -InstanceId 5157 | Select @{Name="message";Expression={ $_.ReplacementStrings[1] }}
 ```
 
 ### Run Powershell script without changing global execution policy
+```
 powershell.exe -ExecutionPolicy Unrestricted -File "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
+```
+
+### No connection in WSL
+```bash
+
+# Set nameserver
+sudo tee /etc/resolv.conf << EOF
+nameserver 1.1.1.1
+EOF
+
+sudo tee /etc/wsl.conf << EOF
+[network]
+generateResolvConf = false
+EOF
+
+sudo chattr +i /etc/resolv.conf
+```
 
 ### Syncthing (installation + autostart + autoupdate)
 ```powershell

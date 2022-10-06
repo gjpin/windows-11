@@ -16,6 +16,15 @@ powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd
 # https://learn.microsoft.com/en-us/windows/win32/fwp/auditing-and-logging
 auditpol /set /category:"Object Access" /success:disable /failure:enable
 
+# Change wallpaper
+Set-ItemProperty -path 'HKCU:\Control Panel\Desktop' -name WallPaper -value "$env:SYSTEMROOT\Web\Wallpaper\Windows\img19.jpg"
+
+# Change lock screen wallpaper
+Set-ItemProperty -path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization' -name LockScreenImage -value "$env:SYSTEMROOT\Web\Wallpaper\Windows\img19.jpg"
+
+# Install WSL
+wsl --install Ubuntu
+
 ################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
@@ -110,16 +119,6 @@ foreach ($app in $apps) {
 
 # Delete OneDrive folder
 Remove-Item -Force "$env:USERPROFILE\OneDrive"
-
-################################################
-##### Setup WSL
-################################################
-
-# Enable WSL
-wsl --install --no-distribution
-
-# Install Ubuntu 22.04
-winget install -e --source winget --id Canonical.Ubuntu.2204 --accept-source-agreements --accept-package-agreements
 
 ################################################
 ##### Install applications
