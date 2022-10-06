@@ -19,9 +19,6 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 # Change wallpaper
 Set-ItemProperty -path 'HKCU:\Control Panel\Desktop' -name WallPaper -value "$env:SYSTEMROOT\Web\Wallpaper\Windows\img19.jpg"
 
-# Change lock screen wallpaper
-Set-ItemProperty -path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization' -name LockScreenImage -value "$env:SYSTEMROOT\Web\Wallpaper\Windows\img19.jpg"
-
 # Install WSL
 wsl --install Ubuntu
 
