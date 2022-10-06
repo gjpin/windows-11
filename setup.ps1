@@ -405,6 +405,11 @@ New-NetFirewallRule -DisplayName "AMD Software - Adrenalin" -Group "User Applica
     -Program "C:\Program Files\AMD\CNext\CNext\RadeonSoftware.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## WSL
+New-NetFirewallRule -DisplayName "WSL" -Group "User Applications" `
+    -Program "%SYSTEMROOT%\System32\wsl.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 
