@@ -1,5 +1,12 @@
 # Windows 11 setup
 
+## How to:
+1. Update system
+2. Change PC name
+3. Reboot
+4. Apply setup.ps1
+5. Reboot
+
 ## Firewall
 - Firewall can only be configured through Group Policy due to:
   - Disallowed globally open ports user preference merge
@@ -8,7 +15,7 @@
   - Disallowed local IPsec policy merge
 - Block inbound/outbound traffic by default
   - Exceptions are in Firewall section of the Powershell script
-- Shield up mode
+- Shield up mode (except Private profile)
 - Disable unicast responses to multicast and broadcast traffic
 - Block outgoing connections to [WindowsSpyBlocker](https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt) IPs
 
@@ -111,6 +118,20 @@ if ($HardwareType -eq 2) {
     Powercfg -setdcvalueindex scheme_current sub_processor PERFBOOSTMODE 0
     Powercfg -setactive scheme_current
 }
+```
+
+### Add WindowsSpyBlocker hosts
+```powershell
+# Add hosts file to Windows Defender exclusion list
+# Will trigger UAC popup
+Add-MpPreference -ExclusionPath "$env:WINDIR\system32\Drivers\etc\hosts"
+
+# WindowsSpyBlocker (https://github.com/crazy-max/WindowsSpyBlocker/)
+$hosts_ipv4 = (Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt").Content
+Add-Content $env:WINDIR\system32\Drivers\etc\hosts "`n`n$hosts_ipv4"
+
+$hosts_ipv6 = (Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy_v6.txt").Content
+Add-Content $env:WINDIR\system32\Drivers\etc\hosts "`n`n$hosts_ipv6"
 ```
 
 ### Run Powershell script without changing global execution policy
