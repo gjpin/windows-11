@@ -56,7 +56,7 @@ Invoke-WebRequest `
 # Extract LGPO
 Add-Type -Assembly System.IO.Compression.FileSystem
 $zip = [IO.Compression.ZipFile]::OpenRead("$env:USERPROFILE\apps\LGPO\LGPO.zip")
-$zip.Entries | where { $_.Name -like 'LGPO.exe' } | foreach { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$env:USERPROFILE\apps\LGPO\LGPO.exe", $true) }
+$zip.Entries | Where-Object { $_.Name -like 'LGPO.exe' } | ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$env:USERPROFILE\apps\LGPO\LGPO.exe", $true) }
 $zip.Dispose()
 
 # Remove LGPO zip
