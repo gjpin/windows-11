@@ -12,6 +12,10 @@ New-Item -Path $env:USERPROFILE\.ssh -ItemType directory
 powercfg /setdcvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
 powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd3b718a-0680-4d9d-8ab2-e1d2b4ac806d 0
 
+# Enable auditing for "Object Access"
+# https://learn.microsoft.com/en-us/windows/win32/fwp/auditing-and-logging
+auditpol /set /category:"Object Access" /success:disable /failure:enable
+
 ################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
@@ -169,13 +173,6 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 ##### Firewall
 ################################################
 
-# Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
-$ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
-$ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
-New-NetFirewallRule -DisplayName "WindowsSpyBlocker" -Group "WindowsSpyBlocker" `
-    -LocalAddress Any -RemoteAddress $ips `
-    -Enabled True -Action Block -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
-
 # References:
 # https://github.com/metablaster/WindowsFirewallRuleset
 
@@ -240,9 +237,8 @@ New-NetFirewallRule -DisplayName "Windows UAC" -Group "Windows Services" `
     -Program "%SYSTEMROOT%\System32\consent.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "ICMP" -Group "Windows Services" `
+New-NetFirewallRule -DisplayName "Windows Kernel" -Group "Windows Services" `
     -Program "SYSTEM" `
-    -Service Any -Protocol ICMPv4 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Microsoft Edge" -Group "Windows Services" `
@@ -253,15 +249,21 @@ New-NetFirewallRule -DisplayName "Microsoft Edge - Update" -Group "Windows Servi
     -Program "%PROGRAMFILES(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# Allow user applications through firewall (outbound)
-## Winget
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Microsoft.DesktopAppInstaller_*x64__8wekyb3d8bbwe -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $wingetPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
-New-NetFirewallRule -DisplayName "Winget" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Winget" -Group "Windows Services" `
     -Program "$wingetPath\winget.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter MicrosoftCorporationII.WindowsSubsystemForLinux_*_x64__8wekyb3d8bbwe -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$wslPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+New-NetFirewallRule -DisplayName "WSL" -Group "Windows Services" `
+    -Program "$wslPath\wsl.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Allow user applications through firewall (outbound)
 ## Powershell
 New-NetFirewallRule -DisplayName "Powershell 64bit" -Group "User Applications" `
     -Program "%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\powershell.exe" `
@@ -402,8 +404,24 @@ New-NetFirewallRule -DisplayName "Insomnia - Update" -Group "User Applications" 
 
 ## AMD Software - Adrenaline
 New-NetFirewallRule -DisplayName "AMD Software - Adrenalin" -Group "User Applications" `
-    -Program "C:\Program Files\AMD\CNext\CNext\RadeonSoftware.exe" `
+    -Program "%PROGRAMFILES%\AMD\CNext\CNext\RadeonSoftware.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## SteelSeries GG
+New-NetFirewallRule -DisplayName "SteelSeries GG" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\steelseries\gg\steelseriesengine.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "SteelSeries GG - Update" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\steelseries\gg\steelseriesgg.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
+$ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
+$ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
+New-NetFirewallRule -DisplayName "WindowsSpyBlocker" -Group "WindowsSpyBlocker" `
+    -LocalAddress Any -RemoteAddress $ips `
+    -Enabled True -Action Block -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
 gpupdate /target:Computer

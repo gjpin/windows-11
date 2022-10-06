@@ -9,8 +9,16 @@ Set-NetFirewallRule -DisplayName "WindowsSpyBlocker" `
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Microsoft.DesktopAppInstaller_*x64__8wekyb3d8bbwe -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $wingetPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
-Set-NetFirewallRule -DisplayName "Winget" `
+Set-NetFirewallRule -DisplayName "Winget" -Group "Windows Services" `
     -Program "$wingetPath\winget.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# WSL
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter MicrosoftCorporationII.WindowsSubsystemForLinux_*_x64__8wekyb3d8bbwe -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$wslPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+Set-NetFirewallRule -DisplayName "WSL" -Group "Windows Services" `
+    -Program "$wslPath\wsl.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Github Desktop

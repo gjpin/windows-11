@@ -50,6 +50,16 @@
 - Install Powershell and Remote WSL extensions
 
 ## Others
+
+### List blocked executables by firewall
+```powershell
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
+Get-EventLog security -newest 100 -InstanceId 5157 -Message *Destination* |  Select @{Name="message";Expression={ $_.ReplacementStrings[1] }}
+```
+
+### Run Powershell script without changing global execution policy
+powershell.exe -ExecutionPolicy Unrestricted -File "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
+
 ### Syncthing (installation + autostart + autoupdate)
 ```powershell
 # Download latest syncthing version
@@ -133,6 +143,3 @@ Add-Content $env:WINDIR\system32\Drivers\etc\hosts "`n`n$hosts_ipv4"
 $hosts_ipv6 = (Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy_v6.txt").Content
 Add-Content $env:WINDIR\system32\Drivers\etc\hosts "`n`n$hosts_ipv6"
 ```
-
-### Run Powershell script without changing global execution policy
-powershell.exe -ExecutionPolicy Unrestricted -File "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
