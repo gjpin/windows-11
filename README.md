@@ -50,7 +50,7 @@
 ### List blocked executables by firewall
 ```powershell
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
-Get-EventLog security -newest 10 -InstanceId 5157 | Select @{Name="message";Expression={ $_.ReplacementStrings[1] }}
+Get-EventLog security -newest 20 -InstanceId 5157 -Message *Destination* | format-table -wrap
 ```
 
 ### Run Powershell script without changing global execution policy

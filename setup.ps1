@@ -428,6 +428,11 @@ New-NetFirewallRule -DisplayName "SteelSeries GG - Update" -Group "User Applicat
     -Program "%PROGRAMFILES%\steelseries\gg\steelseriesgg.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Raspberry Pi Imager
+New-NetFirewallRule -DisplayName "Raspberry Pi Imager" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Raspberry Pi Imager\rpi-imager.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
 $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
 $ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
