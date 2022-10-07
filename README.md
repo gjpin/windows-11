@@ -19,10 +19,6 @@
 - Disable unicast responses to multicast and broadcast traffic
 - Block outgoing connections to [WindowsSpyBlocker](https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt) IPs
 
-## Hosts
-- Add hosts file to Windows Defender exclusion list
-- Add addresses from [WindowsSpyBlocker](https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt) list
-
 ## Restricted traffic (through local group policy)
 - Apply [Windows Restricted Traffic Limited Functionality Baseline](https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services), with exceptions for security/updates
   - Exceptions are commented, in order to keep it easy to keep track of diffs
