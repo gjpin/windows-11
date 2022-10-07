@@ -327,7 +327,7 @@ New-NetFirewallRule -DisplayName "Spotify" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Roaming\Spotify\Spotify.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-## Steam
+## Steam - Outbound
 New-NetFirewallRule -DisplayName "Steam" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
@@ -339,6 +339,19 @@ New-NetFirewallRule -DisplayName "Steam Service" -Group "User Applications" `
 New-NetFirewallRule -DisplayName "Steam Web Helper" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\bin\cef\cef.win7x64\steamwebhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Steam - Inbound
+New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
+    -Profile Private -RemoteAddress LocalSubnet4 `
+    -LocalPort 27031-27036 -Protocol UDP `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
+    -Profile Private -RemoteAddress LocalSubnet4 `
+    -LocalPort 27036 -Protocol TCP `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 ## Epic Games Launcher
 New-NetFirewallRule -DisplayName "Epic Games Launcher 64bit" -Group "User Applications" `
