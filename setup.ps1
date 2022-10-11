@@ -20,7 +20,7 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 Set-ItemProperty -path 'HKCU:\Control Panel\Desktop' -name WallPaper -value "$env:SYSTEMROOT\Web\Wallpaper\Windows\img19.jpg"
 
 # Install WSL
-wsl --install Ubuntu
+wsl --install
 
 ################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
