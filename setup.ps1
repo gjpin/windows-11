@@ -446,6 +446,11 @@ New-NetFirewallRule -DisplayName "Unity Editor - 2021" -Group "User Applications
     -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.11f1\Editor\Unity.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Docker
+New-NetFirewallRule -DisplayName "Docker" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Docker\Docker\resources\com.docker.backend.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
 $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
 $ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
