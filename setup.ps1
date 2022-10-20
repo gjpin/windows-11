@@ -477,10 +477,10 @@ Invoke-WebRequest `
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $binpolicyzip = [IO.Path]::GetTempFileName() | Rename-Item -NewName { $_ -replace 'tmp$', 'zip' } –PassThru
-iwr https://aka.ms/VulnerableDriverBlockList -UseBasicParsing -OutFile $binpolicyzip
+Invoke-WebRequest https://aka.ms/VulnerableDriverBlockList -UseBasicParsing -OutFile $binpolicyzip
 $zipFile = [IO.Compression.ZipFile]::OpenRead($binpolicyzip)
 $zipFile.Entries | Where-Object Name -like SiPolicy_Enforced.p7b | ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$env:windir\system32\CodeIntegrity\SiPolicy.p7b", $true) }
-dir "$env:windir\system32\CodeIntegrity\SiPolicy.p7b"
+Get-ChildItem "$env:windir\system32\CodeIntegrity\SiPolicy.p7b"
 
 ################################################
 ##### Apply local group policies
