@@ -136,6 +136,7 @@ winget install -e --source winget --id Joplin.Joplin
 winget install -e --source winget --id tailscale.tailscale
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Nextcloud.NextcloudDesktop
+winget install -e --source winget --id Docker.DockerDesktop
 
 # Set Tailscale network to Private network
 Set-NetConnectionProfile -InterfaceAlias Tailscale -NetworkCategory "Private"
