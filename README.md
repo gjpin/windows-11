@@ -47,9 +47,6 @@
 
 ## Others
 
-### Add 'I don't care about cookies' filter to uBlock Origin
-```https://www.i-dont-care-about-cookies.eu/abp/```
-
 ### List blocked executables by firewall
 ```powershell
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
