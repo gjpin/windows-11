@@ -452,6 +452,11 @@ New-NetFirewallRule -DisplayName "Docker" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Docker\Docker\resources\com.docker.backend.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## VirtualBox
+New-NetFirewallRule -DisplayName "VirtualBox" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oracle\VirtualBox\VirtualBoxVM.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
 $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
 $ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
