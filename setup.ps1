@@ -137,6 +137,7 @@ winget install -e --source winget --id tailscale.tailscale
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Nextcloud.NextcloudDesktop
 winget install -e --source winget --id Docker.DockerDesktop
+winget install -e --source winget --id Discord.Discord
 
 # Set Tailscale network to Private network
 Set-NetConnectionProfile -InterfaceAlias Tailscale -NetworkCategory "Private"
@@ -455,6 +456,14 @@ New-NetFirewallRule -DisplayName "Docker" -Group "User Applications" `
 ## VirtualBox
 New-NetFirewallRule -DisplayName "VirtualBox" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Oracle\VirtualBox\VirtualBoxVM.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Discord
+$VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Local\Discord" -Filter app-* -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$discordPath = "$env:USERPROFILE\AppData\Local\insomnia\$VersionFolder"
+New-NetFirewallRule -DisplayName "Discord" -Group "User Applications" `
+    -Program "$discordPath\Discord.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list

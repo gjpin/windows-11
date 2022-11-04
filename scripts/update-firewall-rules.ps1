@@ -49,4 +49,12 @@ Set-NetFirewallRule -DisplayName "Insomnia - Update" `
     -Program "$insomniaPath\Update.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Discord
+$VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Local\Discord" -Filter app-* -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$discordPath = "$env:USERPROFILE\AppData\Local\insomnia\$VersionFolder"
+Set-NetFirewallRule -DisplayName "Discord" `
+    -Program "$discordPath\Discord.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 gpupdate /target:Computer
