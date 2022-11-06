@@ -57,4 +57,12 @@ Set-NetFirewallRule -DisplayName "Discord" `
     -Program "$discordPath\Discord.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Edge WebView
+$VersionFolders = Get-ChildItem -Directory -Path "C:\Program Files (x86)\Microsoft\EdgeWebView\Application" -Filter "???.*" -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$edgewebviewPath = "C:\Program Files (x86)\Microsoft\EdgeWebView\Application\$VersionFolder"
+Set-NetFirewallRule -DisplayName "Edge WebView" `
+    -Program "$edgewebviewPath\msedgewebview2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 gpupdate /target:Computer

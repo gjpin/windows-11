@@ -49,6 +49,10 @@
 
 ### List blocked executables by firewall
 ```powershell
+Get-WinEvent -FilterHashtable @{LogName='Security'} -MaxEvents 50 |Where-Object -Property Message -Match "Outbound:*" | Select-Object -Unique -ExpandProperty Message
+
+or
+
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
 Get-EventLog security -newest 20 -InstanceId 5157 -Message *Destination* | format-table -wrap
 ```
