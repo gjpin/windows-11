@@ -138,9 +138,13 @@ winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Nextcloud.NextcloudDesktop
 winget install -e --source winget --id Docker.DockerDesktop
 winget install -e --source winget --id Discord.Discord
+winget install -e --source winget --id Mozilla.Firefox
 
 # Set Tailscale network to Private network
-Set-NetConnectionProfile -InterfaceAlias Tailscale -NetworkCategory "Private"
+# Set-NetConnectionProfile -InterfaceAlias Tailscale -NetworkCategory "Private"
+
+# Set WireGuard network to Private network
+Set-NetConnectionProfile -InterfaceAlias wg0 -NetworkCategory "Private"
 
 # Disable startup apps
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name 'Spotify' -Value ([byte[]](0x33, 0x32, 0xFF))
@@ -481,6 +485,11 @@ $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $edgewebviewPath = "C:\Program Files (x86)\Microsoft\EdgeWebView\Application\$VersionFolder"
 New-NetFirewallRule -DisplayName "Edge WebView" -Group "User Applications" `
     -Program "$edgewebviewPath\msedgewebview2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Firefox
+New-NetFirewallRule -DisplayName "Firefox" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Mozilla Firefox\firefox.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Block IPs from https://github.com/crazy-max/WindowsSpyBlocker/ list
