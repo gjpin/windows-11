@@ -133,7 +133,7 @@ winget install -e --source winget --force --id Spotify.Spotify
 winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 winget install -e --source winget --id Joplin.Joplin
-winget install -e --source winget --id tailscale.tailscale
+winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Nextcloud.NextcloudDesktop
 winget install -e --source winget --id Docker.DockerDesktop
@@ -380,6 +380,15 @@ New-NetFirewallRule -DisplayName "Nextcloud" -Group "User Applications" `
 
 New-NetFirewallRule -DisplayName "Nextcloud Web Engine" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Nextcloud\QtWebEngineProcess.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## WireGuard
+New-NetFirewallRule -DisplayName "WireGuard" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\WireGuard\wireguard.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "WireGuard" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\WireGuard\wg.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ## Tailscale
