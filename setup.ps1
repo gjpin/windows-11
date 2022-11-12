@@ -132,7 +132,7 @@ winget install -e --source winget --id Insomnia.Insomnia
 winget install -e --source winget --force --id Spotify.Spotify 
 winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id TheDocumentFoundation.LibreOffice
-winget install -e --source winget --id Joplin.Joplin
+winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Nextcloud.NextcloudDesktop
@@ -375,6 +375,11 @@ New-NetFirewallRule -DisplayName "Epic Games Web Helper" -Group "User Applicatio
 ## Joplin
 New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Obsidian
+New-NetFirewallRule -DisplayName "Obsidian" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Obsidian\Obsidian.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ## Nextcloud
