@@ -135,10 +135,10 @@ winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
-winget install -e --source winget --id Nextcloud.NextcloudDesktop
 winget install -e --source winget --id Docker.DockerDesktop
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
+# winget install -e --source winget --id Nextcloud.NextcloudDesktop
 
 # Set Tailscale network to Private network
 # Set-NetConnectionProfile -InterfaceAlias Tailscale -NetworkCategory "Private"
@@ -173,6 +173,60 @@ $commands = @'
     "& code --install-extension ms-vscode.powershell"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
+
+################################################
+##### Syncthing (installation + autostart + autoupdate)
+################################################
+
+# Download latest syncthing version
+# https://copdips.com/2019/12/Using-Powershell-to-retrieve-latest-package-url-from-github-releases.html
+$url = 'https://github.com/syncthing/syncthing/releases/latest'
+$request = [System.Net.WebRequest]::Create($url)
+$response = $request.GetResponse()
+$realTagUrl = $response.ResponseUri.OriginalString
+$response.Dispose()
+$version = $realTagUrl.split('/')[-1].Trim('v')
+$filename = "syncthing-windows-amd64-v$version.zip"
+$downloadUrl = $realTagUrl.Replace('tag', 'download') + '/' + $filename
+Invoke-WebRequest `
+    -Uri "$downloadUrl" `
+    -OutFile "$env:USERPROFILE\apps\$filename"
+
+# Extract zip
+Expand-Archive `
+    -LiteralPath "$env:USERPROFILE\apps\$filename" `
+    -DestinationPath "$env:USERPROFILE\apps"
+
+# Remove syncthing zip
+Remove-Item "$env:USERPROFILE\apps\$filename"
+
+# Rename syncthing folder
+Get-ChildItem "$env:USERPROFILE\apps\syncthing-windows-amd64-v*" | Rename-Item -NewName "syncthing"
+
+# Autostart syncthing
+$action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Argument "--no-console --no-browser"
+$trigger = New-ScheduledTaskTrigger -AtLogon -User "$env:USERNAME"
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -ExecutionTimeLimit 0
+$principal = New-ScheduledTaskPrincipal -UserID "$env:USERNAME" -LogonType S4U
+$task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
+Register-ScheduledTask -TaskName "Syncthing" -InputObject $task
+
+# Allow syncthing through firewall (private network only)
+New-NetFirewallRule -DisplayName 'Syncthing - TCP' -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Profile Private -Direction Inbound -Action Allow -Protocol TCP -LocalPort 22000
+New-NetFirewallRule -DisplayName 'Syncthing - UDP' -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Profile Private -Direction Inbound -Action Allow -Protocol UDP -LocalPort 22000, 21027
+
+# Download autoupdater script
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/syncthing-autoupdater.ps1" `
+    -OutFile "$env:USERPROFILE\scripts\syncthing-autoupdater.ps1"
+
+# Add autoupdater to task scheduler
+$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-executionpolicy bypass -file $env:USERPROFILE\scripts\syncthing-autoupdater.ps1"
+$trigger = New-ScheduledTaskTrigger -AtLogon -User "$env:USERNAME"
+$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -ExecutionTimeLimit (New-TimeSpan -Hours 1)
+$principal = New-ScheduledTaskPrincipal -UserID "$env:USERNAME" -LogonType S4U
+$task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
+Register-ScheduledTask -TaskName "Syncthing autoupdater" -InputObject $task
 
 ################################################
 ##### Firewall
