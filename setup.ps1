@@ -211,9 +211,26 @@ $principal = New-ScheduledTaskPrincipal -UserID "$env:USERNAME" -LogonType S4U
 $task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
 Register-ScheduledTask -TaskName "Syncthing" -InputObject $task
 
-# Allow syncthing through firewall (private network only)
-New-NetFirewallRule -DisplayName 'Syncthing - TCP' -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Profile Private -Direction Inbound -Action Allow -Protocol TCP -LocalPort 22000
-New-NetFirewallRule -DisplayName 'Syncthing - UDP' -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Profile Private -Direction Inbound -Action Allow -Protocol UDP -LocalPort 22000, 21027
+# Allow syncthing through firewall
+New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol TCP -LocalPort 22000 `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol UDP -LocalPort 22000, 21027 `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol TCP -LocalPort 22000 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol UDP -LocalPort 22000, 21027 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Download autoupdater script
 Invoke-WebRequest `
