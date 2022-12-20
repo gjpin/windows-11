@@ -599,6 +599,20 @@ $zipFile.Entries | Where-Object Name -like SiPolicy_Enforced.p7b | ForEach-Objec
 Get-ChildItem "$env:windir\system32\CodeIntegrity\SiPolicy.p7b"
 
 ################################################
+##### Virtualization
+################################################
+
+# References:
+# https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
+# https://learn.microsoft.com/en-us/powershell/module/dism/enable-windowsoptionalfeature?view=windowsserver2022-ps
+
+# Enable Hyper-V
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+
+# Enable Windows Hypervisor Platform
+Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
+
+################################################
 ##### Apply local group policies
 ################################################
 
