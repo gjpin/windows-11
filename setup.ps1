@@ -524,7 +524,7 @@ New-NetFirewallRule -DisplayName "Raspberry Pi Imager" -Group "User Applications
     -Program "%PROGRAMFILES(x86)%\Raspberry Pi Imager\rpi-imager.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-## Unity Hub
+## Unity
 New-NetFirewallRule -DisplayName "Unity Hub" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Unity Hub\Unity Hub.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
@@ -533,8 +533,8 @@ New-NetFirewallRule -DisplayName "Unity Hub - Licensing" -Group "User Applicatio
     -Program "%PROGRAMFILES%\Unity Hub\UnityLicensingClient_V1\Unity.Licensing.Client.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unity Editor - 2021" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.11f1\Editor\Unity.exe" `
+New-NetFirewallRule -DisplayName "Unity Editor" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.16f1\Editor\Unity.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ## Docker
