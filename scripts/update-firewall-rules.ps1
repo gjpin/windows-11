@@ -73,4 +73,11 @@ Set-NetFirewallRule -DisplayName "Unity Editor" `
     -Program "$unityPath\Editor\Unity.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+$VersionFolders = Get-ChildItem -Directory -Path "C:\Program Files\Unity\Hub\Editor" -Filter "????.*" -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$unityPath = "C:\Program Files\Unity\Hub\Editor\$VersionFolder"
+Set-NetFirewallRule -DisplayName "Unity Editor - Package manager" `
+    -Program "$unityPath\Editor\Data\Resources\PackageManager\Server\UnityPackageManager.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 gpupdate /target:Computer

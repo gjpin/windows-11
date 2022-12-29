@@ -537,6 +537,10 @@ New-NetFirewallRule -DisplayName "Unity Editor" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.16f1\Editor\Unity.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Unity Editor - Package manager" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.16f1\Editor\Data\Resources\PackageManager\Server\UnityPackageManager.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ## Docker
 New-NetFirewallRule -DisplayName "Docker" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Docker\Docker\resources\com.docker.backend.exe" `
