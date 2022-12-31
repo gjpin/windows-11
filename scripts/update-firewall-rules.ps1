@@ -80,4 +80,12 @@ Set-NetFirewallRule -DisplayName "Unity Editor - Package manager" `
     -Program "$unityPath\Editor\Data\Resources\PackageManager\Server\UnityPackageManager.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Battle.Net
+$VersionFolders = Get-ChildItem -Directory -Path "C:\ProgramData\Battle.net\Agent" -Filter "Agent.*" -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$battleNetAgentPath = "C:\ProgramData\Battle.net\Agent\$VersionFolder"
+Set-NetFirewallRule -DisplayName "Battle.Net agent" `
+    -Program "$battleNetAgentPath\Agent.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 gpupdate /target:Computer

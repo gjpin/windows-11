@@ -524,6 +524,33 @@ New-NetFirewallRule -DisplayName "Raspberry Pi Imager" -Group "User Applications
     -Program "%PROGRAMFILES(x86)%\Raspberry Pi Imager\rpi-imager.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Battle.Net
+New-NetFirewallRule -DisplayName "Battle.Net" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Battle.net\Battle.net.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Battle.Net launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Battle.net\Battle.net Launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Battle.Net agent" -Group "User Applications" `
+    -Program "C:\ProgramData\Battle.net\Agent\Agent.8093\Agent.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Battle.Net agent 2" -Group "User Applications" `
+    -Program "C:\ProgramData\Battle.net\Agent\Agent.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## Diablo Immortal
+New-NetFirewallRule -DisplayName "Diablo Immortal" -Group "User Applications" `
+    -Program "D:\battle.net\Diablo Immortal\Engine\Binaries\Win64\DiabloImmortal.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## COD Warzone
+New-NetFirewallRule -DisplayName "COD Warzone" -Group "User Applications" `
+    -Program "D:\battle.net\Call of Duty\_retail_\cod.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ## Unity
 New-NetFirewallRule -DisplayName "Unity Hub" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Unity Hub\Unity Hub.exe" `
