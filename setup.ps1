@@ -325,6 +325,12 @@ New-NetFirewallRule -DisplayName "Microsoft Edge - Update" -Group "Windows Servi
     -Program "%PROGRAMFILES(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## LSASS
+New-NetFirewallRule -DisplayName "LSASS" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\lsass.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Microsoft.DesktopAppInstaller_*x64__8wekyb3d8bbwe -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $wingetPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
