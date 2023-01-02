@@ -531,6 +531,10 @@ New-NetFirewallRule -DisplayName "Raspberry Pi Imager" -Group "User Applications
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ## Battle.Net
+New-NetFirewallRule -DisplayName "Battle.Net installer" -Group "User Applications" `
+    -Program "$env:USERPROFILE\Downloads\Battle.net-Setup.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 New-NetFirewallRule -DisplayName "Battle.Net" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Battle.net\Battle.net.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
