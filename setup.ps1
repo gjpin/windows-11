@@ -530,6 +530,32 @@ New-NetFirewallRule -DisplayName "Raspberry Pi Imager" -Group "User Applications
     -Program "%PROGRAMFILES(x86)%\Raspberry Pi Imager\rpi-imager.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+## Riot Client
+New-NetFirewallRule -DisplayName "Riot Client" -Group "User Applications" `
+    -Program "C:\Riot Games\Riot Client\RiotClientServices.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Riot Client UX" -Group "User Applications" `
+    -Program "C:\Riot Games\Riot Client\UX\RiotClientUx.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+## League of Legends
+New-NetFirewallRule -DisplayName "League of Legends installer" -Group "User Applications" `
+    -Program "$env:USERPROFILE\Downloads\Install League of Legends euw.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "League of Legends client" -Group "User Applications" `
+    -Program "C:\Riot Games\League of Legends\LeagueClient.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "League of Legends client UX" -Group "User Applications" `
+    -Program "C:\Riot Games\League of Legends\LeagueClientUx.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "League of Legends client UX render" -Group "User Applications" `
+    -Program "C:\Riot Games\League of Legends\LeagueClientUxRender.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ## Battle.Net
 New-NetFirewallRule -DisplayName "Battle.Net installer" -Group "User Applications" `
     -Program "$env:USERPROFILE\Downloads\Battle.net-Setup.exe" `
