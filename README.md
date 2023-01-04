@@ -5,7 +5,8 @@
 2. Change PC name
 3. Reboot
 4. Apply setup.ps1
-5. Reboot
+6. Apply firewall-rules.ps1
+7. Reboot
 
 ## Firewall
 - Firewall can only be configured through Group Policy due to:
