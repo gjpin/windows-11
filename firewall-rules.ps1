@@ -158,6 +158,11 @@ New-NetFirewallRule -DisplayName "Visual Studio Code" -Group "User Applications"
     -Program "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\Code.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Android Studio
+New-NetFirewallRule -DisplayName "Android Studio" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Android\Android Studio\bin\studio64.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Spotify
 New-NetFirewallRule -DisplayName "Spotify" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Roaming\Spotify\Spotify.exe" `
