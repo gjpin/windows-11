@@ -6,6 +6,7 @@
 3. Reboot
 4. Apply setup.ps1
 6. Apply firewall-rules.ps1
+7. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
 7. Reboot
 
 ## Firewall
@@ -77,6 +78,23 @@ generateResolvConf = false
 EOF
 
 sudo chattr +i /etc/resolv.conf
+```
+
+### compare registry snapshots
+```powershell
+cd "$env:USERPROFILE\Documents"
+
+# take snapshot
+dir -rec -erroraction ignore HKLM:\ | % name > Base-HKLM.txt
+dir -rec -erroraction ignore HKCU:\ | % name > Base-HKCU.txt
+
+# make registry change
+
+# take new snapshot
+dir -rec -erroraction ignore HKLM:\ | % name > Current-HKLM-$(get-date -f yyyy-MM-dd).txt
+dir -rec -erroraction ignore HKCU:\ | % name > Current-HKCU-$(get-date -f yyyy-MM-dd).txt
+
+# compare snapshots
 ```
 
 ### Disable turbo boost when running on battery
