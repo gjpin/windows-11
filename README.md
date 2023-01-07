@@ -80,7 +80,18 @@ EOF
 sudo chattr +i /etc/resolv.conf
 ```
 
-### compare registry snapshots
+### Android Emulator - Disable Vulkan
+```powershell
+# Create Android directory
+New-Item -Path $env:USERPROFILE\.android -ItemType directory
+
+# Create Android config file
+New-Item -type file -path $env:USERPROFILE\.android\advancedFeatures.ini -force
+
+Set-Content $env:USERPROFILE\.android\advancedFeatures.ini "Vulkan = off`nGLDirectMem = on"
+```
+
+### Compare registry snapshots
 ```powershell
 cd "$env:USERPROFILE\Documents"
 
