@@ -322,6 +322,20 @@ New-NetFirewallRule -DisplayName "League of Legends client UX render" -Group "Us
     -Program "C:\Riot Games\League of Legends\LeagueClientUxRender.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Valorant
+New-NetFirewallRule -DisplayName "Valorant" -Group "User Applications" `
+    -Program "C:\Riot Games\VALORANT\live\ShooterGame\Binaries\Win64\VALORANT-Win64-Shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Vanguard
+New-NetFirewallRule -DisplayName "Vanguard" -Group "User Applications" `
+    -Program "C:\Program Files\Riot Vanguard\vgc.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Vanguard - Tray" -Group "User Applications" `
+    -Program "C:\Program Files\Riot Vanguard\vgtray.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Battle.Net
 New-NetFirewallRule -DisplayName "Battle.Net installer" -Group "User Applications" `
     -Program "$env:USERPROFILE\Downloads\Battle.net-Setup.exe" `
@@ -410,6 +424,27 @@ New-NetFirewallRule -DisplayName "Edge WebView" -Group "User Applications" `
 New-NetFirewallRule -DisplayName "Firefox" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Mozilla Firefox\firefox.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Syncthing
+New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol TCP -LocalPort 22000 `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol UDP -LocalPort 22000, 21027 `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol TCP -LocalPort 22000 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol UDP -LocalPort 22000, 21027 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################
 ##### Outro

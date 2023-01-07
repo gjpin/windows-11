@@ -155,18 +155,9 @@ winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Docker.DockerDesktop
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
-# winget install -e --source winget --id Nextcloud.NextcloudDesktop
-
-# Set Tailscale network to Private network
-# Set-NetConnectionProfile -InterfaceAlias Tailscale -NetworkCategory "Private"
 
 # Set WireGuard network to Private network
 Set-NetConnectionProfile -InterfaceAlias wg0 -NetworkCategory "Private"
-
-# Disable startup apps
-Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name 'Spotify' -Value ([byte[]](0x33, 0x32, 0xFF))
-Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name 'Steam' -Value ([byte[]](0x33, 0x32, 0xFF))
-Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run -Name 'EpicGamesLauncher' -Value ([byte[]](0x33, 0x32, 0xFF))
 
 ################################################
 ##### VSCode
@@ -227,27 +218,6 @@ $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoi
 $principal = New-ScheduledTaskPrincipal -UserID "$env:USERNAME" -LogonType S4U
 $task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
 Register-ScheduledTask -TaskName "Syncthing" -InputObject $task
-
-# Allow syncthing through firewall
-New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol TCP -LocalPort 22000 `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol UDP -LocalPort 22000, 21027 `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol TCP -LocalPort 22000 `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol UDP -LocalPort 22000, 21027 `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Download autoupdater script
 Invoke-WebRequest `
