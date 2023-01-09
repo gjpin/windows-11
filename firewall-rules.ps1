@@ -336,6 +336,40 @@ New-NetFirewallRule -DisplayName "Vanguard - Tray" -Group "User Applications" `
     -Program "C:\Program Files\Riot Vanguard\vgtray.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# EA App
+New-NetFirewallRule -DisplayName "EA app - Web Engine" -Group "User Applications" `
+    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\QtWebEngineProcess.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "EA app - Desktop" -Group "User Applications" `
+    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EADesktop.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "EA app - Background service" -Group "User Applications" `
+    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EABackgroundService.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "EA app - Updater" -Group "User Applications" `
+    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EAUpdater.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "EA app - LocalhostSvc" -Group "User Applications" `
+    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EALocalHostSvc.exe"`
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "EA app - Launch Helper" -Group "User Applications" `
+    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\ealaunchhelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Apex Legends
+New-NetFirewallRule -DisplayName "Apex Legends" -Group "User Applications" `
+    -Program "D:\eagames\Apex\r5apex.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Apex Legends - EAC launcher" -Group "User Applications" `
+    -Program "D:\eagames\Apex\EasyAntiCheat_launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Battle.Net
 New-NetFirewallRule -DisplayName "Battle.Net installer" -Group "User Applications" `
     -Program "$env:USERPROFILE\Downloads\Battle.net-Setup.exe" `
