@@ -480,6 +480,11 @@ New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
     -Protocol UDP -LocalPort 22000, 21027 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
+# .NET / dotnet
+New-NetFirewallRule -DisplayName ".NET / dotnet" -Group "User Applications" `
+    -Program "C:\Program Files\dotnet\dotnet.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Outro
 ################################################
