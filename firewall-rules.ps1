@@ -361,13 +361,22 @@ New-NetFirewallRule -DisplayName "EA app - Launch Helper" -Group "User Applicati
     -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\ealaunchhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# Apex Legends
+# Apex Legends - EA
 New-NetFirewallRule -DisplayName "Apex Legends" -Group "User Applications" `
     -Program "D:\eagames\Apex\r5apex.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Apex Legends - EAC launcher" -Group "User Applications" `
     -Program "D:\eagames\Apex\EasyAntiCheat_launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Apex Legends - Steam
+New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "User Applications" `
+    -Program "D:\steam\steamapps\common\Apex Legends\EasyAntiCheat_launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - Apex Legends" -Group "User Applications" `
+    -Program "D:\steam\steamapps\common\Apex Legends\r5apex.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Battle.Net
