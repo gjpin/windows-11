@@ -494,6 +494,9 @@ New-NetFirewallRule -DisplayName ".NET / dotnet" -Group "User Applications" `
     -Program "C:\Program Files\dotnet\dotnet.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Update group policy settings
+gpupdate /target:Computer
+
 ################################################
 ##### Outro
 ################################################
