@@ -2,12 +2,13 @@
 
 ## How to:
 1. Update system
-2. Change PC name
-3. Reboot
-4. Apply setup.ps1
-6. Apply firewall-rules.ps1
-7. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
-7. Reboot
+2. Reboot
+3. Apply setup.ps1
+4. Apply firewall-rules.ps1
+5. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
+6. Reboot
+7. Connect to WireGuard network
+8. Set WireGuard network to Private network: ```Set-NetConnectionProfile -InterfaceAlias wg0 -NetworkCategory "Private"```
 
 ## Firewall
 - Firewall can only be configured through Group Policy due to:

@@ -156,9 +156,6 @@ winget install -e --source winget --id Docker.DockerDesktop
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
 
-# Set WireGuard network to Private network
-Set-NetConnectionProfile -InterfaceAlias wg0 -NetworkCategory "Private"
-
 ################################################
 ##### VSCode
 ################################################

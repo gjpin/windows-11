@@ -291,6 +291,10 @@ New-NetFirewallRule -DisplayName "SteelSeries GG - Update" -Group "User Applicat
     -Program "%PROGRAMFILES%\steelseries\gg\steelseriesgg.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "SteelSeries GG - Engine" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\steelseries\gg\apps\engine\steelseriesengine.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Raspberry Pi Imager
 New-NetFirewallRule -DisplayName "Raspberry Pi Imager" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Raspberry Pi Imager\rpi-imager.exe" `
@@ -362,21 +366,21 @@ New-NetFirewallRule -DisplayName "EA app - Launch Helper" -Group "User Applicati
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Apex Legends - EA
-New-NetFirewallRule -DisplayName "Apex Legends" -Group "User Applications" `
-    -Program "D:\eagames\Apex\r5apex.exe" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# New-NetFirewallRule -DisplayName "Apex Legends" -Group "User Applications" `
+#     -Program "D:\eagames\Apex\r5apex.exe" `
+#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Apex Legends - EAC launcher" -Group "User Applications" `
-    -Program "D:\eagames\Apex\EasyAntiCheat_launcher.exe" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# New-NetFirewallRule -DisplayName "Apex Legends - EAC launcher" -Group "User Applications" `
+#     -Program "D:\eagames\Apex\EasyAntiCheat_launcher.exe" `
+#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Apex Legends - Steam
 New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "User Applications" `
-    -Program "D:\steam\steamapps\common\Apex Legends\EasyAntiCheat_launcher.exe" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Apex Legends\Apex Legends\EasyAntiCheat_launcher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Steam - Apex Legends" -Group "User Applications" `
-    -Program "D:\steam\steamapps\common\Apex Legends\r5apex.exe" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Apex Legends\r5apex.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Battle.Net
@@ -401,24 +405,24 @@ New-NetFirewallRule -DisplayName "Battle.Net agent 2" -Group "User Applications"
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Diablo Immortal
-New-NetFirewallRule -DisplayName "Diablo Immortal" -Group "User Applications" `
-    -Program "D:\battle.net\Diablo Immortal\Engine\Binaries\Win64\DiabloImmortal.exe" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# New-NetFirewallRule -DisplayName "Diablo Immortal" -Group "User Applications" `
+#     -Program "D:\battle.net\Diablo Immortal\Engine\Binaries\Win64\DiabloImmortal.exe" `
+#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Overwatch 2
-New-NetFirewallRule -DisplayName "Overwatch 2" -Group "User Applications" `
-    -Program "D:\battle.net\Overwatch\_retail_\Overwatch.exe" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# New-NetFirewallRule -DisplayName "Overwatch 2" -Group "User Applications" `
+#     -Program "D:\battle.net\Overwatch\_retail_\Overwatch.exe" `
+#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Starcraft 2
-New-NetFirewallRule -DisplayName "Starcraft 2" -Group "User Applications" `
-    -Program "D:\battle.net\StarCraft II\Versions\Base89165\SC2_x64.exe" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# New-NetFirewallRule -DisplayName "Starcraft 2" -Group "User Applications" `
+#     -Program "D:\battle.net\StarCraft II\Versions\Base89165\SC2_x64.exe" `
+#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # COD Warzone
-New-NetFirewallRule -DisplayName "COD Warzone" -Group "User Applications" `
-    -Program "D:\battle.net\Call of Duty\_retail_\cod.exe" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# New-NetFirewallRule -DisplayName "COD Warzone" -Group "User Applications" `
+#     -Program "D:\battle.net\Call of Duty\_retail_\cod.exe" `
+#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Unity
 New-NetFirewallRule -DisplayName "Unity Hub" -Group "User Applications" `
