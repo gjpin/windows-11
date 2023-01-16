@@ -376,7 +376,7 @@ New-NetFirewallRule -DisplayName "EA app - Launch Helper" -Group "User Applicati
 
 # Apex Legends - Steam
 New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "User Applications" `
-    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Apex Legends\Apex Legends\EasyAntiCheat_launcher.exe" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Apex Legends\EasyAntiCheat_launcher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Steam - Apex Legends" -Group "User Applications" `
