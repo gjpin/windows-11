@@ -468,47 +468,61 @@ New-NetFirewallRule -DisplayName ".NET / dotnet" -Group "User Applications" `
 gpupdate /target:Computer
 
 ################################################
-##### Local services (through WireGuard and LAN)
+##### Local services (through WireGuard)
 ################################################
 
-# Core networking
-New-NetFirewallRule -DisplayName "Core Networking - ICMPv4" -Group "Windows Services" `
-    -Program "System" -Protocol "ICMPv4" `
-    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Core Networking - Dynamic Host Configuration Protocol (DHCP-In)" -Group "Windows Services" `
-    -Program "%SystemRoot%\system32\svchost.exe" -Service "dhcp" -Protocol "UDP" -LocalPort 68 -RemotePort 67 `
-    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
 # Steam - Remote Play
-New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Steam Remote Play - UDP" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Protocol UDP -LocalPort 27031-27036 -InterfaceAlias "wg0" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam Remote Play - TCP" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
+    -Protocol TCP -LocalPort 27036 -InterfaceAlias "wg0" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Syncthing
-New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Protocol TCP -LocalPort 22000 -InterfaceAlias "wg0" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Protocol UDP -LocalPort 22000, 21027 -InterfaceAlias "wg0" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol TCP -LocalPort 22000 -InterfaceAlias "wg0" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Protocol UDP -LocalPort 22000, 21027 -InterfaceAlias "wg0" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Sunshine - Streaming
-New-NetFirewallRule -DisplayName "Sunshine - Streaming" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Sunshine - TCP" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
-    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Protocol TCP -LocalPort 47984, 47989, 47990, 48010 -InterfaceAlias "wg0" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Sunshine - UDP" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
+    -Protocol UDP -LocalPort 47998, 47999, 48000, 48002 -InterfaceAlias "wg0" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Moonlight - Streaming
-New-NetFirewallRule -DisplayName "Moonlight - Streaming" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Moonlight - TCP" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
-    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Protocol TCP -LocalPort 47984, 47989, 47990, 48010 -InterfaceAlias "wg0" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Moonlight - UDP" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
+    -Protocol UDP -LocalPort 47998, 47999, 48000, 48002 -InterfaceAlias "wg0" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
