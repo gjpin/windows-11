@@ -6,9 +6,10 @@
 3. Apply setup.ps1
 4. Apply firewall-rules.ps1
 5. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
-6. Reboot
-7. Connect to WireGuard network
-8. Set WireGuard network to Private network: ```Set-NetConnectionProfile -InterfaceAlias wg0 -NetworkCategory "Private"```
+6. Set home network as Private
+7. Reboot
+8. Connect to WireGuard network
+9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias wg0 -NetworkCategory "Private"```
 
 ## Firewall
 - Firewall can only be configured through Group Policy due to:
@@ -58,6 +59,36 @@ or
 
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
 Get-EventLog security -newest 20 -InstanceId 5157 -Message *Destination* | format-table -wrap
+```
+
+### Streaming
+```powershell
+########## HOST ##########
+# Enable "Enhanced Sync" in AMD Adrenalin
+
+# Install Sunshine and ViGEmBus
+winget install -e --source winget --id ViGEm.ViGEmBus
+winget install -e --source winget --id LizardByte.Sunshine
+
+# https://github.com/LizardByte/Sunshine/blob/master/src_assets/windows/misc/firewall/add-firewall-rule.bat
+# https://github.com/LizardByte/Sunshine/blob/master/src_assets/windows/misc/service/install-service.bat
+
+# Get system info
+cd "C:\Program Files\Sunshine\tools"
+.\dxgi-info.exe
+.\audio-info.exe
+
+# Configuration:
+## Create user at: https://localhost:47990/
+## General:
+### Gamepads: DS4 (PS4)
+## Audio/Video:
+### Audio Sink: {0.0.0.00000000}.{efd7c964-3adb-491f-a318-c2e8c98dc60e}
+### Adapter Name: AMD Radeon RX 5700 XT
+### Output Name: \\.\DISPLAY1
+
+########## Client ##########
+winget install -e --source winget --id MoonlightGameStreamingProject.Moonlight
 ```
 
 ### Run Powershell script without changing global execution policy

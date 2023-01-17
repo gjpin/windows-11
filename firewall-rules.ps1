@@ -189,19 +189,6 @@ New-NetFirewallRule -DisplayName "Steam Web Helper" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\bin\cef\cef.win7x64\steamwebhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# Steam - Inbound
-New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
-    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Profile Private -RemoteAddress LocalSubnet4 `
-    -LocalPort 27031-27036 -Protocol UDP `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
-    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Profile Private -RemoteAddress LocalSubnet4 `
-    -LocalPort 27036 -Protocol TCP `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
 # Epic Games Launcher
 New-NetFirewallRule -DisplayName "Epic Games Launcher 64bit" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesLauncher.exe" `
@@ -333,36 +320,36 @@ New-NetFirewallRule -DisplayName "Valorant" -Group "User Applications" `
 
 # Vanguard
 New-NetFirewallRule -DisplayName "Vanguard" -Group "User Applications" `
-    -Program "C:\Program Files\Riot Vanguard\vgc.exe" `
+    -Program "%PROGRAMFILES%\Riot Vanguard\vgc.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Vanguard - Tray" -Group "User Applications" `
-    -Program "C:\Program Files\Riot Vanguard\vgtray.exe" `
+    -Program "%PROGRAMFILES%\Riot Vanguard\vgtray.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # EA App
 New-NetFirewallRule -DisplayName "EA app - Web Engine" -Group "User Applications" `
-    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\QtWebEngineProcess.exe" `
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\QtWebEngineProcess.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "EA app - Desktop" -Group "User Applications" `
-    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EADesktop.exe" `
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\EADesktop.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "EA app - Background service" -Group "User Applications" `
-    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EABackgroundService.exe" `
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\EABackgroundService.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "EA app - Updater" -Group "User Applications" `
-    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EAUpdater.exe" `
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\EAUpdater.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "EA app - LocalhostSvc" -Group "User Applications" `
-    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EALocalHostSvc.exe"`
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\EALocalHostSvc.exe"`
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "EA app - Launch Helper" -Group "User Applications" `
-    -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\ealaunchhelper.exe" `
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\ealaunchhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Apex Legends - EA
@@ -374,7 +361,7 @@ New-NetFirewallRule -DisplayName "EA app - Launch Helper" -Group "User Applicati
 #     -Program "D:\eagames\Apex\EasyAntiCheat_launcher.exe" `
 #     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# Apex Legends - Steam
+# Steam - Apex Legends
 New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Apex Legends\EasyAntiCheat_launcher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
@@ -472,30 +459,50 @@ New-NetFirewallRule -DisplayName "Firefox" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Mozilla Firefox\firefox.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# Syncthing
-New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol TCP -LocalPort 22000 `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol UDP -LocalPort 22000, 21027 `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol TCP -LocalPort 22000 `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
-    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol UDP -LocalPort 22000, 21027 `
-    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
 # .NET / dotnet
 New-NetFirewallRule -DisplayName ".NET / dotnet" -Group "User Applications" `
-    -Program "C:\Program Files\dotnet\dotnet.exe" `
+    -Program "%PROGRAMFILES%\dotnet\dotnet.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Update group policy settings
+gpupdate /target:Computer
+
+################################################
+##### Local services (through WireGuard)
+################################################
+
+# Steam - Inbound
+New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
+    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
+    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Syncthing
+New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
+    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Sunshine - Streaming
+New-NetFirewallRule -DisplayName "Sunshine - Streaming" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
+    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Moonlight - Streaming
+New-NetFirewallRule -DisplayName "Moonlight - Streaming" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
+    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
