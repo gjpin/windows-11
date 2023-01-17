@@ -66,7 +66,7 @@ New-NetFirewallRule -DisplayName "Windows UAC" -Group "Windows Services" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Windows Kernel" -Group "Windows Services" `
-    -Program "SYSTEM" `
+    -Program "System" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Microsoft Edge" -Group "Windows Services" `
@@ -472,7 +472,7 @@ gpupdate /target:Computer
 ################################################
 
 # Core networking
-New-NetFirewallRule -DisplayName "Core Networking - Destination Unreachable Fragmentation Needed (ICMPv4-In)" -Group "Windows Services" `
+New-NetFirewallRule -DisplayName "Core Networking - ICMPv4" -Group "Windows Services" `
     -Program "System" -Protocol "ICMPv4" `
     -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"

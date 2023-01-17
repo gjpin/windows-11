@@ -141,8 +141,10 @@ Remove-Item -Force "$env:USERPROFILE\OneDrive"
 # Applicatons with --force are only used in packages which URL is not versioned
 # and the hash may not match
 
-winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
+[Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', 'Machine')
 winget install -e --source winget --id Microsoft.PowerShell
+
+winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
 winget install -e --source winget --id Git.Git
 winget install -e --source winget --id GitHub.GitHubDesktop
 winget install -e --source winget --id VideoLAN.VLC
