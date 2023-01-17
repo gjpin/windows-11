@@ -86,6 +86,8 @@ cd "C:\Program Files\Sunshine\tools"
 ### Audio Sink: {0.0.0.00000000}.{efd7c964-3adb-491f-a318-c2e8c98dc60e}
 ### Adapter Name: AMD Radeon RX 5700 XT
 ### Output Name: \\.\DISPLAY1
+## Advanced:
+### External IP: 10.0.0.2 (wireguard's IP)
 
 ########## Client ##########
 winget install -e --source winget --id MoonlightGameStreamingProject.Moonlight

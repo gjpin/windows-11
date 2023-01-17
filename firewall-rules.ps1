@@ -468,41 +468,47 @@ New-NetFirewallRule -DisplayName ".NET / dotnet" -Group "User Applications" `
 gpupdate /target:Computer
 
 ################################################
-##### Local services (through WireGuard)
+##### Local services (through WireGuard and LAN)
 ################################################
 
-# Steam - Inbound
-New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
-    -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+# Core networking
+New-NetFirewallRule -DisplayName "Core Networking - Destination Unreachable Fragmentation Needed (ICMPv4-In)" -Group "Windows Services" `
+    -Program "System" -Protocol "ICMPv4" `
+    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Core Networking - Dynamic Host Configuration Protocol (DHCP-In)" -Group "Windows Services" `
+    -Program "%SystemRoot%\system32\svchost.exe" -Service "dhcp" -Protocol "UDP" -LocalPort 68 -RemotePort 67 `
+    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Steam - Remote Play
 New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Syncthing
 New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Sunshine - Streaming
 New-NetFirewallRule -DisplayName "Sunshine - Streaming" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Moonlight - Streaming
 New-NetFirewallRule -DisplayName "Moonlight - Streaming" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24 -RemoteAddress 10.0.0.0/24 `
+    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
