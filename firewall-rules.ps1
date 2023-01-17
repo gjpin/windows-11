@@ -464,66 +464,60 @@ New-NetFirewallRule -DisplayName ".NET / dotnet" -Group "User Applications" `
     -Program "%PROGRAMFILES%\dotnet\dotnet.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Moonlight - Streaming
+New-NetFirewallRule -DisplayName "Moonlight" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 
 ################################################
-##### Local services (through WireGuard)
+##### Inbound
 ################################################
 
 # Steam - Remote Play
 New-NetFirewallRule -DisplayName "Steam Remote Play - UDP" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Protocol UDP -LocalPort 27031-27036 -InterfaceAlias "wg0" `
+    -Protocol UDP -LocalPort 27031-27036 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Steam Remote Play - TCP" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Protocol TCP -LocalPort 27036 -InterfaceAlias "wg0" `
+    -Protocol TCP -LocalPort 27036 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Syncthing
 New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol TCP -LocalPort 22000 -InterfaceAlias "wg0" `
+    -Protocol TCP -LocalPort 22000 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol UDP -LocalPort 22000, 21027 -InterfaceAlias "wg0" `
+    -Protocol UDP -LocalPort 22000, 21027 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Syncthing - TCP" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol TCP -LocalPort 22000 -InterfaceAlias "wg0" `
+    -Protocol TCP -LocalPort 22000 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Syncthing - UDP" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Protocol UDP -LocalPort 22000, 21027 -InterfaceAlias "wg0" `
+    -Protocol UDP -LocalPort 22000, 21027 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
-# Sunshine - Streaming
+# Sunshine
 New-NetFirewallRule -DisplayName "Sunshine - TCP" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
-    -Protocol TCP -LocalPort 47984, 47989, 47990, 48010 -InterfaceAlias "wg0" `
+    -Protocol TCP -LocalPort 47984, 47989, 47990, 48010 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Sunshine - UDP" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
-    -Protocol UDP -LocalPort 47998, 47999, 48000, 48002 -InterfaceAlias "wg0" `
+    -Protocol UDP -LocalPort 47998, 47999, 48000, 48002 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
-
-# Moonlight - Streaming
-New-NetFirewallRule -DisplayName "Moonlight - TCP" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
-    -Protocol TCP -LocalPort 47984, 47989, 47990, 48010 -InterfaceAlias "wg0" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
-
-New-NetFirewallRule -DisplayName "Moonlight - UDP" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
-    -Protocol UDP -LocalPort 47998, 47999, 48000, 48002 -InterfaceAlias "wg0" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
 gpupdate /target:Computer

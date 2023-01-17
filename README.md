@@ -9,7 +9,7 @@
 6. Set home network as Private
 7. Reboot
 8. Connect to WireGuard network
-9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias wg0 -NetworkCategory "Private"```
+9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
 
 ## Firewall
 - Firewall can only be configured through Group Policy due to:
