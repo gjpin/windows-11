@@ -485,30 +485,30 @@ New-NetFirewallRule -DisplayName "Core Networking - Dynamic Host Configuration P
 # Steam - Remote Play
 New-NetFirewallRule -DisplayName "Steam - Remote Play" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Syncthing
 New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Syncthing" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\syncthing\syncthing.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Sunshine - Streaming
 New-NetFirewallRule -DisplayName "Sunshine - Streaming" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Moonlight - Streaming
 New-NetFirewallRule -DisplayName "Moonlight - Streaming" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
-    -Profile Private -LocalAddress 10.0.0.0/24, 10.100.100.0/24 -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
+    -Profile Private -RemoteAddress 10.0.0.0/24, 10.100.100.0/24 `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
