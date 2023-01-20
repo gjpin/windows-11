@@ -215,6 +215,19 @@ New-NetFirewallRule -DisplayName "Unreal Engine 5.1 - Quixel Bridge" -Group "Use
     -Program "%PROGRAMFILES%\Epic Games\UE_5.1\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Fortnite
+New-NetFirewallRule -DisplayName "Fortnite - Launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\FortniteLauncher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Fortnite - Client" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\FortniteClient-Win64-Shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Fortnite - EAC" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\FortniteClient-Win64-Shipping_EAC.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Joplin
 New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
