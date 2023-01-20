@@ -202,6 +202,19 @@ New-NetFirewallRule -DisplayName "Epic Games Web Helper" -Group "User Applicatio
     -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Engine\Binaries\Win64\EpicWebHelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Unreal Engine
+New-NetFirewallRule -DisplayName "Unreal Engine 5.1 - Editor" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.1\Engine\Binaries\Win64\UnrealEditor.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Unreal Engine 5.1 - Web Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.1\Engine\Binaries\Win64\EpicWebHelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Unreal Engine 5.1 - Quixel Bridge" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.1\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Joplin
 New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
