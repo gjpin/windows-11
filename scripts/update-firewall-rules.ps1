@@ -57,7 +57,7 @@ Set-NetFirewallRule -DisplayName "Insomnia - Update" `
     -Program "$insomniaPath\Update.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-## Discord
+# Discord
 $VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Local\Discord" -Filter app-* -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $discordPath = "$env:USERPROFILE\AppData\Local\Discord\$VersionFolder"
@@ -65,7 +65,7 @@ Set-NetFirewallRule -DisplayName "Discord" `
     -Program "$discordPath\Discord.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-## Edge WebView
+# Edge WebView
 $VersionFolders = Get-ChildItem -Directory -Path "C:\Program Files (x86)\Microsoft\EdgeWebView\Application" -Filter "???.*" -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $edgewebviewPath = "C:\Program Files (x86)\Microsoft\EdgeWebView\Application\$VersionFolder"
@@ -73,7 +73,7 @@ Set-NetFirewallRule -DisplayName "Edge WebView" `
     -Program "$edgewebviewPath\msedgewebview2.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-## Unity
+# Unity
 $VersionFolders = Get-ChildItem -Directory -Path "C:\Program Files\Unity\Hub\Editor" -Filter "????.*" -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $unityPath = "C:\Program Files\Unity\Hub\Editor\$VersionFolder"
@@ -88,12 +88,27 @@ Set-NetFirewallRule -DisplayName "Unity Editor - Package manager" `
     -Program "$unityPath\Editor\Data\Resources\PackageManager\Server\UnityPackageManager.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-## Battle.Net
+# Battle.Net
 $VersionFolders = Get-ChildItem -Directory -Path "C:\ProgramData\Battle.net\Agent" -Filter "Agent.*" -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $battleNetAgentPath = "C:\ProgramData\Battle.net\Agent\$VersionFolder"
 Set-NetFirewallRule -DisplayName "Battle.Net agent" `
     -Program "$battleNetAgentPath\Agent.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# My Dell
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Dellinc.Mydell_*_x64__htrsf667h5kn2 -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$mydellPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+Set-NetFirewallRule -DisplayName "My Dell" `
+    -Program "$mydellPath\mydell.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Dellinc.Mydell_*_x64__htrsf667h5kn2 -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$mydellPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+Set-NetFirewallRule -DisplayName "My Dell - Updater" `
+    -Program "$mydellPath\bridge\fusnbroker.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 gpupdate /target:Computer

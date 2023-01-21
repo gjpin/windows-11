@@ -495,6 +495,21 @@ New-NetFirewallRule -DisplayName "Moonlight" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Moonlight Game Streaming\Moonlight.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# My Dell
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Dellinc.Mydell_*_x64__htrsf667h5kn2 -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$mydellPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+New-NetFirewallRule -DisplayName "My Dell" -Group "Windows Services" `
+    -Program "$mydellPath\mydell.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Dellinc.Mydell_*_x64__htrsf667h5kn2 -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$mydellPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+New-NetFirewallRule -DisplayName "My Dell - Updater" -Group "Windows Services" `
+    -Program "$mydellPath\bridge\fusnbroker.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 
