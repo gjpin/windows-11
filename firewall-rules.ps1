@@ -418,24 +418,24 @@ New-NetFirewallRule -DisplayName "Battle.Net agent 2" -Group "User Applications"
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Diablo Immortal
-# New-NetFirewallRule -DisplayName "Diablo Immortal" -Group "User Applications" `
-#     -Program "D:\battle.net\Diablo Immortal\Engine\Binaries\Win64\DiabloImmortal.exe" `
-#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+New-NetFirewallRule -DisplayName "Diablo Immortal" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Diablo Immortal\Engine\Binaries\Win64\DiabloImmortal.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Overwatch 2
-# New-NetFirewallRule -DisplayName "Overwatch 2" -Group "User Applications" `
-#     -Program "D:\battle.net\Overwatch\_retail_\Overwatch.exe" `
-#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+New-NetFirewallRule -DisplayName "Overwatch 2" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Overwatch\_retail_\Overwatch.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Starcraft 2
-# New-NetFirewallRule -DisplayName "Starcraft 2" -Group "User Applications" `
-#     -Program "D:\battle.net\StarCraft II\Versions\Base89165\SC2_x64.exe" `
-#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+New-NetFirewallRule -DisplayName "Starcraft 2" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\StarCraft II\Versions\Base89165\SC2_x64.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # COD Warzone
-# New-NetFirewallRule -DisplayName "COD Warzone" -Group "User Applications" `
-#     -Program "D:\battle.net\Call of Duty\_retail_\cod.exe" `
-#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+New-NetFirewallRule -DisplayName "COD Warzone" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Call of Duty\_retail_\cod.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Unity
 New-NetFirewallRule -DisplayName "Unity Hub" -Group "User Applications" `
