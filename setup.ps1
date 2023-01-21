@@ -80,6 +80,26 @@ $zip.Dispose()
 Remove-Item "$env:USERPROFILE\apps\LGPO\LGPO.zip"
 
 ################################################
+##### Update winget-cli
+################################################
+
+# Download latest stable winget-cli version
+$url = 'https://github.com/microsoft/winget-cli/releases/latest'
+$request = [System.Net.WebRequest]::Create($url)
+$response = $request.GetResponse()
+$realTagUrl = $response.ResponseUri.OriginalString
+$response.Dispose()
+$version = $realTagUrl.split('/')[-1].Trim('v')
+$filename = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+$downloadUrl = $realTagUrl.Replace('tag', 'download') + '/' + $filename
+Invoke-WebRequest `
+    -Uri "$downloadUrl" `
+    -OutFile "$env:USERPROFILE\Downloads\$filename"
+
+# Install winget-cli
+Add-AppxPackage -Path "$env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller_*.msixbundle"
+
+################################################
 ##### Remove preinstaled apps
 ################################################
 

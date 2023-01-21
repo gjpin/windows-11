@@ -13,6 +13,14 @@ Set-NetFirewallRule -DisplayName "Winget" `
     -Program "$wingetPath\winget.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Powershell
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Microsoft.Powershell_*x64__8wekyb3d8bbwe -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$powershellPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+Set-NetFirewallRule -DisplayName "Winget" `
+    -Program "$powershellPath\pwsh.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # WSL
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter MicrosoftCorporationII.WindowsSubsystemForLinux_*_x64__8wekyb3d8bbwe -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
