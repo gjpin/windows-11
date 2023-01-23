@@ -459,6 +459,10 @@ New-NetFirewallRule -DisplayName "Docker" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Docker\Docker\resources\com.docker.backend.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Docker Desktop" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Docker\Docker\Docker Desktop.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # VirtualBox
 New-NetFirewallRule -DisplayName "VirtualBox" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Oracle\VirtualBox\VirtualBoxVM.exe" `
