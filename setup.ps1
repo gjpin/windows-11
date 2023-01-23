@@ -99,6 +99,9 @@ Invoke-WebRequest `
 # Install winget-cli
 Add-AppxPackage -Path "$env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller_*.msixbundle"
 
+# Remove bundle file
+Remove-Item "$env:USERPROFILE\Downloads\$filename"
+
 ################################################
 ##### Remove preinstaled apps
 ################################################

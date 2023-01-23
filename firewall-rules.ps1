@@ -120,6 +120,13 @@ New-NetFirewallRule -DisplayName "Powershell Core" -Group "User Applications" `
     -Program "%PROGRAMFILES%\PowerShell\7\pwsh.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Microsoft.Powershell_*x64__8wekyb3d8bbwe -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$powershellPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+New-NetFirewallRule -DisplayName "Powershell" -Group "User Applications" `
+    -Program "$powershellPath\pwsh.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Github Desktop
 $VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Local\GitHubDesktop" -Filter app-* -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
