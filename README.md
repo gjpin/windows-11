@@ -88,6 +88,11 @@ cd "C:\Program Files\Sunshine\tools"
 ### Output Name: \\.\DISPLAY1
 ## Advanced:
 ### External IP: 10.0.0.2 (wireguard's IP)
+## Apps:
+### Steam Big Picture:
+#### Command Preparations: 
+#### Do: cmd echo random
+#### Undo: taskkill /IM "steam.exe" /F
 
 ########## Client ##########
 winget install -e --source winget --id MoonlightGameStreamingProject.Moonlight
