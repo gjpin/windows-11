@@ -453,12 +453,20 @@ New-NetFirewallRule -DisplayName "Unity Hub - Licensing" -Group "User Applicatio
     -Program "%PROGRAMFILES%\Unity Hub\UnityLicensingClient_V1\Unity.Licensing.Client.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unity Editor" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.16f1\Editor\Unity.exe" `
+New-NetFirewallRule -DisplayName "Unity Editor - 2021.3.17f1" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.17f1\Editor\Unity.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unity Editor - Package manager" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.16f1\Editor\Data\Resources\PackageManager\Server\UnityPackageManager.exe" `
+New-NetFirewallRule -DisplayName "Unity Editor - Package manager - 2021.3.17f1" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2021.3.17f1\Editor\Data\Resources\PackageManager\Server\UnityPackageManager.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Unity Editor - 2022.2.4f1" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2022.2.4f1\Editor\Unity.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Unity Editor - Package manager - 2022.2.4f1" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Unity\Hub\Editor\2022.2.4f1\Editor\Data\Resources\PackageManager\Server\UnityPackageManager.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Docker
