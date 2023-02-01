@@ -135,6 +135,10 @@ New-NetFirewallRule -DisplayName "Github Desktop" -Group "User Applications" `
     -Program "$githubPath\GitHubDesktop.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Github Desktop - LFS" -Group "User Applications" `
+    -Program "$githubPath\resources\app\git\mingw64\libexec\git-core\git-lfs.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 New-NetFirewallRule -DisplayName "Github Desktop - Remote HTTPS" -Group "User Applications" `
     -Program "$githubPath\resources\app\git\mingw64\bin\git-remote-https.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
