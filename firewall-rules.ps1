@@ -169,6 +169,11 @@ New-NetFirewallRule -DisplayName "Visual Studio Code" -Group "User Applications"
     -Program "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\Code.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Visual Studio 2022
+New-NetFirewallRule -DisplayName "Visual Studio 2022 - devenv" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Android Studio
 New-NetFirewallRule -DisplayName "Android Studio" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Android\Android Studio\bin\studio64.exe" `
