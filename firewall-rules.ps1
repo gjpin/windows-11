@@ -394,6 +394,18 @@ New-NetFirewallRule -DisplayName "EA app - Launch Helper" -Group "User Applicati
     -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\ealaunchhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "EA app - Link2EA" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\Link2EA.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "EA app - EA Steam Proxy" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Electronic Arts\EA Desktop\EA Desktop\EASteamProxy.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - It Takes Two" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\ItTakesTwo\Nuts\Binaries\Win64\ItTakesTwo.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Apex Legends - EA
 # New-NetFirewallRule -DisplayName "Apex Legends" -Group "User Applications" `
 #     -Program "D:\eagames\Apex\r5apex.exe" `
