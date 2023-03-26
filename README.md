@@ -177,3 +177,18 @@ Add-Content $env:WINDIR\system32\Drivers\etc\hosts "`n`n$hosts_ipv4"
 $hosts_ipv6 = (Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy_v6.txt").Content
 Add-Content $env:WINDIR\system32\Drivers\etc\hosts "`n`n$hosts_ipv6"
 ```
+
+### Apply Microsoft recommended driver block rules (no longer required. enabled by default)
+```powershell
+
+# References:
+# https://github.com/wdormann/applywdac
+# https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-driver-block-rules
+
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$binpolicyzip = [IO.Path]::GetTempFileName() | Rename-Item -NewName { $_ -replace 'tmp$', 'zip' } –PassThru
+Invoke-WebRequest https://aka.ms/VulnerableDriverBlockList -UseBasicParsing -OutFile $binpolicyzip
+$zipFile = [IO.Compression.ZipFile]::OpenRead($binpolicyzip)
+$zipFile.Entries | Where-Object Name -like SiPolicy_Enforced.p7b | ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$env:windir\system32\CodeIntegrity\SiPolicy.p7b", $true) }
+Get-ChildItem "$env:windir\system32\CodeIntegrity\SiPolicy.p7b"
+```
