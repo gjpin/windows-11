@@ -182,6 +182,7 @@ winget install -e --source winget --id Docker.DockerDesktop
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
 winget install -e --source winget --id 7zip.7zip
+winget install -e --source winget --id portmaster
 
 ################################################
 ##### VSCode
