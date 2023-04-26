@@ -30,14 +30,14 @@ wsl --install
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3
 
 # Change powershell execution policy to RemoteSigned
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # Create powershell profile file
-New-Item -type file -path $profile -force
-powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+# New-Item -type file -path $profile -force
+# powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
 # Add function for firewall events
-Add-Content $profile "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
+# Add-Content $profile "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
 
 ################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
@@ -165,23 +165,26 @@ Remove-Item -Force "$env:USERPROFILE\OneDrive"
 # and the hash may not match
 
 [Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', 'Machine')
-winget install -e --source winget --id Microsoft.PowerShell
 
+winget install -e --source winget --id Microsoft.PowerShell
 winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
 winget install -e --source winget --id Git.Git
 winget install -e --source winget --id GitHub.GitHubDesktop
 winget install -e --source winget --id VideoLAN.VLC
 winget install -e --source winget --id Insomnia.Insomnia
-winget install -e --source winget --force --id Spotify.Spotify 
 winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id TheDocumentFoundation.LibreOffice
-winget install -e --source winget --id Obsidian.Obsidian
+
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
 winget install -e --source winget --id 7zip.7zip
-winget install -e --source winget --id portmaster
+winget install -e --source winget --id Safing.Portmaster
+
+# Install in a non-admin powershell
+winget install -e --source winget --force --id Spotify.Spotify
+winget install -e --source winget --id Obsidian.Obsidian
 
 ################################################
 ##### VSCode
@@ -199,13 +202,13 @@ Invoke-WebRequest `
     -OutFile "$env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
 
 # Install VSCode extensions
-$credential = Get-Credential -credential "$env:USERNAME"
-$commands = @'
-    "& code --install-extension ms-vscode-remote.remote-wsl"
-    "& code --install-extension ms-vscode.powershell"
-    "& code --install-extension ms-dotnettools.csharp"
-'@
-Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
+# $credential = Get-Credential -credential "$env:USERNAME"
+# $commands = @'
+#     "& code --install-extension ms-vscode-remote.remote-wsl"
+#     "& code --install-extension ms-vscode.powershell"
+#     "& code --install-extension ms-dotnettools.csharp"
+# '@
+# Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
 ################################################
 ##### .NET
@@ -216,14 +219,14 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-7.0&tabs=visual-studio#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos
 
 # Disable .NET telemetry
-[Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
+# [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
 # Install .NET SDK 7
-winget install -e --source winget --id Microsoft.DotNet.SDK.7
+# winget install -e --source winget --id Microsoft.DotNet.SDK.7
 
 # Trust ASP.NET Core HTTPS certificate
-dotnet --info
-dotnet dev-certs https --trust
+# dotnet --info
+# dotnet dev-certs https --trust
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
