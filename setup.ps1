@@ -178,7 +178,6 @@ winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
-winget install -e --source winget --id Docker.DockerDesktop
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
 winget install -e --source winget --id 7zip.7zip
