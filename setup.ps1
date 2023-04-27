@@ -30,14 +30,14 @@ wsl --install
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3
 
 # Change powershell execution policy to RemoteSigned
-# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # Create powershell profile file
-# New-Item -type file -path $profile -force
-# powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+New-Item -type file -path $profile -force
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
 # Add function for firewall events
-# Add-Content $profile "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
+Add-Content $profile "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
 
 ################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
@@ -180,7 +180,6 @@ winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
 winget install -e --source winget --id 7zip.7zip
-winget install -e --source winget --id Safing.Portmaster
 
 # Install in a non-admin powershell
 winget install -e --source winget --force --id Spotify.Spotify
