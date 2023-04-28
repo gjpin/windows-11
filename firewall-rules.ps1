@@ -244,6 +244,11 @@ New-NetFirewallRule -DisplayName "Fortnite - EAC" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\FortniteClient-Win64-Shipping_EAC.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# UEFN
+New-NetFirewallRule -DisplayName "UEFN" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\UnrealEditorFortnite-Win64-Shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Joplin
 New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
