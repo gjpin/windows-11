@@ -201,13 +201,13 @@ Invoke-WebRequest `
     -OutFile "$env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
 
 # Install VSCode extensions
-# $credential = Get-Credential -credential "$env:USERNAME"
-# $commands = @'
-#     "& code --install-extension ms-vscode-remote.remote-wsl"
-#     "& code --install-extension ms-vscode.powershell"
-#     "& code --install-extension ms-dotnettools.csharp"
-# '@
-# Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
+$credential = Get-Credential -credential "$env:USERNAME"
+$commands = @'
+    "& code --install-extension ms-vscode-remote.remote-wsl"
+    "& code --install-extension ms-vscode.powershell"
+    "& code --install-extension ms-dotnettools.csharp"
+'@
+Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
 ################################################
 ##### .NET
@@ -218,14 +218,14 @@ Invoke-WebRequest `
 # https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-7.0&tabs=visual-studio#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos
 
 # Disable .NET telemetry
-# [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
+[Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
 # Install .NET SDK 7
-# winget install -e --source winget --id Microsoft.DotNet.SDK.7
+winget install -e --source winget --id Microsoft.DotNet.SDK.7
 
 # Trust ASP.NET Core HTTPS certificate
-# dotnet --info
-# dotnet dev-certs https --trust
+dotnet --info
+dotnet dev-certs https --trust
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
