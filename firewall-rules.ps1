@@ -555,6 +555,11 @@ New-NetFirewallRule -DisplayName "My Dell - Updater" -Group "Windows Services" `
     -Program "$mydellPath\bridge\fusnbroker.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# BattlEye
+New-NetFirewallRule -DisplayName "BattlEye" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Common Files\BattlEye\BEService.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 
