@@ -1445,3 +1445,15 @@ Computer
 Software\Policies\Microsoft\Windows NT\DNSClient
 DisableSmartNameResolution
 DWORD:1
+
+; Enable local security authority protection (LSA protection)
+; https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection
+Computer
+SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\LSASS.exe
+AuditLevel
+DWORD:00000008
+
+Computer
+SYSTEM\CurrentControlSet\Control\Lsa
+RunAsPPL
+DWORD:00000001
