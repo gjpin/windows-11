@@ -28,6 +28,11 @@ if ($latestVersion -ne $installedVersion) {
         -Uri "$downloadUrl" `
         -OutFile "$env:USERPROFILE\apps\$filename"
 
+    # Stop script if file was not downloaded
+    if (!(Test-Path "$env:USERPROFILE\apps\$filename")) {
+        Exit
+    }
+
     # Remove installed version
     Remove-Item "$env:USERPROFILE\apps\syncthing" -Recurse
 
@@ -45,6 +50,7 @@ if ($latestVersion -ne $installedVersion) {
     # Restart syncthing
     Start-ScheduledTask -TaskName "Syncthing"
 
-} else {
+}
+else {
     Exit
 }

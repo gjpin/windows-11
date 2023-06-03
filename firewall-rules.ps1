@@ -474,6 +474,19 @@ New-NetFirewallRule -DisplayName "COD Warzone" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Call of Duty\_retail_\cod.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Vermintide 2
+New-NetFirewallRule -DisplayName "Vermintide 2 - Launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Warhammer Vermintide 2\launcher\Launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Vermintide 2 - EAC Launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Warhammer Vermintide 2\launcher\eac_launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Vermintide 2" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Warhammer Vermintide 2\binaries_dx12\vermintide2_dx12.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Unity
 New-NetFirewallRule -DisplayName "Unity Hub" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Unity Hub\Unity Hub.exe" `

@@ -3,7 +3,6 @@
 ################################################
 
 # Create user directories
-New-Item -Path $env:USERPROFILE\lgpo -ItemType directory
 New-Item -Path $env:USERPROFILE\apps -ItemType directory
 New-Item -Path $env:USERPROFILE\scripts -ItemType directory
 New-Item -Path $env:USERPROFILE\src -ItemType directory
@@ -16,9 +15,6 @@ powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd
 # Enable auditing for "Object Access"
 # https://learn.microsoft.com/en-us/windows/win32/fwp/auditing-and-logging
 auditpol /set /category:"Object Access" /success:disable /failure:enable
-
-# Change wallpaper
-Set-ItemProperty -path 'HKCU:\Control Panel\Desktop' -name WallPaper -value "$env:SYSTEMROOT\Web\Wallpaper\Windows\img19.jpg"
 
 # Install WSL
 wsl --install
@@ -39,6 +35,13 @@ powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\WindowsPowe
 
 # Add function for firewall events
 Add-Content $profile "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
+
+# Add function to autoupdate firewall rules
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/update-firewall-rules.ps1" `
+    -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
+
+Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content $profile
 
 ################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
@@ -64,7 +67,7 @@ Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Windows Error Reporting" -Ta
 ################################################
 
 # Create LGPO folder
-New-Item -Path $env:USERPROFILE\apps\LGPO -ItemType directory
+New-Item -Path $env:USERPROFILE\lgpo -ItemType directory
 
 # Download LGPO
 Invoke-WebRequest `
