@@ -15,9 +15,6 @@ if ($latestVersion -ne $installedVersion) {
     # Kill Syncthing process
     taskkill /f /im syncthing.exe
 
-    # Remove installed version
-    Remove-Item "$env:USERPROFILE\apps\syncthing" -Recurse
-
     # Download latest syncthing version
     $url = 'https://github.com/syncthing/syncthing/releases/latest'
     $request = [System.Net.WebRequest]::Create($url)
@@ -30,6 +27,9 @@ if ($latestVersion -ne $installedVersion) {
     Invoke-WebRequest `
         -Uri "$downloadUrl" `
         -OutFile "$env:USERPROFILE\apps\$filename"
+
+    # Remove installed version
+    Remove-Item "$env:USERPROFILE\apps\syncthing" -Recurse
 
     # Extract zip
     Expand-Archive `

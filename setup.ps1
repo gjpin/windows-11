@@ -3,6 +3,7 @@
 ################################################
 
 # Create user directories
+New-Item -Path $env:USERPROFILE\lgpo -ItemType directory
 New-Item -Path $env:USERPROFILE\apps -ItemType directory
 New-Item -Path $env:USERPROFILE\scripts -ItemType directory
 New-Item -Path $env:USERPROFILE\src -ItemType directory
@@ -68,16 +69,16 @@ New-Item -Path $env:USERPROFILE\apps\LGPO -ItemType directory
 # Download LGPO
 Invoke-WebRequest `
     -Uri "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/LGPO.zip" `
-    -OutFile "$env:USERPROFILE\apps\LGPO\LGPO.zip"
+    -OutFile "$env:USERPROFILE\lgpo\LGPO.zip"
 
 # Extract LGPO
 Add-Type -Assembly System.IO.Compression.FileSystem
-$zip = [IO.Compression.ZipFile]::OpenRead("$env:USERPROFILE\apps\LGPO\LGPO.zip")
-$zip.Entries | Where-Object { $_.Name -like 'LGPO.exe' } | ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$env:USERPROFILE\apps\LGPO\LGPO.exe", $true) }
+$zip = [IO.Compression.ZipFile]::OpenRead("$env:USERPROFILE\lgpo\LGPO.zip")
+$zip.Entries | Where-Object { $_.Name -like 'LGPO.exe' } | ForEach-Object { [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, "$env:USERPROFILE\lgpo\LGPO.exe", $true) }
 $zip.Dispose()
 
 # Remove LGPO zip
-Remove-Item "$env:USERPROFILE\apps\LGPO\LGPO.zip"
+Remove-Item "$env:USERPROFILE\lgpo\LGPO.zip"
 
 ################################################
 ##### Update winget-cli
@@ -114,7 +115,6 @@ $apps = "Microsoft.BingNews", `
     "Microsoft.BingFinance", `
     "Microsoft.BingSports", `
     "9E2F88E3.Twitter", `
-    "Microsoft.XboxApp", `
     "Microsoft.Office.Sway", `
     "Microsoft.Office.OneNote", `
     "Microsoft.MicrosoftOfficeHub", `
@@ -139,7 +139,6 @@ $apps = "Microsoft.BingNews", `
     "Microsoft.WindowsAlarms", `
     "Microsoft.windowscommunicationsapps", `
     "Microsoft.StorePurchaseApp", `
-    "Microsoft.WindowsStore", `
     "Microsoft.WindowsSoundRecorder"
 
 foreach ($app in $apps) {
@@ -147,8 +146,8 @@ foreach ($app in $apps) {
     Get-AppxPackage $app | Remove-AppxPackage -AllUsers
 }
 
-# Uninstall OneDrive / Xbox / Cortana apps
-$apps = "onedrive", "xbox", "cortana"
+# Uninstall OneDrive / Cortana apps
+$apps = "onedrive", "cortana"
 
 foreach ($app in $apps) {
     winget uninstall $app
@@ -179,10 +178,11 @@ winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Mozilla.Firefox
+winget install -e --source winget --id Google.Chrome
 winget install -e --source winget --id 7zip.7zip
 
 # Install in a non-admin powershell
-winget install -e --source winget --force --id Spotify.Spotify
+winget install -e --source winget --id Spotify.Spotify
 winget install -e --source winget --id Obsidian.Obsidian
 
 ################################################
@@ -205,7 +205,6 @@ $credential = Get-Credential -credential "$env:USERNAME"
 $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
-    "& code --install-extension ms-dotnettools.csharp"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -301,29 +300,33 @@ Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 # https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-security-configuration-framework/windows-security-baselines
 # https://learn.microsoft.com/en-us/windows/security/threat-protection/device-guard/enable-virtualization-based-protection-of-code-integrity
 
+# Create a backup of the policies
+New-Item -Path $env:USERPROFILE\lgpo\backup -ItemType directory
+& "$env:USERPROFILE\lgpo\LGPO.exe" /b "$env:USERPROFILE\lgpo\backup"
+
 # Create policies directories
-New-Item -Path $env:USERPROFILE\apps\LGPO\policies -ItemType directory
-New-Item -Path $env:USERPROFILE\apps\LGPO\policies\Machine -ItemType directory
-New-Item -Path $env:USERPROFILE\apps\LGPO\policies\User -ItemType directory
+New-Item -Path $env:USERPROFILE\lgpo\policies -ItemType directory
+New-Item -Path $env:USERPROFILE\lgpo\policies\Machine -ItemType directory
+New-Item -Path $env:USERPROFILE\lgpo\policies\User -ItemType directory
 
 # Download policies
 Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/policies/machine.txt" `
-    -OutFile "$env:USERPROFILE\apps\LGPO\policies\machine.txt"
+    -OutFile "$env:USERPROFILE\lgpo\policies\machine.txt"
 
 Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/policies/user.txt" `
-    -OutFile "$env:USERPROFILE\apps\LGPO\policies\user.txt"
+    -OutFile "$env:USERPROFILE\lgpo\policies\user.txt"
 
 # Build policy files
-& "$env:USERPROFILE\apps\LGPO\LGPO.exe" `
-    /r "$env:USERPROFILE\apps\LGPO\policies\machine.txt" `
-    /w "$env:USERPROFILE\apps\LGPO\policies\Machine\registry.pol"
+& "$env:USERPROFILE\lgpo\LGPO.exe" `
+    /r "$env:USERPROFILE\lgpo\policies\machine.txt" `
+    /w "$env:USERPROFILE\lgpo\policies\Machine\registry.pol"
 
-& "$env:USERPROFILE\apps\LGPO\LGPO.exe" `
-    /r "$env:USERPROFILE\apps\LGPO\policies\user.txt" `
-    /w "$env:USERPROFILE\apps\LGPO\policies\User\registry.pol"
+& "$env:USERPROFILE\lgpo\LGPO.exe" `
+    /r "$env:USERPROFILE\lgpo\policies\user.txt" `
+    /w "$env:USERPROFILE\lgpo\policies\User\registry.pol"
 
 # Import settings from policy files
-& "$env:USERPROFILE\apps\LGPO\LGPO.exe" `
-    /g "$env:USERPROFILE\apps\LGPO\policies"
+& "$env:USERPROFILE\lgpo\LGPO.exe" `
+    /g "$env:USERPROFILE\lgpo\policies"

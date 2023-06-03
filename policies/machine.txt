@@ -436,7 +436,7 @@ SZ:v2.25|Action=Block|Active=TRUE|Dir=Out|Protocol=6|App=%windir%\\SystemApps\\M
 Computer
 SOFTWARE\Policies\Microsoft\WindowsStore
 AutoDownload
-DWORD:2
+DWORD:4
 
 Computer
 SOFTWARE\Policies\Microsoft\WindowsStore
@@ -863,16 +863,16 @@ ResolveNavigationErrorsUseWebService
 DWORD:0
 
 ; Do not allow Edge to pre-launch
-; Computer
-; SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main
-; AllowPrelaunch
-; DWORD:0
+Computer
+SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main
+AllowPrelaunch
+DWORD:0
 
 ; Disable startup boost
-; Computer
-; SOFTWARE\Policies\Microsoft\Edge\Recommended
-; StartupBoostEnabled
-; DWORD:0
+Computer
+SOFTWARE\Policies\Microsoft\Edge\Recommended
+StartupBoostEnabled
+DWORD:0
 
 Computer
 SOFTWARE\Policies\Microsoft\Edge
@@ -961,12 +961,6 @@ Computer
 SOFTWARE\Policies\Microsoft\Windows\GameDVR
 AllowGameDVR
 DWORD:0
-
-; Enable SmartScreen
-Computer
-SOFTWARE\Policies\Microsoft\Windows\System
-EnableSmartScreen
-DWORD:1
 
 ; ----------------------------------------------------------------------
 ; Enable virtualization-based protection of code integrity, System Guard Launch and Credential Guard
@@ -1457,3 +1451,9 @@ Computer
 SYSTEM\CurrentControlSet\Control\Lsa
 RunAsPPL
 DWORD:00000001
+
+; Disable "Get the latest updates as soon as they are available"
+Computer
+SOFTWARE\Microsoft\WindowsUpdate\UX\Settings
+IsContinuousInnovationOptedIn
+DWORD:00000000
