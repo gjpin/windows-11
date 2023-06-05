@@ -547,6 +547,15 @@ New-NetFirewallRule -DisplayName "Firefox" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Mozilla Firefox\firefox.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Chrome
+New-NetFirewallRule -DisplayName "Chrome" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Google\Chrome\Application\chrome.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Chrome - Updater" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Google\Update\GoogleUpdate.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # .NET / dotnet
 New-NetFirewallRule -DisplayName ".NET / dotnet" -Group "User Applications" `
     -Program "%PROGRAMFILES%\dotnet\dotnet.exe" `
