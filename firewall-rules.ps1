@@ -420,13 +420,13 @@ New-NetFirewallRule -DisplayName "Steam - It Takes Two" -Group "User Application
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Apex Legends - EA
-# New-NetFirewallRule -DisplayName "Apex Legends" -Group "User Applications" `
-#     -Program "D:\eagames\Apex\r5apex.exe" `
-#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+New-NetFirewallRule -DisplayName "Apex Legends" -Group "User Applications" `
+    -Program "D:\eagames\Apex\r5apex.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# New-NetFirewallRule -DisplayName "Apex Legends - EAC launcher" -Group "User Applications" `
-#     -Program "D:\eagames\Apex\EasyAntiCheat_launcher.exe" `
-#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+New-NetFirewallRule -DisplayName "Apex Legends - EAC launcher" -Group "User Applications" `
+    -Program "D:\eagames\Apex\EasyAntiCheat_launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Steam - Apex Legends
 New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "User Applications" `
@@ -435,6 +435,23 @@ New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "U
 
 New-NetFirewallRule -DisplayName "Steam - Apex Legends" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\Apex Legends\r5apex.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# GOG
+New-NetFirewallRule -DisplayName "GOG client" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\GOG Galaxy\GalaxyClient.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "GOG communication" -Group "User Applications" `
+    -Program "C:\ProgramData\GOG.com\Galaxy\redists\GalaxyCommunication.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "GOG updater" -Group "User Applications" `
+    -Program "C:\ProgramData\GOG.com\Galaxy\redists\GalaxyUpdater.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "GOG updater 2" -Group "User Applications" `
+    -Program "C:\ProgramData\GOG.com\Galaxy\prefetch\desktop-galaxy-updater\GalaxyUpdater.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Battle.Net
