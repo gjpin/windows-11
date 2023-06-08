@@ -248,6 +248,10 @@ New-NetFirewallRule -DisplayName "Fortnite - BattlEye" -Group "User Applications
     -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\FortniteClient-Win64-Shipping_BE.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Fortnite - EOS" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\FortniteClient-Win64-Shipping_EAC_EOS.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # UEFN
 New-NetFirewallRule -DisplayName "UEFN" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\UnrealEditorFortnite-Win64-Shipping.exe" `
