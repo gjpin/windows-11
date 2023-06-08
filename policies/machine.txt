@@ -1445,15 +1445,20 @@ DWORD:1
 Computer
 SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\LSASS.exe
 AuditLevel
-DWORD:00000008
+DWORD:8
 
 Computer
 SYSTEM\CurrentControlSet\Control\Lsa
 RunAsPPL
-DWORD:00000001
+DWORD:1
+
+Computer
+SYSTEM\CurrentControlSet\Control\Lsa
+RunAsPPLBoot
+DWORD:1
 
 ; Disable "Get the latest updates as soon as they are available"
 Computer
 SOFTWARE\Microsoft\WindowsUpdate\UX\Settings
 IsContinuousInnovationOptedIn
-DWORD:00000000
+DWORD:0
