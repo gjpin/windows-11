@@ -219,16 +219,16 @@ New-NetFirewallRule -DisplayName "Epic Games Web Helper" -Group "User Applicatio
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Unreal Engine
-New-NetFirewallRule -DisplayName "Unreal Engine 5.1 - Editor" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Epic Games\UE_5.1\Engine\Binaries\Win64\UnrealEditor.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.2 - Editor" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unreal Engine 5.1 - Web Helper" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Epic Games\UE_5.1\Engine\Binaries\Win64\EpicWebHelper.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.2 - Web Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.2\Engine\Binaries\Win64\EpicWebHelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unreal Engine 5.1 - Quixel Bridge" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Epic Games\UE_5.1\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.2 - Quixel Bridge" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.2\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Fortnite
