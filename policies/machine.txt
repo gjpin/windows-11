@@ -1462,3 +1462,9 @@ Computer
 SOFTWARE\Microsoft\WindowsUpdate\UX\Settings
 IsContinuousInnovationOptedIn
 DWORD:0
+
+; Disable Copilot button
+Computer
+SOFTWARE\Policies\Microsoft\Windows\Explorer
+HideCopilotButton
+DWORD:1
