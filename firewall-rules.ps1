@@ -99,6 +99,13 @@ New-NetFirewallRule -DisplayName "WSL 2" -Group "Windows Services" `
     -Program "%SYSTEMROOT%\System32\wsl.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter microsoft.windowsterminal_*_x64__8wekyb3d8bbwe -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$wingetPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+New-NetFirewallRule -DisplayName "Windows Terminal" -Group "Windows Services" `
+    -Program "$wingetPath\windowsterminal.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### User services and applications
 ################################################
