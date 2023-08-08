@@ -1452,11 +1452,6 @@ SYSTEM\CurrentControlSet\Control\Lsa
 RunAsPPL
 DWORD:1
 
-Computer
-SYSTEM\CurrentControlSet\Control\Lsa
-RunAsPPLBoot
-DWORD:1
-
 ; Disable "Get the latest updates as soon as they are available"
 Computer
 SOFTWARE\Microsoft\WindowsUpdate\UX\Settings
