@@ -1468,3 +1468,63 @@ Computer
 SOFTWARE\Policies\Microsoft\Windows\Explorer
 HideCopilotButton
 DWORD:1
+
+; Disallow widgets
+; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.NewsAndInterests::AllowNewsAndInterests
+Computer
+SOFTWARE\Policies\Microsoft\Dsh
+AllowNewsAndInterests
+DWORD:0
+
+; Turn off cloud optimized content
+; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.CloudContent::DisableCloudOptimizedContent
+Computer
+Software\Policies\Microsoft\Windows\CloudContent
+DisableCloudOptimizedContent
+DWORD:1
+
+; Turn off cloud consumer account state content
+; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.CloudContent::DisableConsumerAccountStateContent
+Computer
+Software\Policies\Microsoft\Windows\CloudContent
+DisableConsumerAccountStateContent
+DWORD:1
+
+; Disable the Chat icon on the taskbar
+; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.TaskBar2::ConfigureChatIcon
+Computer
+Software\Policies\Microsoft\Windows\Windows Chat
+ChatIcon
+DWORD:3
+
+; Data Collection and Preview Builds
+; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.DataCollection::AllowCommercialDataPipeline
+Computer
+Software\Policies\Microsoft\Windows\DataCollection
+AllowCommercialDataPipeline
+DWORD:0
+
+Computer
+Software\Policies\Microsoft\Windows\DataCollection
+AllowDesktopAnalyticsProcessing
+DWORD:0
+
+Computer
+Software\Policies\Microsoft\Windows\DataCollection
+AllowUpdateComplianceProcessing
+DWORD:0
+
+Computer
+Software\Policies\Microsoft\Windows\DataCollection
+AllowWUfBCloudProcessing
+DWORD:0
+
+Computer
+Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection
+MicrosoftEdgeDataOptIn
+DWORD:0
+
+Computer
+Software\Policies\Microsoft\Windows\PreviewBuilds
+AllowBuildPreview
+DWORD:0
