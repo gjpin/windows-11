@@ -112,12 +112,11 @@ sudo tee /etc/resolv.conf << EOF
 nameserver 1.1.1.1
 EOF
 
-sudo tee /etc/wsl.conf << EOF
+sudo tee -a /etc/wsl.conf << EOF
+
 [network]
 generateResolvConf = false
 EOF
-
-sudo chattr +i /etc/resolv.conf
 ```
 
 ### Android Emulator - Disable Vulkan
