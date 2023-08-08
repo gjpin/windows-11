@@ -95,6 +95,10 @@ New-NetFirewallRule -DisplayName "WSL" -Group "Windows Services" `
     -Program "$wslPath\wsl.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "WSL 2" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\wsl.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### User services and applications
 ################################################
