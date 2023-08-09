@@ -294,6 +294,22 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRes
 Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 
 ################################################
+##### Resolution/frequency changer helper
+################################################
+
+# References:
+# https://github.com/lust4life/display-resolution
+
+# Helper script to set resolution/frequency
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/set-display-resolution-frequency/main.psm1" `
+    -OutFile "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"
+
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/set-display-resolution-frequency/CDS.cs" `
+    -OutFile "$env:USERPROFILE\scripts\set-display-resolution-frequency\CDS.cs"
+
+################################################
 ##### Apply local group policies
 ################################################
 

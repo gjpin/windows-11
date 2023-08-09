@@ -71,6 +71,13 @@ Get-EventLog security -newest 20 -InstanceId 5157 -Message *Destination* | forma
 winget install -e --source winget --id ViGEm.ViGEmBus
 winget install -e --source winget --id LizardByte.Sunshine
 
+# Change resolution and frequency before starting applications
+pwsh -command "& { import-module "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"; Set-DisplayResolutionFrequency 1920 1080 60 }"
+
+pwsh -command "& { import-module "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"; Set-DisplayResolutionFrequency 3440 1440 144 }"
+
+pwsh -command "& { import-module "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"; Set-DisplayResolutionFrequency 1280 800 60 }"
+
 # https://github.com/LizardByte/Sunshine/blob/master/src_assets/windows/misc/firewall/add-firewall-rule.bat
 # https://github.com/LizardByte/Sunshine/blob/master/src_assets/windows/misc/service/install-service.bat
 
