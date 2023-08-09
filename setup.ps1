@@ -301,6 +301,8 @@ Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 # https://github.com/lust4life/display-resolution
 
 # Helper script to set resolution/frequency
+New-Item -Path $env:USERPROFILE\scripts\set-display-resolution-frequency -ItemType directory
+
 Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/set-display-resolution-frequency/main.psm1" `
     -OutFile "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"
