@@ -124,6 +124,8 @@ sudo tee -a /etc/wsl.conf << EOF
 [network]
 generateResolvConf = false
 EOF
+
+sudo chattr +i /etc/resolv.conf
 ```
 
 ### Android Emulator - Disable Vulkan
