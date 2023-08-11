@@ -1,0 +1,20 @@
+{
+	"git.autofetch": true,
+	"workbench.startupEditor": "none",
+	"window.menuBarVisibility": "toggle",
+	"editor.formatOnSave": true,
+	"git.enableSmartCommit": true,
+	"git.confirmSync": false,
+	"powershell.promptToUpdatePowerShell": true,
+	"workbench.iconTheme": null,
+	"html.format.enable": false,
+	"editor.formatOnPaste": true,
+	"editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace",
+	"editor.fontLigatures": true,
+	"workbench.settings.enableNaturalLanguageSearch": false,
+	"workbench.enableExperiments": false,
+	"extensions.ignoreRecommendations": true,
+	"telemetry.telemetryLevel": "off",
+	"update.showReleaseNotes": false,
+	"workbench.welcomePage.walkthroughs.openOnInstall": false
+}

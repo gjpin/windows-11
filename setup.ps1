@@ -180,13 +180,31 @@ winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
-winget install -e --source winget --id Mozilla.Firefox
 winget install -e --source winget --id Google.Chrome
 winget install -e --source winget --id 7zip.7zip
 
 # Install in a non-admin powershell
 winget install -e --source winget --id Spotify.Spotify
 winget install -e --source winget --id Obsidian.Obsidian
+
+################################################
+##### Firefox
+################################################
+
+# Install Firefox
+winget install -e --source winget --id Mozilla.Firefox
+
+##
+# Open and close Firefox to create profile
+##
+
+# Get profile path
+$FirefoxProfilePath = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles" -Filter "*.default-release" -Name
+
+# Import Firefox configs to profile path
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/configs/firefox/user.js" `
+    -OutFile "$env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles\$FirefoxProfilePath"
 
 ################################################
 ##### VSCode
@@ -200,7 +218,7 @@ New-Item -Path $env:USERPROFILE\AppData\Roaming\Code\User -ItemType directory
 
 # Import VSCode settings
 Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/configs/vscode.json" `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/configs/vscode/settings.json" `
     -OutFile "$env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
 
 # Install VSCode extensions
@@ -294,7 +312,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRes
 Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 
 ################################################
-##### Resolution/frequency changer helper
+##### Sunshine
 ################################################
 
 # References:
@@ -310,6 +328,21 @@ Invoke-WebRequest `
 Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/set-display-resolution-frequency/CDS.cs" `
     -OutFile "$env:USERPROFILE\scripts\set-display-resolution-frequency\CDS.cs"
+
+# Install Sunshine and ViGEmBus
+winget install -e --source winget --id ViGEm.ViGEmBus
+winget install -e --source winget --id LizardByte.Sunshine
+
+# Import Sunshine configurations
+New-Item -Path "C:\Program Files\Sunshine\config" -ItemType directory -ErrorAction SilentlyContinue
+
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/configs/sunshine/apps.json" `
+    -OutFile "C:\Program Files\Sunshine\config\apps.json"
+
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/configs/sunshine/sunshine.conf" `
+    -OutFile "C:\Program Files\Sunshine\config\sunshine.conf"
 
 ################################################
 ##### Apply local group policies

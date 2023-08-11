@@ -1,0 +1,92 @@
+{
+    "env": {
+        "PATH": "$(PATH);$(ProgramFiles(x86))\\Steam"
+    },
+    "apps": [
+        {
+            "name": "Desktop - 3440x1440",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false"
+        },
+        {
+            "name": "Desktop - 2560x1440",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 2560 1440 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false"
+        },
+        {
+            "name": "Desktop - 1920x1080",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false"
+        },
+        {
+            "name": "Steam - 2560x1440",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 2560 1440 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false",
+            "working-dir": "C:\\Program Files (x86)\\Steam",
+            "cmd": "steam.exe -gamepadui"
+        },
+        {
+            "name": "Steam - 1920x1080",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false",
+            "working-dir": "C:\\Program Files (x86)\\Steam",
+            "cmd": "steam.exe -gamepadui"
+        },
+        {
+            "name": "Steam - 1280x800",
+            "output": "",
+            "cmd": "steam.exe -gamepadui",
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "image-path": "",
+            "working-dir": "C:\\Program Files (x86)\\Steam"
+        }
+    ]
+}

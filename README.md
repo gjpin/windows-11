@@ -52,65 +52,6 @@
 
 ## Others
 
-### List blocked executables by firewall
-```powershell
-Get-WinEvent -FilterHashtable @{LogName='Security'} -MaxEvents 50 |Where-Object -Property Message -Match "Outbound:*" | Select-Object -Unique -ExpandProperty Message
-
-or
-
-# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
-Get-EventLog security -newest 20 -InstanceId 5157 -Message *Destination* | format-table -wrap
-```
-
-### Streaming
-```powershell
-########## HOST ##########
-# Enable "Enhanced Sync" in AMD Adrenalin
-
-# Install Sunshine and ViGEmBus
-winget install -e --source winget --id ViGEm.ViGEmBus
-winget install -e --source winget --id LizardByte.Sunshine
-
-# Change resolution and frequency before starting applications
-pwsh -command "& { import-module "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"; Set-DisplayResolutionFrequency 1920 1080 60 }"
-
-pwsh -command "& { import-module "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"; Set-DisplayResolutionFrequency 3440 1440 144 }"
-
-pwsh -command "& { import-module "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"; Set-DisplayResolutionFrequency 1280 800 60 }"
-
-# https://github.com/LizardByte/Sunshine/blob/master/src_assets/windows/misc/firewall/add-firewall-rule.bat
-# https://github.com/LizardByte/Sunshine/blob/master/src_assets/windows/misc/service/install-service.bat
-
-# Get system info
-cd "C:\Program Files\Sunshine\tools"
-.\dxgi-info.exe
-.\audio-info.exe
-
-# Configuration:
-## Create user at: https://localhost:47990/
-## General:
-### Gamepads: DS4 (PS4)
-## Audio/Video:
-### Audio Sink: {0.0.0.00000000}.{efd7c964-3adb-491f-a318-c2e8c98dc60e}
-### Adapter Name: AMD Radeon RX 5700 XT
-### Output Name: \\.\DISPLAY1
-## Advanced:
-### External IP: 10.0.0.2 (wireguard's IP)
-## Apps:
-### Steam Big Picture:
-#### Command Preparations: 
-#### Do: cmd echo random
-#### Undo: taskkill /IM "steam.exe" /F
-
-########## Client ##########
-winget install -e --source winget --id MoonlightGameStreamingProject.Moonlight
-```
-
-### Run Powershell script without changing global execution policy
-```
-powershell.exe -ExecutionPolicy Unrestricted -File "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
-```
-
 ### No connection in WSL
 ```bash
 
@@ -126,6 +67,21 @@ generateResolvConf = false
 EOF
 
 sudo chattr +i /etc/resolv.conf
+```
+
+### List blocked executables by firewall
+```powershell
+Get-WinEvent -FilterHashtable @{LogName='Security'} -MaxEvents 50 |Where-Object -Property Message -Match "Outbound:*" | Select-Object -Unique -ExpandProperty Message
+
+or
+
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog
+Get-EventLog security -newest 20 -InstanceId 5157 -Message *Destination* | format-table -wrap
+```
+
+### Run Powershell script without changing global execution policy
+```
+powershell.exe -ExecutionPolicy Unrestricted -File "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
 ```
 
 ### Android Emulator - Disable Vulkan
