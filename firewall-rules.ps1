@@ -618,9 +618,13 @@ New-NetFirewallRule -DisplayName "BattlEye" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Common Files\BattlEye\BEService.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# Kitbash3d Cargo
-New-NetFirewallRule -DisplayName "Kitbash3d Cargo" -Group "User Applications" `
+# Cargo by KitBash3D
+New-NetFirewallRule -DisplayName "Cargo by KitBash3D" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Kitbash3D\Cargo by KitBash3D\Cargo by KitBash3D.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Cargo by KitBash3D - Downloader" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Kitbash3D\Cargo by KitBash3D\resources\downloader\CargoDownloadApp.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
