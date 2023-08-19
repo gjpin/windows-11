@@ -198,6 +198,10 @@ New-NetFirewallRule -DisplayName "Android Studio - Emulator" -Group "User Applic
     -Program "$env:USERPROFILE\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Android Studio - ADB" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools\adb.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Spotify
 New-NetFirewallRule -DisplayName "Spotify" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Roaming\Spotify\Spotify.exe" `
@@ -617,6 +621,15 @@ New-NetFirewallRule -DisplayName "Cargo by KitBash3D" -Group "User Applications"
 
 New-NetFirewallRule -DisplayName "Cargo by KitBash3D - Downloader" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Kitbash3D\Cargo by KitBash3D\resources\downloader\CargoDownloadApp.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# HTTP Toolkit
+New-NetFirewallRule -DisplayName "HTTP Toolkit" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\httptoolkit\HTTP Toolkit.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "HTTP Toolkit - Server" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\httptoolkit\resources\httptoolkit-server\bin\node.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
