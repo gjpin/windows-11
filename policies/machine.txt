@@ -972,6 +972,19 @@ SOFTWARE\Policies\Microsoft\Windows\GameDVR
 AllowGameDVR
 DWORD:0
 
+; Disables SmartScreen automatic data collection
+; https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-webthreatdefense#automaticdatacollection
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WTDS\Components
+CaptureThreatWindow
+DWORD:0
+
+; Disables Windows Copilot
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot
+TurnOffWindowsCopilot
+DWORD:1
+
 ; ----------------------------------------------------------------------
 ; Enable virtualization-based protection of code integrity, System Guard Launch and Credential Guard
 ; https://learn.microsoft.com/en-us/windows/security/threat-protection/device-guard/enable-virtualization-based-protection-of-code-integrity
