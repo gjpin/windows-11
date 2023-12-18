@@ -24,7 +24,8 @@ wsl --install
 ################################################
 
 # References:
-# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.4
+# https://learn.microsoft.com/en-us/windows/terminal/tutorials/custom-prompt-setup
 
 # Change powershell execution policy to RemoteSigned
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -42,6 +43,12 @@ Invoke-WebRequest `
     -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
 
 Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content $profile
+
+# Install Oh My Posh
+winget install -e --source winget --id JanDeDobbeleer.OhMyPosh
+
+# Set Oh My Posh theme
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression
 
 ################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
