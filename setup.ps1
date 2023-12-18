@@ -240,8 +240,8 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # Disable .NET telemetry
 [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
-# Install .NET SDK 7
-winget install -e --source winget --id Microsoft.DotNet.SDK.7
+# Install .NET SDK 8
+winget install -e --source winget --id Microsoft.DotNet.SDK.8
 
 # Trust ASP.NET Core HTTPS certificate
 dotnet --info

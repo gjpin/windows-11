@@ -594,8 +594,18 @@ TroubleshootingAllowRecommendations
 DWORD:0
 
 Computer
-SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\Dsh
+SOFTWARE\Microsoft\Windows\CurrentVersion\Dsh
 AllowNewsAndInterests
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\CloudContent
+DisableCloudOptimizedContent
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\EdgeUpdate
+UpdaterExperimentationAndConfigurationServiceControl
 DWORD:0
 
 ; ----------------------------------------------------------------------

@@ -16,5 +16,10 @@
 	"extensions.ignoreRecommendations": true,
 	"telemetry.telemetryLevel": "off",
 	"update.showReleaseNotes": false,
-	"workbench.welcomePage.walkthroughs.openOnInstall": false
+	"workbench.welcomePage.walkthroughs.openOnInstall": false,
+    "workbench.colorCustomizations": {
+        "[Default Dark Modern]": {
+            "editor.background": "#181818"
+        }
+    }
 }
