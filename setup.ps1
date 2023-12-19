@@ -54,20 +54,20 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
 
-# Disable Windows Customer Experience Program (Proxy) task
-Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Autochk" -TaskName "Proxy"
-
-# Disable Windows Customer Experience Program (Microsoft Compatibility Appraiser) task
+# Disable scheduled tasks
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "Microsoft Compatibility Appraiser"
-
-# Disable Windows Customer Experience Program (Consolidator) task
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "ProgramDataUpdater"
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Autochk" -TaskName "Proxy"
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program" -TaskName "Consolidator"
-
-# Disable Windows Customer Experience Program (UsbCeip) task
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Customer Experience Improvement Program" -TaskName "UsbCeip"
-
-# Disable Windows Error Reporting task
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\DiskDiagnostic" -TaskName "Microsoft-Windows-DiskDiagnosticDataCollector"
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Feedback\Siuf" -TaskName "DmClient"
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Feedback\Siuf" -TaskName "DmClientOnScenarioDownload"
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Windows Error Reporting" -TaskName "QueueReporting"
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "MareBackup"
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "StartupAppTask"
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "PcaPatchDbTask"
+Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Maps" -TaskName "MapsUpdateTask"
 
 ################################################
 ##### Install LGPO
