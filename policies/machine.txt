@@ -4,17 +4,17 @@
 ; ----------------------------------------------------------------------
 
 Computer
-Software\Microsoft\OneDrive
+SOFTWARE\Microsoft\OneDrive
 PreventNetworkTrafficPreUserSignIn
 DWORD:1
 
 Computer
-Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
 AllowOnlineTips
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\FindMyDevice
+SOFTWARE\Policies\Microsoft\FindMyDevice
 AllowFindMyDevice
 DWORD:0
 
@@ -24,7 +24,7 @@ AllowServicePoweredQSA
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Internet Explorer\BrowserEmulation
+SOFTWARE\Policies\Microsoft\Internet Explorer\BrowserEmulation
 DisableSiteListEditing
 DWORD:1
 
@@ -44,7 +44,7 @@ PolicyDisableGeolocation
 DWORD:1
 
 ; Computer
-; Software\Policies\Microsoft\Internet Explorer\PhishingFilter
+; SOFTWARE\Policies\Microsoft\Internet Explorer\PhishingFilter
 ; EnabledV9
 ; DWORD:0
 
@@ -54,12 +54,12 @@ Enabled
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\MicrosoftEdge\BrowserEmulation
+SOFTWARE\Policies\Microsoft\MicrosoftEdge\BrowserEmulation
 MSCompatibilityMode
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\MicrosoftEdge\Internet Settings
+SOFTWARE\Policies\Microsoft\MicrosoftEdge\Internet Settings
 ProvisionedHomePages
 SZ:<about:blank>
 
@@ -74,7 +74,7 @@ FormSuggest Passwords
 SZ:no
 
 Computer
-Software\Policies\Microsoft\MicrosoftEdge\Main
+SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main
 PreventFirstRunPage
 DWORD:1
 
@@ -104,7 +104,7 @@ DontReportInfectionInformation
 DWORD:1
 
 Computer
-Software\Policies\Microsoft\Speech
+SOFTWARE\Policies\Microsoft\Speech
 AllowSpeechModelUpdate
 DWORD:0
 
@@ -149,7 +149,7 @@ ManualLaunchAllowed
 DWORD:0
 
 Computer
-SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform
+SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\SOFTWARE\ Protection Platform
 NoGenTicket
 DWORD:1
 
@@ -224,7 +224,7 @@ LetAppsAccessRadios
 DWORD:2
 
 Computer
-Software\Policies\Microsoft\Windows\AppPrivacy
+SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
 LetAppsAccessTasks
 DWORD:2
 
@@ -234,7 +234,7 @@ LetAppsAccessTrustedDevices
 DWORD:2
 
 Computer
-Software\Policies\Microsoft\Windows\AppPrivacy
+SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
 LetAppsGetDiagnosticInfo
 DWORD:2
 
@@ -299,7 +299,7 @@ AutoDownloadAndUpdateMapData
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\Messaging
+SOFTWARE\Policies\Microsoft\Windows\Messaging
 AllowMessageSync
 DWORD:0
 
@@ -344,12 +344,12 @@ DisableSettingSyncUserOverride
 DWORD:1
 
 ; Computer
-; Software\Policies\Microsoft\Windows\StorageHealth
+; SOFTWARE\Policies\Microsoft\Windows\StorageHealth
 ; AllowDiskHealthModelUpdates
 ; DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\System
+SOFTWARE\Policies\Microsoft\Windows\System
 EnableAppUriHandlers
 DWORD:0
 
@@ -449,7 +449,7 @@ NoCloudApplicationNotification
 DWORD:1
 
 Computer
-Software\Policies\Microsoft\MicrosoftEdge\BooksLibrary
+SOFTWARE\Policies\Microsoft\MicrosoftEdge\BooksLibrary
 AllowConfigurationUpdateForBooksLibrary
 DWORD:0
 
@@ -474,27 +474,27 @@ HapDownloadEnabled
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\System
+SOFTWARE\Policies\Microsoft\Windows\System
 EnableActivityFeed
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\System
+SOFTWARE\Policies\Microsoft\Windows\System
 PublishUserActivities
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\System
+SOFTWARE\Policies\Microsoft\Windows\System
 UploadUserActivities
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\AppPrivacy
+SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
 LetAppsActivateWithVoice
 DWORD:2
 
 Computer
-Software\Policies\Microsoft\Windows\AppPrivacy
+SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
 LetAppsActivateWithVoiceAboveLock
 DWORD:2
 
@@ -574,12 +574,12 @@ ExperimentationAndConfigurationServiceControl
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\DataCollection
+SOFTWARE\Policies\Microsoft\Windows\DataCollection
 DisableOneSettingsDownloads
 DWORD:1
 
 Computer
-Software\Policies\Microsoft\Windows\System
+SOFTWARE\Policies\Microsoft\Windows\System
 AllowCrossDeviceClipboard
 DWORD:0
 
@@ -1394,6 +1394,81 @@ DisableRemoteAnalysis
 DWORD:1
 
 ; ----------------------------------------------------------------------
+; Disable Activity History
+; WPFEssTweaksAH: https://github.com/ChrisTitusTech/winutil/blob/main/config/tweaks.json#L2
+; ----------------------------------------------------------------------
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\System
+EnableActivityFeed
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\System
+PublishUserActivities
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\System
+UploadUserActivities
+DWORD:0
+
+; ----------------------------------------------------------------------
+; Disable Homegroup
+; WPFEssTweaksHome: https://github.com/ChrisTitusTech/winutil/blob/main/config/tweaks.json#L48
+; ----------------------------------------------------------------------
+
+Computer
+SYSTEM\CurrentControlSet\Services\HomeGroupListener
+Start
+DWORD:4
+
+Computer
+SYSTEM\CurrentControlSet\Services\HomeGroupProvider
+Start
+DWORD:4
+
+; ----------------------------------------------------------------------
+; Disable Location Tracking
+; WPFEssTweaksLoc: https://github.com/ChrisTitusTech/winutil/blob/main/config/tweaks.json#L62
+; ----------------------------------------------------------------------
+
+Computer
+SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location
+Value
+SZ:Deny
+
+Computer
+SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}
+SensorPermissionState
+DWORD:0
+
+Computer
+SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration
+Status
+DWORD:0
+
+Computer
+SYSTEM\Maps
+AutoUpdateEnabled
+DWORD:0
+
+; ----------------------------------------------------------------------
+; Disable Wifi-Sense
+; WPFEssTweaksWifi: https://github.com/ChrisTitusTech/winutil/blob/main/config/tweaks.json#L1894
+; ----------------------------------------------------------------------
+
+Computer
+SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting
+Value
+DWORD:0
+
+Computer
+SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots
+Value
+DWORD:0
+
+; ----------------------------------------------------------------------
 ; Misc
 ; ----------------------------------------------------------------------
 
@@ -1459,7 +1534,7 @@ DWORD:0
 
 ; Turn off smart multi-homed name resolution
 Computer
-Software\Policies\Microsoft\Windows NT\DNSClient
+SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
 DisableSmartNameResolution
 DWORD:1
 
@@ -1497,62 +1572,63 @@ DWORD:0
 ; Turn off cloud optimized content
 ; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.CloudContent::DisableCloudOptimizedContent
 Computer
-Software\Policies\Microsoft\Windows\CloudContent
+SOFTWARE\Policies\Microsoft\Windows\CloudContent
 DisableCloudOptimizedContent
 DWORD:1
 
 ; Turn off cloud consumer account state content
 ; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.CloudContent::DisableConsumerAccountStateContent
 Computer
-Software\Policies\Microsoft\Windows\CloudContent
+SOFTWARE\Policies\Microsoft\Windows\CloudContent
 DisableConsumerAccountStateContent
 DWORD:1
 
 ; Disable the Chat icon on the taskbar
 ; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.TaskBar2::ConfigureChatIcon
 Computer
-Software\Policies\Microsoft\Windows\Windows Chat
+SOFTWARE\Policies\Microsoft\Windows\Windows Chat
 ChatIcon
 DWORD:3
 
 ; Data Collection and Preview Builds
 ; https://admx.help/?Category=Windows_11_2022&Policy=Microsoft.Policies.DataCollection::AllowCommercialDataPipeline
 Computer
-Software\Policies\Microsoft\Windows\DataCollection
+SOFTWARE\Policies\Microsoft\Windows\DataCollection
 AllowCommercialDataPipeline
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\DataCollection
+SOFTWARE\Policies\Microsoft\Windows\DataCollection
 AllowDesktopAnalyticsProcessing
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\DataCollection
+SOFTWARE\Policies\Microsoft\Windows\DataCollection
 AllowUpdateComplianceProcessing
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\DataCollection
+SOFTWARE\Policies\Microsoft\Windows\DataCollection
 AllowWUfBCloudProcessing
 DWORD:0
 
 Computer
-Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection
+SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection
 MicrosoftEdgeDataOptIn
 DWORD:0
 
 Computer
-Software\Policies\Microsoft\Windows\PreviewBuilds
+SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds
 AllowBuildPreview
 DWORD:0
 
-; Disable other services
+; Disable AllJoyn router service
 Computer
 SYSTEM\CurrentControlSet\Services\AJRouter
 Start
 DWORD:4
 
+; Disable kiosk experience
 Computer
 SYSTEM\CurrentControlSet\Services\AssignedAccessManagerSvc
 Start
