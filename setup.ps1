@@ -54,6 +54,9 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
 
+# References:
+# https://github.com/ChrisTitusTech/winutil/blob/main/config/tweaks.json#L1513
+
 # Disable scheduled tasks
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "Microsoft Compatibility Appraiser"
 Disable-ScheduledTask -TaskPath "\Microsoft\Windows\Application Experience" -TaskName "ProgramDataUpdater"
