@@ -51,6 +51,39 @@ winget install -e --source winget --id JanDeDobbeleer.OhMyPosh
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression
 
 ################################################
+##### Nerd Fonts (CaskaydiaMono Nerd Font)
+################################################
+
+# Download latest Nerd Fonts version
+$url = 'https://github.com/ryanoasis/nerd-fonts/releases/latest'
+$request = [System.Net.WebRequest]::Create($url)
+$response = $request.GetResponse()
+$realTagUrl = $response.ResponseUri.OriginalString
+$response.Dispose()
+$version = $realTagUrl.split('/')[-1].Trim('v')
+$filename = "CascadiaMono.zip"
+$downloadUrl = $realTagUrl.Replace('tag', 'download') + '/' + $filename
+Invoke-WebRequest `
+    -Uri "$downloadUrl" `
+    -OutFile "$env:TEMP\$filename"
+
+# Extract zip
+Expand-Archive `
+    -LiteralPath "$env:USERPROFILE\Downloads\$filename" `
+    -DestinationPath "$env:TEMP"
+
+# Install Nerd fonts
+$FontFolder = "$env:TEMP"
+$FontItem = Get-Item -Path $FontFolder
+$FontList = Get-ChildItem -Path "$FontItem\*" -Include ('*.fon','*.otf','*.ttc','*.ttf')
+
+foreach ($Font in $FontList) {
+        Write-Host 'Installing font -' $Font.BaseName
+        Copy-Item $Font "C:\Windows\Fonts"
+        New-ItemProperty -Name $Font.BaseName -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $Font.name         
+}
+
+################################################
 ##### Telemetry / Privacy enhancements (scheduled tasks only)
 ################################################
 
