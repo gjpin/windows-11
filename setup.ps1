@@ -69,7 +69,7 @@ Invoke-WebRequest `
 
 # Extract zip
 Expand-Archive `
-    -LiteralPath "$env:USERPROFILE\Downloads\$filename" `
+    -LiteralPath "$env:TEMP\$filename" `
     -DestinationPath "$env:TEMP"
 
 # Install Nerd fonts
