@@ -48,7 +48,7 @@ Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content $
 winget install -e --source winget --id JanDeDobbeleer.OhMyPosh
 
 # Set Oh My Posh theme
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Add-Content $profile
 
 ################################################
 ##### Nerd Fonts (CaskaydiaMono Nerd Font)

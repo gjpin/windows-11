@@ -1622,6 +1622,12 @@ SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds
 AllowBuildPreview
 DWORD:0
 
+; Disable telephony service
+Computer
+SYSTEM\CurrentControlSet\Services\PhoneSvc
+Start
+DWORD:4
+
 ; Disable AllJoyn router service
 Computer
 SYSTEM\CurrentControlSet\Services\AJRouter

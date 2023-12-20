@@ -682,9 +682,6 @@ New-NetFirewallRule -DisplayName "Sunshine - UDP" -Group "User Applications" `
     -Protocol UDP -LocalPort 47998, 47999, 48000, 48002 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
-# Update group policy settings
-gpupdate /target:Computer
-
 ################################################
 ##### Outro
 ################################################
@@ -705,4 +702,4 @@ Invoke-WebRequest `
     -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
 
 # Update group policy settings
-gpupdate /target:Computer
+gpupdate /force

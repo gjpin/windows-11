@@ -125,5 +125,5 @@ function Update-FwRules {
         -Program "$mydellPath\bridge\fusnbroker.exe" `
         -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-    gpupdate /target:Computer
+    gpupdate /force
 }
