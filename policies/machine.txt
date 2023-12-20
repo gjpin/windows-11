@@ -1633,3 +1633,14 @@ Computer
 SYSTEM\CurrentControlSet\Services\AssignedAccessManagerSvc
 Start
 DWORD:4
+
+; Disable Microsoft accounts
+Computer
+SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+NoConnectedUser
+DWORD:3
+
+Computer
+SOFTWARE\Microsoft\PolicyManager\default\Settings\AllowYourAccount
+Value
+DWORD:0
