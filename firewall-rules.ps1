@@ -286,6 +286,15 @@ New-NetFirewallRule -DisplayName "Obsidian" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Obsidian\Obsidian.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Remnant II
+New-NetFirewallRule -DisplayName "Remnant II - Win64-Shipping" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\Remnant2\Remnant2\Binaries\Win64\Remnant2-Win64-Shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Remnant II" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\Remnant2\Remnant2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Nextcloud
 New-NetFirewallRule -DisplayName "Nextcloud" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Nextcloud\nextcloud.exe" `
@@ -634,6 +643,11 @@ New-NetFirewallRule -DisplayName "HTTP Toolkit" -Group "User Applications" `
 
 New-NetFirewallRule -DisplayName "HTTP Toolkit - Server" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\httptoolkit\resources\httptoolkit-server\bin\node.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Oh My Posh
+New-NetFirewallRule -DisplayName "Oh My Posh" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
