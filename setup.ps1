@@ -44,7 +44,7 @@ Invoke-WebRequest `
 
 Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content $profile
 
-# Install Oh My Posh
+# Install in a non-admin powershell
 winget install -e --source winget --id JanDeDobbeleer.OhMyPosh
 
 # Set Oh My Posh theme
@@ -75,12 +75,12 @@ Expand-Archive `
 # Install Nerd fonts
 $FontFolder = "$env:TEMP"
 $FontItem = Get-Item -Path $FontFolder
-$FontList = Get-ChildItem -Path "$FontItem\*" -Include ('*.fon','*.otf','*.ttc','*.ttf')
+$FontList = Get-ChildItem -Path "$FontItem\*" -Include ('*.fon', '*.otf', '*.ttc', '*.ttf')
 
 foreach ($Font in $FontList) {
-        Write-Host 'Installing font -' $Font.BaseName
-        Copy-Item $Font "C:\Windows\Fonts"
-        New-ItemProperty -Name $Font.BaseName -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $Font.name         
+    Write-Host 'Installing font -' $Font.BaseName
+    Copy-Item $Font "C:\Windows\Fonts"
+    New-ItemProperty -Name $Font.BaseName -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Fonts" -PropertyType string -Value $Font.name         
 }
 
 ################################################
@@ -185,7 +185,13 @@ $apps = "Microsoft.BingNews", `
     "Microsoft.WindowsAlarms", `
     "Microsoft.windowscommunicationsapps", `
     "Microsoft.StorePurchaseApp", `
-    "Microsoft.WindowsSoundRecorder"
+    "Microsoft.WindowsSoundRecorder", `
+    "Microsoft.OutlookForWindows", `
+    "Microsoft.Xbox.TCUI", `
+    "Microsoft.XboxGameOverlay", `
+    "Microsoft.XboxGamingOverlay", `
+    "Microsoft.XboxSpeechToTextOverlay", `
+    "Microsoft.XboxIdentityProvider"
 
 foreach ($app in $apps) {
     Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like "$app" } | ForEach-Object { Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }
@@ -236,10 +242,6 @@ winget install -e --source winget --id Obsidian.Obsidian
 
 # Install Firefox
 winget install -e --source winget --id Mozilla.Firefox
-
-##
-# Open and close Firefox to create profile
-##
 
 # Get profile path
 $FirefoxProfilePath = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles" -Filter "*.default-release" -Name

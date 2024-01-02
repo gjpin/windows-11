@@ -106,6 +106,10 @@ New-NetFirewallRule -DisplayName "Windows Terminal" -Group "Windows Services" `
     -Program "$wingetPath\windowsterminal.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "WSL 3" -Group "Windows Services" `
+    -Program "$env:ProgramFiles\WSL\wsl.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### User services and applications
 ################################################
