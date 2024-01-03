@@ -288,6 +288,10 @@ New-NetFirewallRule -DisplayName "UEFN - Unreal Revision control" -Group "User A
     -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\urc.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "UEFN - FAB" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\fortnite\engine\binaries\win64\epicwebhelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Joplin
 New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
