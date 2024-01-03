@@ -246,18 +246,22 @@ New-NetFirewallRule -DisplayName "Epic Games Web Helper" -Group "User Applicatio
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Unreal Engine
-New-NetFirewallRule -DisplayName "Unreal Engine 5.2 - Editor" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Epic Games\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Editor" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.3\Engine\Binaries\Win64\UnrealEditor.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unreal Engine 5.2 - Web Helper" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Epic Games\UE_5.2\Engine\Binaries\Win64\EpicWebHelper.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Web Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.3\Engine\Binaries\Win64\EpicWebHelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unreal Engine 5.2 - Quixel Bridge" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Epic Games\UE_5.2\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Quixel Bridge" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.3\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Prerequirements" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\UE_5.3\engine\extras\redist\en-us\ueprereqsetup_x64.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+    
 # Fortnite
 New-NetFirewallRule -DisplayName "Fortnite - Launcher" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Epic Games\Fortnite\FortniteGame\Binaries\Win64\FortniteLauncher.exe" `
