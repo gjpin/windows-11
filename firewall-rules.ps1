@@ -245,6 +245,10 @@ New-NetFirewallRule -DisplayName "Epic Games Web Helper" -Group "User Applicatio
     -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Engine\Binaries\Win64\EpicWebHelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Epic Games Overlay" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\portal\extras\overlay\eosoverlayrenderer-win64-shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Unreal Engine
 New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Editor" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Epic Games\UE_5.3\Engine\Binaries\Win64\UnrealEditor.exe" `
