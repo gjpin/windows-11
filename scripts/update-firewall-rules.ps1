@@ -125,5 +125,27 @@ function Update-FwRules {
         -Program "$mydellPath\bridge\fusnbroker.exe" `
         -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+    # Epic Games Launcher - Lords of the Fallen
+    $VersionFolders = Get-ChildItem -Directory -Path "%PROGRAMFILES%\Epic Games\lordsofthefallen" -Filter *1* -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $lotfPath = "%PROGRAMFILES%\Epic Games\lordsofthefallen\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "Epic Games Launcher - Lord of the Fallen 1" `
+        -Program "$lotfPath\lotf2\binaries\win64\lotf2-win64-shipping.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+    $VersionFolders = Get-ChildItem -Directory -Path "%PROGRAMFILES%\Epic Games\lordsofthefallen" -Filter *1* -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $lotfPath = "%PROGRAMFILES%\Epic Games\lordsofthefallen\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "Epic Games Launcher - Lord of the Fallen 2" `
+        -Program "$lotfPath\lotf2.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+    $VersionFolders = Get-ChildItem -Directory -Path "%PROGRAMFILES%\Epic Games\lordsofthefallen" -Filter *1* -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $lotfPath = "%PROGRAMFILES%\Epic Games\lordsofthefallen\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "Epic Games Launcher - Lord of the Fallen 3" `
+        -Program "$lotfPath\start_protected_game.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
     gpupdate /force
 }

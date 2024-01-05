@@ -241,12 +241,24 @@ New-NetFirewallRule -DisplayName "Epic Games Launcher 32bit" -Group "User Applic
     -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Epic Games Web Helper" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Epic Games Launcher - Web Helper" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Engine\Binaries\Win64\EpicWebHelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Epic Games Overlay" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Epic Games Launcher - EOS" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Epic Games\epic online services\epiconlineservices.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Epic Games Launcher - EOS Overlay" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\portal\extras\overlay\eosoverlayrenderer-win64-shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Epic Games Launcher - EOS User Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Epic Games\epic online services\epiconlineservicesuserhelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Epic Games Launcher - EOS Install Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Epic Games\epic online services\epiconlineservicesinstallhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Unreal Engine
@@ -298,6 +310,28 @@ New-NetFirewallRule -DisplayName "UEFN - Unreal Revision control" -Group "User A
 
 New-NetFirewallRule -DisplayName "UEFN - FAB" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Epic Games\fortnite\engine\binaries\win64\epicwebhelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Epic Games Launcher - Lords of the Fallen
+$VersionFolders = Get-ChildItem -Directory -Path "%PROGRAMFILES%\Epic Games\lordsofthefallen" -Filter *1* -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$lotfPath = "%PROGRAMFILES%\Epic Games\lordsofthefallen\$VersionFolder"
+New-NetFirewallRule -DisplayName "Epic Games Launcher - Lord of the Fallen 1" -Group "User Applications" `
+    -Program "$lotfPath\lotf2\binaries\win64\lotf2-win64-shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "%PROGRAMFILES%\Epic Games\lordsofthefallen" -Filter *1* -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$lotfPath = "%PROGRAMFILES%\Epic Games\lordsofthefallen\$VersionFolder"
+New-NetFirewallRule -DisplayName "Epic Games Launcher - Lord of the Fallen 2" -Group "User Applications" `
+    -Program "$lotfPath\lotf2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "%PROGRAMFILES%\Epic Games\lordsofthefallen" -Filter *1* -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$lotfPath = "%PROGRAMFILES%\Epic Games\lordsofthefallen\$VersionFolder"
+New-NetFirewallRule -DisplayName "Epic Games Launcher - Lord of the Fallen 3" -Group "User Applications" `
+    -Program "$lotfPath\start_protected_game.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Joplin
