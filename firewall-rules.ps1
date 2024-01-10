@@ -232,6 +232,11 @@ New-NetFirewallRule -DisplayName "Steam Web Helper" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\bin\cef\cef.win7x64\steamwebhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# steamcmd
+New-NetFirewallRule -DisplayName "Steam - steamcmd" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\steamcmd\steamcmd.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Epic Games Launcher
 New-NetFirewallRule -DisplayName "Epic Games Launcher 64bit" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesLauncher.exe" `

@@ -359,6 +359,41 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRes
 Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 
 ################################################
+##### Steam / steamcmd
+################################################
+
+# References:
+# https://developer.valvesoftware.com/wiki/SteamCMD#Windows
+
+# Install Steam
+winget install -e --source winget --id Valve.Steam
+
+# Create steamcmd directory
+New-Item -Path $env:USERPROFILE\apps\steamcmd -ItemType directory
+
+# Download steamcmd
+Invoke-WebRequest `
+    -Uri "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip" `
+    -OutFile "$env:USERPROFILE\apps\steamcmd\steamcmd.zip"
+
+# Extract zip
+Expand-Archive `
+    -LiteralPath "$env:USERPROFILE\apps\steamcmd\steamcmd.zip" `
+    -DestinationPath "$env:USERPROFILE\apps\steamcmd"
+
+# Remove steamcmd zip
+Remove-Item "$env:USERPROFILE\apps\steamcmd\steamcmd.zip"
+
+# Add steamcmd to path
+[Environment]::SetEnvironmentVariable(
+    "Path",
+    [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$env:USERPROFILE\apps\steamcmd",
+    [EnvironmentVariableTarget]::Machine)
+
+# Update steamcmd
+& "$env:USERPROFILE\apps\steamcmd\steamcmd.exe" "+@ShutdownOnFailedCommand 1" "+quit"
+
+################################################
 ##### Sunshine
 ################################################
 
