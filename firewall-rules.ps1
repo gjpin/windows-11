@@ -113,9 +113,9 @@ New-NetFirewallRule -DisplayName "WSL 3" -Group "Windows Services" `
 # Microsoft Store
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter microsoft.windowsstore_*_x64__8wekyb3d8bbwe -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
-$wingetPath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
+$storePath = "$env:ProgramFiles\WindowsApps\$VersionFolder"
 New-NetFirewallRule -DisplayName "Microsoft Store" -Group "Windows Services" `
-    -Program "$wingetPath\winstore.app.exe" `
+    -Program "$storePath\winstore.app.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################
