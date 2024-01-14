@@ -713,6 +713,15 @@ New-NetFirewallRule -DisplayName "Oh My Posh" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Tailscale
+New-NetFirewallRule -DisplayName "Tailscale - IPN" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\tailscale\tailscale-ipn.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Tailscale - tailscaled" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\tailscale\tailscaled.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 

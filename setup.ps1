@@ -228,7 +228,7 @@ winget install -e --source winget --id Insomnia.Insomnia
 winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 
-winget install -e --source winget --id WireGuard.WireGuard
+winget install -e --source winget --id tailscale.tailscale
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Google.Chrome
