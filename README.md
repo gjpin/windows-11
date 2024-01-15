@@ -9,8 +9,8 @@
 6. Set home network as Private
 7. Reboot
 8. Connect to WireGuard network
-9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'Tailscale' -NetworkCategory 'Private'```
-10. Create NRPT rule: ```Add-DnsClientNrptRule -Namespace "." -NameServers "100.84.36.92"```
+9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
+10. Create NRPT rule: ```Add-DnsClientNrptRule -Namespace "." -NameServers "10.0.0.1"```
 
 ## Firewall
 - Firewall can only be configured through Group Policy due to:
