@@ -722,6 +722,11 @@ New-NetFirewallRule -DisplayName "Tailscale - tailscaled" -Group "User Applicati
     -Program "%PROGRAMFILES%\tailscale\tailscaled.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# CS 2
+New-NetFirewallRule -DisplayName "Counter Strike 2" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\counter-strike global offensive\game\bin\win64\cs2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 
