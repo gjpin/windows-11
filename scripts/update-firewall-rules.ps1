@@ -155,5 +155,35 @@ function Update-FwRules {
         -Program "$storePath\winstore.app.exe" `
         -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+    # JDK 21 - Microsoft
+    $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Microsoft" -Filter jdk-21.*-hotspot -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $java21Path = "$env:ProgramFiles\Microsoft\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "JDK 21 - Microsoft (javaw.exe)" `
+        -Program "$java21Path\bin\javaw.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+    $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Microsoft" -Filter jdk-21.*-hotspot -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $java21Path = "$env:ProgramFiles\Microsoft\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "JDK 21 - Microsoft (java.exe)" `
+        -Program "$java21Path\bin\java.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+    # JDK 21 - Temurin
+    $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jdk-21.*-hotspot -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $java21Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "JDK 21 - Eclipse Adoptium (javaw.exe)" `
+        -Program "$java21Path\bin\javaw.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+    $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jdk-21.*-hotspot -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $java21Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "JDK 21 - Eclipse Adoptium (java.exe)" `
+        -Program "$java21Path\bin\java.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
     gpupdate /force
 }

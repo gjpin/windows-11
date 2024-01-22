@@ -727,6 +727,36 @@ New-NetFirewallRule -DisplayName "Counter Strike 2" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\counter-strike global offensive\game\bin\win64\cs2.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# JDK 21 - Microsoft
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Microsoft" -Filter jdk-21.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java21Path = "$env:ProgramFiles\Microsoft\$VersionFolder"
+New-NetFirewallRule -DisplayName "JDK 21 - Microsoft (javaw.exe)" -Group "User Applications" `
+    -Program "$java21Path\bin\javaw.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Microsoft" -Filter jdk-21.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java21Path = "$env:ProgramFiles\Microsoft\$VersionFolder"
+New-NetFirewallRule -DisplayName "JDK 21 - Microsoft (java.exe)" -Group "User Applications" `
+    -Program "$java21Path\bin\java.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+    
+# JDK 21 - Temurin
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jdk-21.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java21Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JDK 21 - Eclipse Adoptium (javaw.exe)" -Group "User Applications" `
+    -Program "$java21Path\bin\javaw.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jdk-21.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java21Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JDK 21 - Eclipse Adoptium (java.exe)" -Group "User Applications" `
+    -Program "$java21Path\bin\java.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 
