@@ -757,6 +757,11 @@ New-NetFirewallRule -DisplayName "JDK 21 - Eclipse Adoptium (java.exe)" -Group "
     -Program "$java21Path\bin\java.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Python 3.12
+New-NetFirewallRule -DisplayName "Python 3.12" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\Python\Python312\python.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 

@@ -277,7 +277,7 @@ $commands = @'
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
 ################################################
-##### .NET
+##### Development
 ################################################
 
 # References:
@@ -293,6 +293,22 @@ winget install -e --source winget --id Microsoft.DotNet.SDK.8
 # Trust ASP.NET Core HTTPS certificate
 dotnet --info
 dotnet dev-certs https --trust
+
+# Install Python 3.12
+winget install -e --id Python.Python.3.12
+
+# Install JDK Temurin 21
+winget install -e --id EclipseAdoptium.Temurin.21.JDK
+
+# Install JDK Microsoft 21
+# winget install -e --id Microsoft.OpenJDK.21
+
+# Install Android Studio
+winget install -e --id Google.AndroidStudio
+
+# Add Android platform tools and emulator to path
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
