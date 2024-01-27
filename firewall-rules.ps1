@@ -762,6 +762,11 @@ New-NetFirewallRule -DisplayName "Python 3.12" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Python\Python312\python.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Brave Browser
+New-NetFirewallRule -DisplayName "Brave Browser" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\bravesoftware\brave-browser\application\brave.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Update group policy settings
 gpupdate /target:Computer
 
