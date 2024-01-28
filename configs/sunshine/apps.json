@@ -289,6 +289,44 @@
             "detached": [
                 "cmd \/C \"start com.epicgames.launcher:\/\/apps\/a9dad8af015a422eb89a5f88e6def923%3A5acc7a7675aa4d2786d6bfaad1920b60%3Ageum?action=launch&silent=true\""
             ]
+        },
+        {
+            "name": "Destiny 2 - 800p",
+            "output": "",
+            "cmd": "",
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false",
+            "auto-detach": "true",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "detached": [
+                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/428115def4ca4deea9d69c99c5a5a99e%3A06bd477f9fbe4259a1421fb3f559aa46%3A592c359fb0e0413fb46dee2d24448eb4?action=launch&silent=true\""
+            ]
+        },
+        {
+            "name": "Destiny 2 - 1080p",
+            "output": "",
+            "cmd": "",
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false",
+            "auto-detach": "true",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
+                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "elevated": "false"
+                }
+            ],
+            "detached": [
+                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/428115def4ca4deea9d69c99c5a5a99e%3A06bd477f9fbe4259a1421fb3f559aa46%3A592c359fb0e0413fb46dee2d24448eb4?action=launch&silent=true\""
+            ]
         }
     ]
 }
