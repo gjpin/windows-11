@@ -361,6 +361,10 @@ New-NetFirewallRule -DisplayName "Warframe - Launcher" -Group "User Applications
     -Program "%PROGRAMFILES%\Epic Games\warframe\downloaded\tools\launcher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Warframe - x64 binary" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\warframe\downloaded\warframe.x64.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Joplin
 New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
