@@ -352,6 +352,15 @@ New-NetFirewallRule -DisplayName "Destiny 2 - Epic Overlay" -Group "User Applica
     -Program "%PROGRAMFILES(x86)%\epic games\epic online services\managedartifacts\98bc04bc842e4906993fd6d6644ffb8d\eosoverlayrenderer-win64-shipping.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Warframe
+New-NetFirewallRule -DisplayName "Warframe" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\warframe\warframe.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Warframe - Launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\warframe\downloaded\tools\launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Joplin
 New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Joplin\Joplin.exe" `
