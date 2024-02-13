@@ -188,12 +188,7 @@ $apps = "Microsoft.BingNews", `
     "Microsoft.windowscommunicationsapps", `
     "Microsoft.StorePurchaseApp", `
     "Microsoft.WindowsSoundRecorder", `
-    "Microsoft.OutlookForWindows", `
-    "Microsoft.Xbox.TCUI", `
-    "Microsoft.XboxGameOverlay", `
-    "Microsoft.XboxGamingOverlay", `
-    "Microsoft.XboxSpeechToTextOverlay", `
-    "Microsoft.XboxIdentityProvider"
+    "Microsoft.OutlookForWindows"
 
 foreach ($app in $apps) {
     Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like "$app" } | ForEach-Object { Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }
@@ -231,7 +226,7 @@ winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 winget install -e --source winget --id tailscale.tailscale
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
-winget install -e --source winget --id Google.Chrome
+winget install -e --source winget --id Brave.Brave
 winget install -e --source winget --id 7zip.7zip
 
 # Install in a non-admin powershell
