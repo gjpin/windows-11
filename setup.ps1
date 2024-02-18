@@ -219,11 +219,9 @@ winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
 winget install -e --source winget --id Git.Git
 winget install -e --source winget --id GitHub.GitHubDesktop
 winget install -e --source winget --id VideoLAN.VLC
-winget install -e --source winget --id Insomnia.Insomnia
 winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id TheDocumentFoundation.LibreOffice
-
-winget install -e --source winget --id tailscale.tailscale
+winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Brave.Brave
@@ -293,10 +291,7 @@ dotnet dev-certs https --trust
 winget install -e --id Python.Python.3.12
 
 # Install JDK Temurin 21
-winget install -e --id EclipseAdoptium.Temurin.21.JDK
-
-# Install JDK Microsoft 21
-# winget install -e --id Microsoft.OpenJDK.21
+winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
 
 # Install Android Studio
 winget install -e --id Google.AndroidStudio
