@@ -110,6 +110,10 @@ New-NetFirewallRule -DisplayName "WSL 3" -Group "Windows Services" `
     -Program "$env:ProgramFiles\WSL\wsl.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "WSL - Service" -Group "Windows Services" `
+    -Program "%PROGRAMFILES%\WSL\wslservice.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Microsoft Store
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter microsoft.windowsstore_*_x64__8wekyb3d8bbwe -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
@@ -791,6 +795,19 @@ New-NetFirewallRule -DisplayName "Python 3.12" -Group "User Applications" `
 # Brave Browser
 New-NetFirewallRule -DisplayName "Brave Browser" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\bravesoftware\brave-browser\application\brave.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Oculus
+New-NetFirewallRule -DisplayName "Oculus - Setup" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\OculusSetup.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Client" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-client\oculusclient.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Runtime VR server" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-runtime\ovrserver_x64.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings
