@@ -34,10 +34,11 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 New-Item -type file -path $profile -force
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
 
-New-Item -type file -path "$env:USERPROFILE\Documents\PowerShell" -force
+New-Item -type file -path "$env:USERPROFILE\Documents\PowerShell\Profile.ps1" -force
 
 # Add function for firewall events
 Add-Content -Path $profile -Value "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
+Add-Content -Path "$env:USERPROFILE\Documents\PowerShell\Profile.ps1" -Value "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
 
 # Add function to autoupdate firewall rules
 Invoke-WebRequest `
@@ -45,12 +46,14 @@ Invoke-WebRequest `
     -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
 
 Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content $profile
+Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
 # Install in a non-admin powershell
 winget install -e --source winget --id JanDeDobbeleer.OhMyPosh
 
 # Set Oh My Posh theme
 Add-Content -Path $profile -Value 'oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression'
+Add-Content -Path "$env:USERPROFILE\Documents\PowerShell\Profile.ps1" -Value 'oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression'
 
 ################################################
 ##### Nerd Fonts (CaskaydiaMono Nerd Font)
