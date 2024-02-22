@@ -803,15 +803,29 @@ New-NetFirewallRule -DisplayName "Oculus - Setup" -Group "User Applications" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Oculus - Client" -Group "User Applications" `
-    -Program "%PROGRAMFILES%\Oculus\Support\oculus-client\oculusclient.exe" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-client\OculusClient.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Oculus - Runtime VR server" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Oculus - Server" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Oculus\Support\oculus-runtime\ovrserver_x64.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-# Update group policy settings
-gpupdate /target:Computer
+New-NetFirewallRule -DisplayName "Oculus - Redir" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-runtime\OVRRedir.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Service Launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-runtime\OVRServiceLauncher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Dash" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-dash\dash\bin\OculusDash.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Windows Assessment and Deployment Kit (ADK)
+New-NetFirewallRule -DisplayName "Windows ADK - Installer" -Group "User Applications" `
+    -Program "$env:USERPROFILE\Downloads\adksetup.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################
 ##### Inbound
@@ -858,6 +872,27 @@ New-NetFirewallRule -DisplayName "Sunshine - TCP" -Group "User Applications" `
 New-NetFirewallRule -DisplayName "Sunshine - UDP" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Sunshine\sunshine.exe" `
     -Protocol UDP -LocalPort 47998, 47999, 48000, 48002 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Oculus
+New-NetFirewallRule -DisplayName "Oculus - Client" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-client\OculusClient.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Redir" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-runtime\OVRRedir.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Server" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-runtime\OVRServer_x64.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Service Launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-runtime\OVRServiceLauncher.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Oculus - Dash" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Oculus\Support\oculus-dash\dash\bin\OculusDash.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################
