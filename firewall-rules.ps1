@@ -822,6 +822,19 @@ New-NetFirewallRule -DisplayName "Oculus - Dash" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Oculus\Support\oculus-dash\dash\bin\OculusDash.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Virtual Desktop
+New-NetFirewallRule -DisplayName "Virtual Desktop - Streamer" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\virtual desktop streamer\virtualdesktop.streamer.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Virtual Desktop - Setup" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\virtual desktop streamer\virtualdesktop.setup.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Virtual Desktop - Updater" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\virtual desktop streamer\updater.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Windows Assessment and Deployment Kit (ADK)
 New-NetFirewallRule -DisplayName "Windows ADK - Installer" -Group "User Applications" `
     -Program "$env:USERPROFILE\Downloads\adksetup.exe" `
@@ -893,6 +906,11 @@ New-NetFirewallRule -DisplayName "Oculus - Service Launcher" -Group "User Applic
 
 New-NetFirewallRule -DisplayName "Oculus - Dash" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Oculus\Support\oculus-dash\dash\bin\OculusDash.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Virtual Desktop
+New-NetFirewallRule -DisplayName "Virtual Desktop - Streamer" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\virtual desktop streamer\VirtualDesktop.Streamer.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################

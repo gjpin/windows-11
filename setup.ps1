@@ -229,6 +229,9 @@ winget install -e --source winget --id Bitwarden.Bitwarden
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Brave.Brave
 
+# VR
+winget install -e --source winget --id VirtualDesktop.Streamer
+
 # Install in a non-admin powershell
 winget install -e --source winget --id Spotify.Spotify
 winget install -e --source winget --id Obsidian.Obsidian
