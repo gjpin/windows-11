@@ -204,6 +204,7 @@ winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Brave.Brave
+winget install -e --source winget --id 7zip.7zip
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
