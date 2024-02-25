@@ -228,12 +228,24 @@ New-NetFirewallRule -DisplayName "Steam" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Steam Service" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Steam - Service" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Common Files\Steam\SteamService.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Steam Web Helper" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Steam - Web Helper" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\bin\cef\cef.win7x64\steamwebhelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR Monitor" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\steamvr\bin\win64\vrmonitor.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR Tours" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\steamvr\tools\steamvr_environments\game\bin\win64\steamtours.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR Web Helper" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\steamvr\bin\vrwebhelper\win64\vrwebhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # steamcmd
@@ -681,6 +693,10 @@ New-NetFirewallRule -DisplayName "Firefox" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Mozilla Firefox\firefox.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Firefox - Maintenance Service" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\mozilla maintenance service\maintenanceservice.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Chrome
 New-NetFirewallRule -DisplayName "Chrome" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Google\Chrome\Application\chrome.exe" `
@@ -822,6 +838,10 @@ New-NetFirewallRule -DisplayName "Oculus - Dash" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Oculus\Support\oculus-dash\dash\bin\OculusDash.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Oculus - Platform Runtime" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\oculus\support\oculus-platform-runtime\oculus-platform-runtime.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Virtual Desktop
 New-NetFirewallRule -DisplayName "Virtual Desktop - Streamer" -Group "User Applications" `
     -Program "%PROGRAMFILES%\virtual desktop streamer\virtualdesktop.streamer.exe" `
@@ -844,15 +864,31 @@ New-NetFirewallRule -DisplayName "Windows ADK - Installer" -Group "User Applicat
 ##### Inbound
 ################################################
 
-# Steam - Remote Play
-New-NetFirewallRule -DisplayName "Steam Remote Play - UDP" -Group "User Applications" `
+# Steam
+New-NetFirewallRule -DisplayName "Steam - Remote Play (UDP)" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
     -Protocol UDP -LocalPort 27031-27036 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Steam Remote Play - TCP" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Steam - Remote Play (TCP)" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\Steam\Steam.exe" `
     -Protocol TCP -LocalPort 27036 `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\SteamVR\bin\win32\vrstartup.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR Home" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\SteamVR\tools\steamvr_environments\game\bin\win64\steamtours.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR Home Tools" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\SteamVR\tools\steamvr_environments\game\bin\win64\steamtourscfg.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR Server" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\Steam\steamapps\common\SteamVR\bin\win64\vrserver.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Syncthing
