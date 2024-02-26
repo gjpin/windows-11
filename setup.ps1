@@ -212,6 +212,7 @@ winget install -e --source winget --id EpicGames.EpicGamesLauncher
 
 # VR
 winget install -e --source winget --id VirtualDesktop.Streamer
+winget install -e --source winget --id SideQuestVR.SideQuest
 
 # Install in a non-admin powershell
 winget install -e --source winget --id Spotify.Spotify

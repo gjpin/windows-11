@@ -860,6 +860,11 @@ New-NetFirewallRule -DisplayName "Windows ADK - Installer" -Group "User Applicat
     -Program "$env:USERPROFILE\Downloads\adksetup.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# SideQuest
+New-NetFirewallRule -DisplayName "SideQuest - " -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\programs\sidequest\sidequest.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
