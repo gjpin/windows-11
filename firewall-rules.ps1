@@ -803,6 +803,21 @@ New-NetFirewallRule -DisplayName "JDK 21 - Eclipse Adoptium (java.exe)" -Group "
     -Program "$java21Path\bin\java.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# JRE 21 - Temurin
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jre-21.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java21Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JRE 21 - Eclipse Adoptium (javaw.exe)" -Group "User Applications" `
+    -Program "$java21Path\bin\javaw.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jre-21.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java21Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JRE 21 - Eclipse Adoptium (java.exe)" -Group "User Applications" `
+    -Program "$java21Path\bin\java.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Python 3.12
 New-NetFirewallRule -DisplayName "Python 3.12" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Python\Python312\python.exe" `
@@ -861,8 +876,13 @@ New-NetFirewallRule -DisplayName "Windows ADK - Installer" -Group "User Applicat
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # SideQuest
-New-NetFirewallRule -DisplayName "SideQuest - " -Group "User Applications" `
+New-NetFirewallRule -DisplayName "SideQuest" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\programs\sidequest\sidequest.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Minecraft Legacy Launcher
+New-NetFirewallRule -DisplayName "Minecraft Legacy Launcher" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\minecraft launcher\minecraftlauncher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################
