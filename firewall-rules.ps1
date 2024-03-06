@@ -885,6 +885,11 @@ New-NetFirewallRule -DisplayName "Minecraft Legacy Launcher" -Group "User Applic
     -Program "%PROGRAMFILES(x86)%\minecraft launcher\minecraftlauncher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Deep Rock Galactic
+New-NetFirewallRule -DisplayName "Deep Rock Galactic" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\deep rock galactic\fsd\binaries\win64\fsd-win64-shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
