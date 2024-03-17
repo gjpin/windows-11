@@ -890,6 +890,15 @@ New-NetFirewallRule -DisplayName "Deep Rock Galactic" -Group "User Applications"
     -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\deep rock galactic\fsd\binaries\win64\fsd-win64-shipping.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Skyrim - Wabbajack
+New-NetFirewallRule -DisplayName "Skyrim - Wabbajack" -Group "User Applications" `
+    -Program "C:\VR\Skyrim VR\Wabbajack\Wabbajack.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Skyrim - Wabbajack 3.5.0.1" -Group "User Applications" `
+    -Program "C:\VR\Skyrim VR\Wabbajack\3.5.0.1\Wabbajack.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
