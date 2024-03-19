@@ -899,6 +899,11 @@ New-NetFirewallRule -DisplayName "Skyrim - Wabbajack 3.5.0.1" -Group "User Appli
     -Program "C:\VR\Skyrim VR\Wabbajack\3.5.0.1\Wabbajack.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Fanatec
+New-NetFirewallRule -DisplayName "Fanatec - Control Panel" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\fanatec\fanatec wheel\ui\fanateccontrolpanel.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
