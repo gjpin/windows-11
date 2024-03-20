@@ -904,6 +904,16 @@ New-NetFirewallRule -DisplayName "Fanatec - Control Panel" -Group "User Applicat
     -Program "%PROGRAMFILES%\fanatec\fanatec wheel\ui\fanateccontrolpanel.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Assetto Corsa Competizione
+New-NetFirewallRule -DisplayName "Assetto Corsa Competizione" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\assetto corsa competizione\ac2\binaries\win64\ac2-win64-shipping.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Dirt Rally 2.0
+New-NetFirewallRule -DisplayName "Dirt Rally 2.0" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\dirt rally 2.0\dirtrally2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
