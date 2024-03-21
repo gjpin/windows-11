@@ -904,6 +904,10 @@ New-NetFirewallRule -DisplayName "Fanatec - Control Panel" -Group "User Applicat
     -Program "%PROGRAMFILES%\fanatec\fanatec wheel\ui\fanateccontrolpanel.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Fanatec - Fanalab" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\fanatec\fanalab\control\fanalab.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Assetto Corsa Competizione
 New-NetFirewallRule -DisplayName "Assetto Corsa Competizione" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\assetto corsa competizione\ac2\binaries\win64\ac2-win64-shipping.exe" `
