@@ -918,6 +918,15 @@ New-NetFirewallRule -DisplayName "Dirt Rally 2.0" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\dirt rally 2.0\dirtrally2.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Automobilista 2
+New-NetFirewallRule -DisplayName "Automobilista 2" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\Automobilista 2\AMS2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Automobilista 2 - AVX" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\Automobilista 2\AMS2AVX.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
