@@ -927,6 +927,11 @@ New-NetFirewallRule -DisplayName "Automobilista 2 - AVX" -Group "User Applicatio
     -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\Automobilista 2\AMS2AVX.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# 3DMark
+New-NetFirewallRule -DisplayName "3DMark" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\3dmark\bin\x64\3dmark.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
