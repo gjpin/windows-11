@@ -932,6 +932,11 @@ New-NetFirewallRule -DisplayName "3DMark" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\3dmark\bin\x64\3dmark.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# No Man's Sky
+New-NetFirewallRule -DisplayName "No Man's Sky" -Group "User Applications" `
+    -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\no man's sky\binaries\nms.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
