@@ -196,6 +196,15 @@ New-NetFirewallRule -DisplayName "Visual Studio Code" -Group "User Applications"
     -Program "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\Code.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Visual Studio Code - Extension Manager" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\resources\app\node_modules.asar.unpacked\@vscode\vsce-sign\bin\vsce-sign.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Golang
+New-NetFirewallRule -DisplayName "Golang" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\go\bin\go.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Visual Studio 2022
 New-NetFirewallRule -DisplayName "Visual Studio 2022 - devenv" -Group "User Applications" `
     -Program "%PROGRAMFILES%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe" `

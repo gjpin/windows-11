@@ -253,6 +253,7 @@ $credential = Get-Credential -credential "$env:USERNAME"
 $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
+    "& code --install-extension golang.Go"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -273,6 +274,9 @@ winget install -e --source winget --id Microsoft.DotNet.SDK.8
 # Trust ASP.NET Core HTTPS certificate
 dotnet --info
 dotnet dev-certs https --trust
+
+# Install Go
+winget install -e --source winget --id GoLang.Go
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
