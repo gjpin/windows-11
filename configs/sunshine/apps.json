@@ -8,8 +8,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -24,8 +24,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -50,8 +50,8 @@
             ],
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -71,8 +71,8 @@
             ],
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -92,8 +92,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -113,8 +113,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -134,8 +134,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -152,8 +152,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -173,8 +173,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -194,8 +194,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -216,8 +216,8 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -235,8 +235,8 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ]
