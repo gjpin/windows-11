@@ -4,38 +4,28 @@
     },
     "apps": [
         {
-            "name": "Desktop - Ultra wide",
+            "name": "Desktop",
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
             "exclude-global-prep-cmd": "false",
-            "elevated": "false"
+            "elevated": "false",
+            "auto-detach": "true",
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Desktop - 1080p",
+            "name": "Steam",
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
-            ],
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false"
-        },
-        {
-            "name": "Steam - 1080p",
-            "image-path": "",
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -43,27 +33,12 @@
             "elevated": "false",
             "working-dir": "C:\\Program Files (x86)\\Steam",
             "cmd": "steam.exe steam:\/\/open\/gamepadui",
-            "auto-detach": "true"
+            "auto-detach": "true",
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Steam - 800p",
-            "output": "",
-            "cmd": "steam.exe steam:\/\/open\/gamepadui",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
-            ],
-            "image-path": "",
-            "working-dir": "C:\\Program Files (x86)\\Steam",
-            "auto-detach": "true"
-        },
-        {
-            "name": "Remnant II - 1080p",
+            "name": "EGS - Remnant II",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -75,33 +50,16 @@
             ],
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
-            ]
-        },
-        {
-            "name": "Remnant II - 800p",
-            "output": "",
-            "cmd": "",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "image-path": "",
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/aa598567414d42378187b8861da550f7%3A684e4c88cfb940c2b386ebc87ed47700%3Afe214af49d9146de8ee21cc5537cea9c?action=launch&silent=true\""
             ],
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
-            ]
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Fortnite - 1080p",
+            "name": "EGS - Fortnite",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -113,33 +71,16 @@
             ],
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
-            ]
-        },
-        {
-            "name": "Fortnite - 800p",
-            "output": "",
-            "cmd": "",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "image-path": "",
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/fn%3A4fe75bbc5a674f4f9b356b5c90567da5%3AFortnite?action=launch&silent=true\""
             ],
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
-            ]
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Lords of the Fallen - 1080p",
+            "name": "EGS - Lords of the Fallen",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -151,33 +92,16 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
-            ]
-        },
-        {
-            "name": "Lords of the Fallen - 800p",
-            "output": "",
-            "cmd": "",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/f2d5f78997994c9891b8f23d962be28e%3A535203eeeb4a46219a2c2a66436ec4ac%3Ace98de7d9e9c47ea8d9ba8e46a5063b4?action=launch&silent=true\""
             ],
-            "image-path": "",
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
-            ]
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "WitchFire - 1080p",
+            "name": "EGS - WitchFire",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -189,33 +113,16 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
-            ]
-        },
-        {
-            "name": "WitchFire - 800p",
-            "output": "",
-            "cmd": "",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/2e404271085e4eb480f48c3d2e5f08ed%3A46a591c55b544561b2779d6c71e4a880%3A8764f82381f5436f99e97172df06af35?action=launch&silent=true\""
             ],
-            "image-path": "",
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
-            ]
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Solar Ash - 1080p",
+            "name": "EGS - Solar Ash",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -227,33 +134,16 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
-            ]
-        },
-        {
-            "name": "Solar Ash - 800p",
-            "output": "",
-            "cmd": "",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/fe5a2e3e842a4394938a81f3308df2ed%3A78a0d387c97045a48d2756d06b321ada%3AOwl?action=launch&silent=true\""
             ],
-            "image-path": "",
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
-            ]
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "The Pathless - 1080p",
+            "name": "EGS - The Pathless",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -262,36 +152,19 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
             "detached": [
                 "cmd \/C \"start com.epicgames.launcher:\/\/apps\/a9dad8af015a422eb89a5f88e6def923%3A5acc7a7675aa4d2786d6bfaad1920b60%3Ageum?action=launch&silent=true\""
-            ]
-        },
-        {
-            "name": "The Pathless - 800p",
-            "output": "",
-            "cmd": "",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "image-path": "",
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
             ],
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/a9dad8af015a422eb89a5f88e6def923%3A5acc7a7675aa4d2786d6bfaad1920b60%3Ageum?action=launch&silent=true\""
-            ]
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Destiny 2 - 800p",
+            "name": "EGS - Destiny 2",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -300,36 +173,19 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
             "detached": [
                 "cmd \/C \"start com.epicgames.launcher:\/\/apps\/428115def4ca4deea9d69c99c5a5a99e%3A06bd477f9fbe4259a1421fb3f559aa46%3A592c359fb0e0413fb46dee2d24448eb4?action=launch&silent=true\""
-            ]
-        },
-        {
-            "name": "Destiny 2 - 1080p",
-            "output": "",
-            "cmd": "",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "image-path": "",
-            "prep-cmd": [
-                {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
-                    "elevated": "false"
-                }
             ],
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/428115def4ca4deea9d69c99c5a5a99e%3A06bd477f9fbe4259a1421fb3f559aa46%3A592c359fb0e0413fb46dee2d24448eb4?action=launch&silent=true\""
-            ]
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Warframe - 800p",
+            "name": "EGS - Warframe",
             "output": "",
             "cmd": "",
             "exclude-global-prep-cmd": "false",
@@ -338,32 +194,51 @@
             "image-path": "",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1280 800 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
             "detached": [
                 "cmd \/C \"start com.epicgames.launcher:\/\/apps\/244aaaa06bfa49d088205b13b9d2d115%3A9b6e3ff688c448f4971a9c752094f286%3A398965b67f314d31b0683b8ea11c93a4?action=launch&silent=true\""
-            ]
+            ],
+            "wait-all": "true",
+            "exit-timeout": "5"
         },
         {
-            "name": "Warframe - 1080p",
+            "name": "EGS - Breathedge",
             "output": "",
-            "cmd": "",
+            "cmd": "cmd \/C \"start com.epicgames.launcher:\/\/apps\/08ae29e4f70a4b62aa055e383381aa82%3A1addbe9a36af44b2868133287a3673c0%3A0a20ccd3f1b3464da750a4dbf8c80d7c?action=launch&silent=true\"",
             "exclude-global-prep-cmd": "false",
             "elevated": "false",
             "auto-detach": "true",
-            "image-path": "",
+            "wait-all": "true",
+            "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 1920 1080 60 }\"",
-                    "undo": "pwsh -command \"& { import-module \"$env:USERPROFILE\\scripts\\set-display-resolution-frequency\\main.psm1\"; Set-DisplayResolutionFrequency 3440 1440 144 }\"",
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
-            "detached": [
-                "cmd \/C \"start com.epicgames.launcher:\/\/apps\/244aaaa06bfa49d088205b13b9d2d115%3A9b6e3ff688c448f4971a9c752094f286%3A398965b67f314d31b0683b8ea11c93a4?action=launch&silent=true\""
+            "image-path": ""
+        },
+        {
+            "name": "EGS - Alien Isolation",
+            "output": "",
+            "cmd": "cmd \/C \"start com.epicgames.launcher:\/\/apps\/df37f065c3f14eadbf011177396e2966%3A4106b71233fa4b4ba3b04c818fce91d4%3A8935bb3e1420443a9789fe01758039a5?action=launch&silent=true\"",
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false",
+            "auto-detach": "true",
+            "wait-all": "true",
+            "exit-timeout": "5",
+            "image-path": "",
+            "prep-cmd": [
+                {
+                    "do": "resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
+                    "undo": "resolution-manager.exe 3440 1440 144",
+                    "elevated": "false"
+                }
             ]
         }
     ]

@@ -346,19 +346,14 @@ Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 ##### Sunshine
 ################################################
 
-# References:
-# https://github.com/lust4life/display-resolution
-
-# Helper script to set resolution/frequency
-New-Item -Path $env:USERPROFILE\scripts\set-display-resolution-frequency -ItemType directory
+# Helper executable to set resolution/frequency
+New-Item -Path $env:USERPROFILE\apps\resolution-manager -ItemType directory
 
 Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/set-display-resolution-frequency/main.psm1" `
-    -OutFile "$env:USERPROFILE\scripts\set-display-resolution-frequency\main.psm1"
+    -Uri "https://github.com/gjpin/resolution-manager/releases/download/v1.0.0/resolution-manager.exe" `
+    -OutFile "$env:USERPROFILE\apps\resolution-manager\resolution-manager.exe"
 
-Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/set-display-resolution-frequency/CDS.cs" `
-    -OutFile "$env:USERPROFILE\scripts\set-display-resolution-frequency\CDS.cs"
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\apps\resolution-manager", "Machine")
 
 # Install Sunshine and ViGEmBus
 winget install -e --source winget --id ViGEm.ViGEmBus
