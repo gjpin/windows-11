@@ -946,6 +946,11 @@ New-NetFirewallRule -DisplayName "No Man's Sky" -Group "User Applications" `
     -Program "%PROGRAMFILES(x86)%\steam\steamapps\common\no man's sky\binaries\nms.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# EGS - Borderlands 3
+New-NetFirewallRule -DisplayName "EGS - Borderlands 3" -Group "User Applications" `
+    -Program "%PROGRAMFILES%\Epic Games\borderlands3\oakgame\binaries\win64\borderlands3.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
