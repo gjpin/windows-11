@@ -951,6 +951,24 @@ New-NetFirewallRule -DisplayName "EGS - Borderlands 3" -Group "User Applications
     -Program "C:\Program Files\Epic Games\borderlands3\oakgame\binaries\win64\borderlands3.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Ubisoft Launcher
+New-NetFirewallRule -DisplayName "Ubisoft Launcher" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\ubisoft\ubisoft game launcher\upc.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Ubisoft Launcher - Web core" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\ubisoft\ubisoft game launcher\uplaywebcore.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# The Division 2
+New-NetFirewallRule -DisplayName "The Division 2" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\steam\steamapps\common\tom clancy's the division 2\thedivision2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "The Division 2 - EAC" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\steam\steamapps\common\tom clancy's the division 2\eaclaunch.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
