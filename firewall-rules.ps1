@@ -114,6 +114,14 @@ New-NetFirewallRule -DisplayName "WSL - Service" -Group "Windows Services" `
     -Program "C:\Program Files\WSL\wslservice.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "WSL - Relay" -Group "Windows Services" `
+    -Program "C:\Program Files\WSL\wslrelay.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "WSL - Host" -Group "Windows Services" `
+    -Program "C:\Program Files\WSL\wslhost.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Microsoft Store
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter microsoft.windowsstore_*_x64__8wekyb3d8bbwe -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
@@ -969,6 +977,20 @@ New-NetFirewallRule -DisplayName "The Division 2 - EAC" -Group "User Application
     -Program "C:\Program Files (x86)\steam\steamapps\common\tom clancy's the division 2\eaclaunch.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Podman
+New-NetFirewallRule -DisplayName "Podman" -Group "User Applications" `
+    -Program "C:\Program Files\redhat\podman\podman.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Podman Desktop" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\programs\podman-desktop\podman desktop.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# k9s
+New-NetFirewallRule -DisplayName "k9s" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\local\microsoft\winget\packages\derailed.k9s_microsoft.winget.source_8wekyb3d8bbwe\k9s.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
@@ -1056,6 +1078,11 @@ New-NetFirewallRule -DisplayName "Oculus - Dash" -Group "User Applications" `
 # Virtual Desktop
 New-NetFirewallRule -DisplayName "Virtual Desktop - Streamer" -Group "User Applications" `
     -Program "C:\Program Files\virtual desktop streamer\VirtualDesktop.Streamer.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Podman
+New-NetFirewallRule -DisplayName "Podman" -Group "User Applications" `
+    -Program "C:\Program Files\redhat\podman\podman.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################

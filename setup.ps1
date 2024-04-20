@@ -278,6 +278,18 @@ dotnet dev-certs https --trust
 # Install Go
 winget install -e --source winget --id GoLang.Go
 
+# Install Podman
+winget install -e --source winget --id RedHat.Podman
+winget install -e --source winget --id RedHat.Podman-Desktop
+
+# Install Kubernetes CLIs
+winget install -e --source winget --id Kubernetes.kubectl
+winget install -e --source winget --id ahmetb.kubectx
+winget install -e --source winget --id Derailed.k9s
+
+# Install Kind
+winget install -e --source winget --id Kubernetes.kind
+
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
 ################################################
