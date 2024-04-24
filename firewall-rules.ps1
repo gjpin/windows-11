@@ -474,6 +474,10 @@ New-NetFirewallRule -DisplayName "AMD Software - Adrenalin" -Group "User Applica
     -Program "C:\Program Files\AMD\CNext\CNext\RadeonSoftware.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "AMD Software - Autoupdater" -Group "User Applications" `
+    -Program "C:\Program Files\AMD\AutoUpdate\AMDAutoUpdate.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # SteelSeries GG
 New-NetFirewallRule -DisplayName "SteelSeries GG" -Group "User Applications" `
     -Program "C:\Program Files\steelseries\gg\steelseriesengine.exe" `
