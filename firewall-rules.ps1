@@ -995,6 +995,11 @@ New-NetFirewallRule -DisplayName "k9s" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\local\microsoft\winget\packages\derailed.k9s_microsoft.winget.source_8wekyb3d8bbwe\k9s.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Fedora Media Writer
+New-NetFirewallRule -DisplayName "Fedora Media Writer" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\fedora media writer\mediawriter.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################
