@@ -205,6 +205,7 @@ winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Brave.Brave
 winget install -e --source winget --id 7zip.7zip
+winget install -e --source winget --id Joplin.Joplin
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
@@ -216,7 +217,7 @@ winget install -e --source winget --id SideQuestVR.SideQuest
 
 # Install in a non-admin powershell
 winget install -e --source winget --id Spotify.Spotify
-winget install -e --source winget --id Obsidian.Obsidian
+# winget install -e --source winget --id Obsidian.Obsidian
 
 ################################################
 ##### Firefox
@@ -224,6 +225,10 @@ winget install -e --source winget --id Obsidian.Obsidian
 
 # Install Firefox
 winget install -e --source winget --id Mozilla.Firefox
+
+#
+# OPEN FIREFOX
+#
 
 # Get profile path
 $FirefoxProfilePath = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles" -Filter "*.default-release" -Name
@@ -271,7 +276,10 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # Install .NET SDK 8
 winget install -e --source winget --id Microsoft.DotNet.SDK.8
 
+#
 # Trust ASP.NET Core HTTPS certificate
+# MUST BE DONE IN A NEW SHELL AFTER SDK IS INSTALLER
+#
 dotnet --info
 dotnet dev-certs https --trust
 
@@ -279,8 +287,11 @@ dotnet dev-certs https --trust
 winget install -e --source winget --id GoLang.Go
 
 # Install Podman
-winget install -e --source winget --id RedHat.Podman
-winget install -e --source winget --id RedHat.Podman-Desktop
+# winget install -e --source winget --id RedHat.Podman
+# winget install -e --source winget --id RedHat.Podman-Desktop
+
+# Install Docker
+winget install -e --source winget --id Docker.DockerDesktop
 
 # Install Kubernetes CLIs
 winget install -e --source winget --id Kubernetes.kubectl
@@ -288,7 +299,7 @@ winget install -e --source winget --id ahmetb.kubectx
 winget install -e --source winget --id Derailed.k9s
 
 # Install Kind
-winget install -e --source winget --id Kubernetes.kind
+# winget install -e --source winget --id Kubernetes.kind
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)

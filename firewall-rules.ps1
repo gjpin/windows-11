@@ -1094,6 +1094,9 @@ New-NetFirewallRule -DisplayName "Podman" -Group "User Applications" `
     -Program "C:\Program Files\redhat\podman\podman.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
+# Update group policy settings
+gpupdate /force
+
 ################################################
 ##### Outro
 ################################################
@@ -1102,16 +1105,16 @@ New-NetFirewallRule -DisplayName "Podman" -Group "User Applications" `
 # https://github.com/crazy-max/WindowsSpyBlocker/
 
 # WindowsSpyBlocker
-$ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
-$ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
-New-NetFirewallRule -DisplayName "WindowsSpyBlocker" -Group "WindowsSpyBlocker" `
-    -LocalAddress Any -RemoteAddress $ips `
-    -Enabled True -Action Block -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
+# $ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
+# New-NetFirewallRule -DisplayName "WindowsSpyBlocker" -Group "WindowsSpyBlocker" `
+#     -LocalAddress Any -RemoteAddress $ips `
+#     -Enabled True -Action Block -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Helper script to update dynamic firewall rules
-Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/update-firewall-rules.ps1" `
-    -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
+# Invoke-WebRequest `
+#     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/update-firewall-rules.ps1" `
+#     -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
 
-# Update group policy settings
-gpupdate /force
+# # Update group policy settings
+# gpupdate /force
