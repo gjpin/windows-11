@@ -379,7 +379,6 @@ Invoke-WebRequest `
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\apps\resolution-manager", "Machine")
 
 # Install Sunshine and ViGEmBus
-winget install -e --source winget --id ViGEm.ViGEmBus
 winget install -e --source winget --id LizardByte.Sunshine
 
 # Import Sunshine configurations
