@@ -1,11 +1,19 @@
 
 function Update-FwRules {
-    # WindowsSpyBlocker
-    $ips = ((Invoke-WebRequest -URI "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/firewall/spy.txt").Content -split '\r?\n').Trim()
-    $ips = $ips | Where-Object { $_ -match "^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" }
-    Set-NetFirewallRule -DisplayName "WindowsSpyBlocker" `
-        -LocalAddress Any -RemoteAddress $ips `
-        -Enabled True -Action Block -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+    # Windows Defender - Core Services
+    $DefenderFolder = "C:\ProgramData\Microsoft\Windows Defender\Platform"
+    $DefenderLatestSubfolder = Get-ChildItem $defenderFolder -Directory | Sort-Object CreationTime -Descending
+    Set-NetFirewallRule -DisplayName "Windows Defender - Core Services" `
+        -Program "$($DefenderLatestSubfolder[0].FullName)\mpdefendercoreservice.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+    # VSCode
+    $VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\.vscode\extensions" -Filter ms-dotnettools.csharp-*-win32-x64 -Name
+    $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+    $csharpPath = "$env:USERPROFILE\.vscode\extensions\$VersionFolder"
+    Set-NetFirewallRule -DisplayName "Visual Studio Code - csharp LSP" `
+        -Program "$csharpPath\.roslyn\microsoft.codeanalysis.languageserver.exe" `
+        -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
     # Winget
     $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\WindowsApps" -Filter Microsoft.DesktopAppInstaller_*x64__8wekyb3d8bbwe -Name

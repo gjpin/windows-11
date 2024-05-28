@@ -18,11 +18,17 @@ New-NetFirewallRule -DisplayName "Device Census" -Group "Windows Services" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Windows Defender" -Group "Windows Services" `
-    -Program "%ALLUSERSPROFILE%\Microsoft\Windows Defender\Platform\MsMpEng.exe" `
+    -Program "C:\ProgramData\Microsoft\Windows Defender\Platform\MsMpEng.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Windows Defender CLI" -Group "Windows Services" `
-    -Program "%ALLUSERSPROFILE%\Microsoft\Windows Defender\Platform\MpCmdRun.exe" `
+    -Program "C:\ProgramData\Microsoft\Windows Defender\Platform\MpCmdRun.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$DefenderFolder = "C:\ProgramData\Microsoft\Windows Defender\Platform"
+$DefenderLatestSubfolder = Get-ChildItem $defenderFolder -Directory | Sort-Object CreationTime -Descending
+New-NetFirewallRule -DisplayName "Windows Defender - Core Services" -Group "Windows Services" `
+    -Program "$($DefenderLatestSubfolder[0].FullName)\mpdefendercoreservice.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Malicious Software Removal Tool" -Group "Windows Services" `
@@ -206,6 +212,13 @@ New-NetFirewallRule -DisplayName "Visual Studio Code" -Group "User Applications"
 
 New-NetFirewallRule -DisplayName "Visual Studio Code - Extension Manager" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Microsoft VS Code\resources\app\node_modules.asar.unpacked\@vscode\vsce-sign\bin\vsce-sign.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:USERPROFILE\.vscode\extensions" -Filter ms-dotnettools.csharp-*-win32-x64 -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$csharpPath = "$env:USERPROFILE\.vscode\extensions\$VersionFolder"
+New-NetFirewallRule -DisplayName "Visual Studio Code - csharp LSP" -Group "User Applications" `
+    -Program "$csharpPath\.roslyn\microsoft.codeanalysis.languageserver.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Golang
@@ -998,6 +1011,15 @@ New-NetFirewallRule -DisplayName "k9s" -Group "User Applications" `
 # Fedora Media Writer
 New-NetFirewallRule -DisplayName "Fedora Media Writer" -Group "User Applications" `
     -Program "C:\Program Files (x86)\fedora media writer\mediawriter.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Ollama
+New-NetFirewallRule -DisplayName "Ollama - App" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\Ollama\ollama.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Ollama - App" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\Local\Programs\Ollama\ollama app.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################

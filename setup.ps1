@@ -259,6 +259,8 @@ $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
     "& code --install-extension golang.Go"
+    "& code --install-extension Continue.continue"
+    "& code --install-extension ms-dotnettools.csdevkit"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -287,11 +289,11 @@ dotnet dev-certs https --trust
 winget install -e --source winget --id GoLang.Go
 
 # Install Podman
-# winget install -e --source winget --id RedHat.Podman
-# winget install -e --source winget --id RedHat.Podman-Desktop
+winget install -e --source winget --id RedHat.Podman
+winget install -e --source winget --id RedHat.Podman-Desktop
 
 # Install Docker
-winget install -e --source winget --id Docker.DockerDesktop
+# winget install -e --source winget --id Docker.DockerDesktop
 
 # Install Kubernetes CLIs
 winget install -e --source winget --id Kubernetes.kubectl
@@ -300,6 +302,9 @@ winget install -e --source winget --id Derailed.k9s
 
 # Install Kind
 # winget install -e --source winget --id Kubernetes.kind
+
+# Install Ollama
+winget install -e --source winget --id Ollama.Ollama
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
