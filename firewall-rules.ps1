@@ -1022,6 +1022,11 @@ New-NetFirewallRule -DisplayName "Ollama - App" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Programs\Ollama\ollama app.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Control
+New-NetFirewallRule -DisplayName "Control" -Group "User Applications" `
+    -Program "C:\program files\epic games\control\control_dx12.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################

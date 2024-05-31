@@ -54,16 +54,16 @@
 
 ### No connection in WSL
 ```bash
-
-# Set nameserver
-sudo tee /etc/resolv.conf << EOF
-nameserver 1.1.1.1
-EOF
-
-sudo tee -a /etc/wsl.conf << EOF
+sudo tee /etc/wsl.conf << EOF
+[boot]
+systemd=true
 
 [network]
-generateResolvConf = false
+generateResolvConf=false
+EOF
+
+sudo tee /etc/resolv.conf << EOF
+nameserver 1.1.1.1
 EOF
 
 sudo chattr +i /etc/resolv.conf

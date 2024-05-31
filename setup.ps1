@@ -256,7 +256,7 @@ Invoke-WebRequest `
 # Install VSCode extensions
 $credential = Get-Credential -credential "$env:USERNAME"
 $commands = @'
-    "& code --install-extension ms-vscode-remote.remote-wsl"
+    "& code --install-extension ms-vscode-remote.vscode-remote-extensionpack"
     "& code --install-extension ms-vscode.powershell"
     "& code --install-extension golang.Go"
     "& code --install-extension Continue.continue"
@@ -280,7 +280,7 @@ winget install -e --source winget --id Microsoft.DotNet.SDK.8
 
 #
 # Trust ASP.NET Core HTTPS certificate
-# MUST BE DONE IN A NEW SHELL AFTER SDK IS INSTALLER
+# MUST BE DONE IN A NEW SHELL AFTER SDK IS INSTALLED
 #
 dotnet --info
 dotnet dev-certs https --trust
