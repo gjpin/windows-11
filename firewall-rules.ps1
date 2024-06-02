@@ -1027,6 +1027,20 @@ New-NetFirewallRule -DisplayName "Control" -Group "User Applications" `
     -Program "C:\program files\epic games\control\control_dx12.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Playstation Plus
+New-NetFirewallRule -DisplayName "Playstation Plus" -Group "User Applications" `
+    -Program "C:\program files (x86)\playstationplus\pspluslauncher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Playstation Plus - AGL" -Group "User Applications" `
+    -Program "C:\program files (x86)\playstationplus\agl\agl.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Playstation Remote Play
+New-NetFirewallRule -DisplayName "Playstation Remote Play" -Group "User Applications" `
+    -Program "C:\program files (x86)\sony\ps remote play\remoteplay.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################

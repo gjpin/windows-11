@@ -196,6 +196,7 @@ Remove-Item -Force "$env:USERPROFILE\OneDrive"
 
 winget install -e --source winget --id Microsoft.PowerShell
 winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
+winget install -e --source winget --id Microsoft.VCRedist.2013.x64
 winget install -e --source winget --id Git.Git
 winget install -e --source winget --id GitHub.GitHubDesktop
 winget install -e --source winget --id VideoLAN.VLC
@@ -210,10 +211,13 @@ winget install -e --source winget --id Joplin.Joplin
 # Gaming
 winget install -e --source winget --id Valve.Steam
 winget install -e --source winget --id EpicGames.EpicGamesLauncher
+winget install -e --source winget --id PlayStation.PSRemotePlay
+winget install -e --source winget --id PlayStation.PSPlus
 
 # VR
 winget install -e --source winget --id VirtualDesktop.Streamer
 winget install -e --source winget --id SideQuestVR.SideQuest
+# Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
 # Install in a non-admin powershell
 winget install -e --source winget --id Spotify.Spotify
@@ -259,7 +263,6 @@ $commands = @'
     "& code --install-extension ms-vscode-remote.vscode-remote-extensionpack"
     "& code --install-extension ms-vscode.powershell"
     "& code --install-extension golang.Go"
-    "& code --install-extension Continue.continue"
     "& code --install-extension ms-dotnettools.csdevkit"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
@@ -289,11 +292,8 @@ dotnet dev-certs https --trust
 winget install -e --source winget --id GoLang.Go
 
 # Install Podman
-winget install -e --source winget --id RedHat.Podman
+winget install -e --source winget --id RedHat.Podman # or Docker: Docker.DockerDesktop
 winget install -e --source winget --id RedHat.Podman-Desktop
-
-# Install Docker
-# winget install -e --source winget --id Docker.DockerDesktop
 
 # Install Kubernetes CLIs
 winget install -e --source winget --id Kubernetes.kubectl
@@ -303,8 +303,15 @@ winget install -e --source winget --id Derailed.k9s
 # Install Kind
 # winget install -e --source winget --id Kubernetes.kind
 
-# Install Ollama
-winget install -e --source winget --id Ollama.Ollama
+# Install JDK Temurin 21
+winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
+
+# Install Android Studio
+winget install -e --id Google.AndroidStudio
+
+# Add Android platform tools and emulator to path
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)

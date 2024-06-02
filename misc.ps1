@@ -5,15 +5,15 @@
 # Install Python 3.12
 winget install -e --id Python.Python.3.12
 
-# Install JDK Temurin 21
-winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
+# AI
+$credential = Get-Credential -credential "$env:USERNAME"
+$commands = @'
+    "& code --install-extension ms-dotnettools.csdevkit"
+'@
+Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
-# Install Android Studio
-winget install -e --id Google.AndroidStudio
-
-# Add Android platform tools and emulator to path
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
+# Install Ollama
+winget install -e --source winget --id Ollama.Ollama
 
 ################################################
 ##### Update winget-cli
