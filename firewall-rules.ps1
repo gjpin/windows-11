@@ -278,6 +278,10 @@ New-NetFirewallRule -DisplayName "Steam - VR Web Helper" -Group "User Applicatio
     -Program "C:\Program Files (x86)\steam\steamapps\common\steamvr\bin\vrwebhelper\win64\vrwebhelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Steam - VR Server (64 bit)" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\bin\win64\vrserver.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # steamcmd
 New-NetFirewallRule -DisplayName "Steam - steamcmd" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\steamcmd\steamcmd.exe" `
@@ -1056,8 +1060,12 @@ New-NetFirewallRule -DisplayName "Steam - Remote Play (TCP)" -Group "User Applic
     -Protocol TCP -LocalPort 27036 `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Steam - VR" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Steam - VR (32 bit)" -Group "User Applications" `
     -Program "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\bin\win32\vrstartup.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR (64 bit)" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\bin\win64\vrstartup.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 New-NetFirewallRule -DisplayName "Steam - VR Home" -Group "User Applications" `
@@ -1068,7 +1076,11 @@ New-NetFirewallRule -DisplayName "Steam - VR Home Tools" -Group "User Applicatio
     -Program "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\tools\steamvr_environments\game\bin\win64\steamtourscfg.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Steam - VR Server" -Group "User Applications" `
+New-NetFirewallRule -DisplayName "Steam - VR Server (32 bit)" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\bin\win32\vrserver.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Steam - VR Server (64 bit)" -Group "User Applications" `
     -Program "C:\Program Files (x86)\Steam\steamapps\common\SteamVR\bin\win64\vrserver.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
