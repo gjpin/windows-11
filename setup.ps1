@@ -215,13 +215,13 @@ winget install -e --source winget --id PlayStation.PSRemotePlay
 winget install -e --source winget --id PlayStation.PSPlus
 
 # VR
+winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
 winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
 # Install in a non-admin powershell
 winget install -e --source winget --id Spotify.Spotify
-# winget install -e --source winget --id Obsidian.Obsidian
 
 ################################################
 ##### Firefox
@@ -260,10 +260,9 @@ Invoke-WebRequest `
 # Install VSCode extensions
 $credential = Get-Credential -credential "$env:USERNAME"
 $commands = @'
-    "& code --install-extension ms-vscode-remote.vscode-remote-extensionpack"
+    "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
     "& code --install-extension golang.Go"
-    "& code --install-extension ms-dotnettools.csdevkit"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
