@@ -317,20 +317,20 @@ New-NetFirewallRule -DisplayName "Epic Games Launcher - EOS Install Helper" -Gro
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Unreal Engine
-New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Editor" -Group "User Applications" `
-    -Program "C:\Program Files\Epic Games\UE_5.3\Engine\Binaries\Win64\UnrealEditor.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.4 - Editor" -Group "User Applications" `
+    -Program "C:\Program Files\Epic Games\UE_5.4\Engine\Binaries\Win64\UnrealEditor.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Web Helper" -Group "User Applications" `
-    -Program "C:\Program Files\Epic Games\UE_5.3\Engine\Binaries\Win64\EpicWebHelper.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.4 - Web Helper" -Group "User Applications" `
+    -Program "C:\Program Files\Epic Games\UE_5.4\Engine\Binaries\Win64\EpicWebHelper.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Quixel Bridge" -Group "User Applications" `
-    -Program "C:\Program Files\Epic Games\UE_5.3\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.4 - Quixel Bridge" -Group "User Applications" `
+    -Program "C:\Program Files\Epic Games\UE_5.4\Engine\Plugins\Bridge\ThirdParty\Win\node-bifrost.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
-New-NetFirewallRule -DisplayName "Unreal Engine 5.3 - Prerequirements" -Group "User Applications" `
-    -Program "C:\Program Files\Epic Games\UE_5.3\engine\extras\redist\en-us\ueprereqsetup_x64.exe" `
+New-NetFirewallRule -DisplayName "Unreal Engine 5.4 - Prerequirements" -Group "User Applications" `
+    -Program "C:\Program Files\Epic Games\UE_5.4\engine\extras\redist\en-us\ueprereqsetup_x64.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
     
 # Fortnite
