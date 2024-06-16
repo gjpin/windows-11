@@ -369,12 +369,16 @@ Register-ScheduledTask -TaskName "Syncthing autoupdater" -InputObject $task
 # References:
 # https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
 # https://learn.microsoft.com/en-us/powershell/module/dism/enable-windowsoptionalfeature?view=windowsserver2022-ps
+# https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview
 
 # Enable Hyper-V
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
 
 # Enable Windows Hypervisor Platform
 Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
+
+# Enable Windows Sandbox 
+Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
 
 ################################################
 ##### Sunshine
