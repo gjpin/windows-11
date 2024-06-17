@@ -841,6 +841,21 @@ New-NetFirewallRule -DisplayName "JDK 21 - Eclipse Adoptium (java.exe)" -Group "
     -Program "$java21Path\bin\java.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# JDK 17 - Temurin
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jdk-17.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java17Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JDK 17 - Eclipse Adoptium (javaw.exe)" -Group "User Applications" `
+    -Program "$java17Path\bin\javaw.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jdk-17.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java17Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JDK 17 - Eclipse Adoptium (java.exe)" -Group "User Applications" `
+    -Program "$java17Path\bin\java.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # JRE 21 - Temurin
 $VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jre-21.*-hotspot -Name
 $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
@@ -854,6 +869,21 @@ $VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
 $java21Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
 New-NetFirewallRule -DisplayName "JRE 21 - Eclipse Adoptium (java.exe)" -Group "User Applications" `
     -Program "$java21Path\bin\java.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# JRE 17 - Temurin
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jre-17.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java17Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JRE 17 - Eclipse Adoptium (javaw.exe)" -Group "User Applications" `
+    -Program "$java17Path\bin\javaw.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+$VersionFolders = Get-ChildItem -Directory -Path "$env:ProgramFiles\Eclipse Adoptium" -Filter jre-17.*-hotspot -Name
+$VersionFolder = $VersionFolders | Sort-Object | Select-Object -Last 1
+$java17Path = "$env:ProgramFiles\Eclipse Adoptium\$VersionFolder"
+New-NetFirewallRule -DisplayName "JRE 17 - Eclipse Adoptium (java.exe)" -Group "User Applications" `
+    -Program "$java17Path\bin\java.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Python 3.12
