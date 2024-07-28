@@ -17,7 +17,7 @@ powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd
 auditpol /set /category:"Object Access" /success:disable /failure:enable
 
 # Install WSL
-wsl --install
+wsl --install -d Ubuntu-24.04
 
 ################################################
 ##### Powershell
