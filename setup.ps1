@@ -209,6 +209,7 @@ winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Brave.Brave
 winget install -e --source winget --id 7zip.7zip
 winget install -e --source winget --id Joplin.Joplin
+winget install -e --source winget --id Spotify.Spotify
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
@@ -221,8 +222,6 @@ winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
 winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
-
-winget install -e --source winget --id Spotify.Spotify
 
 ################################################
 ##### Firefox
@@ -291,7 +290,7 @@ dotnet dev-certs https --trust
 # Install Go
 winget install -e --source winget --id GoLang.Go
 
-# Install Podman
+# Install Docker
 winget install -e --source winget --id Docker.DockerDesktop
 # winget install -e --source winget --id RedHat.Podman
 # winget install -e --source winget --id RedHat.Podman-Desktop
