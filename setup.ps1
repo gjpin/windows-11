@@ -303,8 +303,9 @@ winget install -e --source winget --id Derailed.k9s
 # Install Kind
 # winget install -e --source winget --id Kubernetes.kind
 
-# Install JDK Temurin 21
-winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
+# Install JDK Temurin
+winget install -e --id EclipseAdoptium.Temurin.17.JDK
+# winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
 
 # Install Android Studio
 winget install -e --id Google.AndroidStudio
