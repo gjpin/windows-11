@@ -958,6 +958,11 @@ New-NetFirewallRule -DisplayName "Deep Rock Galactic" -Group "User Applications"
     -Program "C:\Program Files (x86)\steam\steamapps\common\deep rock galactic\fsd\binaries\win64\fsd-win64-shipping.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Persona 5 Royal
+New-NetFirewallRule -DisplayName "Persona 5 Royal" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\steam\steamapps\common\p5r\p5r.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Skyrim - Wabbajack
 New-NetFirewallRule -DisplayName "Skyrim - Wabbajack" -Group "User Applications" `
     -Program "C:\VR\Skyrim VR\Wabbajack\Wabbajack.exe" `
