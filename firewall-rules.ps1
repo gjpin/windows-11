@@ -968,6 +968,11 @@ New-NetFirewallRule -DisplayName "Google Earth VR" -Group "User Applications" `
     -Program "C:\Program Files (x86)\steam\steamapps\common\EarthVR\Earth.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Serious Sam VR - The First Enconter
+New-NetFirewallRule -DisplayName "Serious Sam VR - The First Enconter" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\steam\steamapps\common\serious sam vr the first encounter\bin\x64\samtfe_vr.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Skyrim - Wabbajack
 New-NetFirewallRule -DisplayName "Skyrim - Wabbajack" -Group "User Applications" `
     -Program "C:\VR\Skyrim VR\Wabbajack\Wabbajack.exe" `
