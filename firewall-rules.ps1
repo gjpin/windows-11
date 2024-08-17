@@ -586,6 +586,10 @@ New-NetFirewallRule -DisplayName "EA app - EA Steam Proxy" -Group "User Applicat
     -Program "C:\Program Files\Electronic Arts\EA Desktop\EA Desktop\EASteamProxy.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "EA app - EA Subprocess" -Group "User Applications" `
+    -Program "C:\Program Files\electronic arts\ea desktop\ea desktop\eacefsubprocess.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 New-NetFirewallRule -DisplayName "Steam - It Takes Two" -Group "User Applications" `
     -Program "C:\Program Files (x86)\Steam\steamapps\common\ItTakesTwo\Nuts\Binaries\Win64\ItTakesTwo.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
@@ -606,6 +610,11 @@ New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "U
 
 New-NetFirewallRule -DisplayName "Steam - Apex Legends" -Group "User Applications" `
     -Program "C:\Program Files (x86)\Steam\steamapps\common\Apex Legends\r5apex.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Need for Speed Heat
+New-NetFirewallRule -DisplayName "Steam - Apex Legends - EAC launcher" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\Steam\steamapps\common\need for speed heat\needforspeedheat.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # GOG
