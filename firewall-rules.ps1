@@ -421,9 +421,9 @@ New-NetFirewallRule -DisplayName "Joplin" -Group "User Applications" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Obsidian
-New-NetFirewallRule -DisplayName "Obsidian" -Group "User Applications" `
-    -Program "$env:USERPROFILE\AppData\Local\Obsidian\Obsidian.exe" `
-    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+# New-NetFirewallRule -DisplayName "Obsidian" -Group "User Applications" `
+#     -Program "$env:USERPROFILE\AppData\Local\Obsidian\Obsidian.exe" `
+#     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 # Remnant II
 New-NetFirewallRule -DisplayName "Remnant II - Win64-Shipping" -Group "User Applications" `
