@@ -253,6 +253,11 @@ New-NetFirewallRule -DisplayName "Spotify" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Roaming\Spotify\Spotify.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Hashicorp Packer
+New-NetFirewallRule -DisplayName "Hashicorp Packer" -Group "User Applications" `
+    -Program "$env:USERPROFILE\AppData\local\microsoft\winget\packages\hashicorp.packer_microsoft.winget.source_8wekyb3d8bbwe\packer.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Steam - Outbound
 New-NetFirewallRule -DisplayName "Steam" -Group "User Applications" `
     -Program "C:\Program Files (x86)\Steam\Steam.exe" `
