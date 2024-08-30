@@ -16,8 +16,20 @@ powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd
 # https://learn.microsoft.com/en-us/windows/win32/fwp/auditing-and-logging
 auditpol /set /category:"Object Access" /success:disable /failure:enable
 
+################################################
+##### WSL
+################################################
+
 # Install WSL
-wsl --install -d Ubuntu-24.04
+wsl --install --no-distribution
+
+# Install AlmaLinux WSL
+$url = "https://wsl.almalinux.org/9/AlmaLinuxOS-9_latest_x64.appx"
+$outputPath = "$env:USERPROFILE\Downloads\AlmaLinuxOS-9_latest_x64.appx"
+
+Invoke-WebRequest -Uri $url -OutFile $outputPath
+Add-AppxPackage -Path $outputPath
+Remove-Item -Path $outputPath -Force
 
 ################################################
 ##### Powershell
