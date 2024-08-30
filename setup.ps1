@@ -21,15 +21,15 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 ################################################
 
 # Install WSL
-wsl --install --no-distribution
+wsl --install -d Debian
 
 # Install AlmaLinux WSL
-$url = "https://wsl.almalinux.org/9/AlmaLinuxOS-9_latest_x64.appx"
-$outputPath = "$env:USERPROFILE\Downloads\AlmaLinuxOS-9_latest_x64.appx"
+# $url = "https://wsl.almalinux.org/9/AlmaLinuxOS-9_latest_x64.appx"
+# $outputPath = "$env:USERPROFILE\Downloads\AlmaLinuxOS-9_latest_x64.appx"
 
-Invoke-WebRequest -Uri $url -OutFile $outputPath
-Add-AppxPackage -Path $outputPath
-Remove-Item -Path $outputPath -Force
+# Invoke-WebRequest -Uri $url -OutFile $outputPath
+# Add-AppxPackage -Path $outputPath
+# Remove-Item -Path $outputPath -Force
 
 ################################################
 ##### Powershell
