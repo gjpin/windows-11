@@ -258,6 +258,23 @@ New-NetFirewallRule -DisplayName "Hashicorp Packer" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\local\microsoft\winget\packages\hashicorp.packer_microsoft.winget.source_8wekyb3d8bbwe\packer.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Rockstar Games Launcher
+New-NetFirewallRule -DisplayName "Rockstar Games Launcher" -Group "User Applications" `
+    -Program "C:\program files\rockstar games\launcher\launcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Rockstar Games Launcher Service" -Group "User Applications" `
+    -Program "C:\program files\rockstar games\launcher\rockstarservice.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Rockstar Games Launcher Patcher" -Group "User Applications" `
+    -Program "C:\program files\rockstar games\launcher\launcherpatcher.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+New-NetFirewallRule -DisplayName "Rockstar Games Social Club Helper" -Group "User Applications" `
+    -Program "C:\program files\rockstar games\social club\socialclubhelper.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Steam - Outbound
 New-NetFirewallRule -DisplayName "Steam" -Group "User Applications" `
     -Program "C:\Program Files (x86)\Steam\Steam.exe" `
