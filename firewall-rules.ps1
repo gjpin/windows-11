@@ -1041,6 +1041,11 @@ New-NetFirewallRule -DisplayName "Automobilista 2 - AVX" -Group "User Applicatio
     -Program "C:\Program Files (x86)\steam\steamapps\common\Automobilista 2\AMS2AVX.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# DOTA 2
+New-NetFirewallRule -DisplayName "DOTA 2" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\steam\steamapps\common\dota 2 beta\game\bin\win64\dota2.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # 3DMark
 New-NetFirewallRule -DisplayName "3DMark" -Group "User Applications" `
     -Program "C:\Program Files (x86)\steam\steamapps\common\3dmark\bin\x64\3dmark.exe" `
