@@ -8,6 +8,11 @@
             "image-path": "",
             "prep-cmd": [
                 {
+                    "do": "cmd \/C DisplaySwitch 4",
+                    "undo": "cmd \/C DisplaySwitch 1",
+                    "elevated": "false"
+                },
+                {
                     "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
                     "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
@@ -30,7 +35,12 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \/C resolution-manager.exe 1280 800 60",
+                    "do": "cmd \/C DisplaySwitch 4",
+                    "undo": "cmd \/C DisplaySwitch 1",
+                    "elevated": "false"
+                },
+                {
+                    "do": "cmd \/C resolution-manager.exe 1280 80 60",
                     "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
@@ -47,6 +57,11 @@
             "wait-all": "true",
             "exit-timeout": "5",
             "prep-cmd": [
+                {
+                    "do": "cmd \/C DisplaySwitch 4",
+                    "undo": "cmd \/C DisplaySwitch 1",
+                    "elevated": "false"
+                },
                 {
                     "do": "cmd \/C resolution-manager.exe 1920 1080 60",
                     "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
@@ -66,31 +81,17 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
+                    "do": "cmd \/C DisplaySwitch 4",
+                    "undo": "cmd \/C DisplaySwitch 1",
+                    "elevated": "false"
+                },
+                {
                     "do": "cmd \/C resolution-manager.exe 2560 1440 60",
                     "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
             "image-path": ""
-        },
-        {
-            "name": "Steam",
-            "output": "",
-            "cmd": "steam.exe steam:\/\/open\/gamepadui",
-            "exclude-global-prep-cmd": "false",
-            "elevated": "false",
-            "auto-detach": "true",
-            "wait-all": "true",
-            "exit-timeout": "5",
-            "image-path": "",
-            "working-dir": "C:\\Program Files (x86)\\Steam",
-            "prep-cmd": [
-                {
-                    "do": "cmd \/C resolution-manager.exe %SUNSHINE_CLIENT_WIDTH% %SUNSHINE_CLIENT_HEIGHT% %SUNSHINE_CLIENT_FPS%",
-                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
-                    "elevated": "false"
-                }
-            ]
         }
     ]
 }
