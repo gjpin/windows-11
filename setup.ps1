@@ -221,12 +221,12 @@ winget install -e --source winget --id GitHub.GitHubDesktop
 winget install -e --source winget --id VideoLAN.VLC
 winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id TheDocumentFoundation.LibreOffice
-winget install -e --source winget --id WireGuard.WireGuard
+winget install -e --source winget --id tailscale.tailscale
 winget install -e --source winget --id Discord.Discord
-winget install -e --source winget --id Brave.Brave
 winget install -e --source winget --id 7zip.7zip
 winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id Spotify.Spotify
+# winget install -e --source winget --id Brave.Brave
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
