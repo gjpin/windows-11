@@ -21,7 +21,12 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 ################################################
 
 # Install WSL
-wsl --install -d Debian
+wsl --install --no-distribution
+
+# Install ArchLinux WSL
+New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
+Invoke-WebRequest -Uri "https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst" -OutFile "archlinux-bootstrap-x86_64.tar.zst"
+wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux .\archlinux-bootstrap-x86_64.tar.zst
 
 # Install AlmaLinux WSL
 # $url = "https://wsl.almalinux.org/9/AlmaLinuxOS-9_latest_x64.appx"
@@ -220,14 +225,14 @@ winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id Brave.Brave
 winget install -e --source winget --id 7zip.7zip
-winget install -e --source winget --id Joplin.Joplin
+winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id Spotify.Spotify
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
 winget install -e --source winget --id EpicGames.EpicGamesLauncher
-winget install -e --source winget --id PlayStation.PSRemotePlay
-winget install -e --source winget --id PlayStation.PSPlus
+# winget install -e --source winget --id PlayStation.PSRemotePlay
+# winget install -e --source winget --id PlayStation.PSPlus
 
 # VR
 winget install -e --source winget --id Meta.Oculus
