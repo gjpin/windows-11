@@ -15,6 +15,7 @@
   - Windows Terminal -> Settings -> ArchLinux -> Command line: C:\Windows\system32\wsl.exe -d ArchLinux -u wsl
 ```powershell
 # Prepare ArchLinux
+# Or download from https://github.com/gjpin/windows-11/releases/download/archlinux-2024.09.01/arch_bootstrap.tar.gz
 curl -LO https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst
 sudo apt install -y zstd
 sudo su
