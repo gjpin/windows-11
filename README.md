@@ -8,26 +8,142 @@
 5. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
 6. Set home network as Private
 7. Reboot
-8. Install ArchLinux in WSL
+8. Connect to Tailscale network
+9. Set Tailscale network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'Tailscale' -NetworkCategory 'Private'```
+10. Install ArchLinux in WSL
+  - After the installation, make sure WSL runs ArchLinux with the new user:
+  - Windows Terminal -> Settings -> ArchLinux -> Command line: C:\Windows\system32\wsl.exe -d ArchLinux -u wsl
 ```powershell
+# Prepare ArchLinux
+curl -LO https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst
+sudo apt install -y zstd
+sudo su
+zstd -d archlinux-bootstrap-x86_64.tar.zst
+tar -xvf archlinux-bootstrap-x86_64.tar
+tar -zcvf arch_bootstrap.tar.gz -C root.x86_64 .
+
+# Move arch_bootstrap.tar.gz to $env:USERPROFILE\Downloads
+
 # Install ArchLinux WSL
 New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
-Invoke-WebRequest -Uri "https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst" -OutFile "archlinux-bootstrap-x86_64.tar.zst"
-wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux .\archlinux-bootstrap-x86_64.tar.zst
+wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux $env:USERPROFILE\Downloads\arch_bootstrap.tar.gz
+
+################################################
+##### Configure ArchLinux
+################################################
+wsl -d ArchLinux
+
+# Init and populate keyring
+pacman-key --init
+pacman-key --populate
+
+# Configure mirrorlist
+tee /etc/pacman.d/mirrorlist << 'EOF'
+Server = https://europe.mirror.pkgbuild.com/$repo/os/$arch
+Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
+EOF
+
+# Update packages
+pacman -Syu --noconfirm
+
+# Install base packages
+pacman -S --noconfirm base base-devel
+
+# Set locale
+echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+echo "LANG=\"en_US.UTF-8\"" > /etc/locale.conf
+locale-gen
+
+# Set keymap
+echo "KEYMAP=us" > /etc/vconsole.conf
+
+# Set hostname
+echo archlinux > /etc/hostname
+
+# Set /etc/hosts
+tee /etc/hosts << EOF
+127.0.0.1 localhost
+::1 localhost
+127.0.1.1 archlinux.localdomain archlinux
+EOF
+
+# Install common applications
+pacman -S --noconfirm \
+    coreutils \
+    htop \
+    git \
+    p7zip \
+    unzip \
+    unrar \
+    lm_sensors \
+    upower \
+    nano \
+    wget \
+    openssh \
+    fwupd \
+    zstd \
+    lzop \
+    man-db \
+    man-pages \
+    e2fsprogs \
+    util-linux \
+    rsync \
+    jq \
+    yq \
+    lazygit \
+    ripgrep \
+    fd \
+    gptfdisk \
+    bc \
+    cpupower \
+    procps-ng \
+    gawk \
+    fzf \
+    findutils \
+    net-tools
+
+# Install ZSH and dependencies
+pacman -S --noconfirm zsh
+
+# Change root password
+passwd
+
+# Setup user
+useradd -m -G wheel -s /usr/bin/zsh wsl
+passwd wsl
+echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+
+# Create SSH directory and config file
+mkdir -p /home/wsl/.ssh
+
+chown 700 /home/wsl/.ssh
+
+tee /home/wsl/.ssh/config << EOF
+Host *
+    ServerAliveInterval 60
+EOF
+
+# Create zsh configs directory
+mkdir -p /home/wsl/.zshrc.d
+
+# Configure ZSH
+curl https://raw.githubusercontent.com/gjpin/arch-linux/main/configs/zsh/.zshrc -o /home/wsl/.zshrc
+
+# Configure powerlevel10k zsh theme
+curl https://raw.githubusercontent.com/gjpin/arch-linux/main/configs/zsh/.p10k.zsh -o /home/wsl/.p10k.zsh
+
+# Make sure that all /home/wsl actually belongs to wsl
+chown -R wsl:wsl /home/wsl
+
+# Install other packages
+pacman -S --noconfirm kubectl cilium talosctl k9s go nodejs npm
 ```
-9. Connect to Tailscale network
-10. Set Tailscale network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'Tailscale' -NetworkCategory 'Private'```
 
 ## Debug
 - If winget is failing:
 ```powershell
 Add-AppxPackage -Path https://cdn.winget.microsoft.com/cache/source.msix
-```
-
-## ArchLinux WSL
-```
-# References
-# https://github.com/nckslvrmn/arch_linux_wsl2
 ```
 
 ## Firewall

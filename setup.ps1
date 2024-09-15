@@ -21,8 +21,7 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 ################################################
 
 # Install WSL
-# wsl --install --no-distribution
-wsl --install
+wsl --install --no-distribution
 
 ################################################
 ##### Powershell
