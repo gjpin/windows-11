@@ -24,6 +24,12 @@ wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux .\archlinux-bootstrap-x86_
 Add-AppxPackage -Path https://cdn.winget.microsoft.com/cache/source.msix
 ```
 
+## ArchLinux WSL
+```
+# References
+# https://github.com/nckslvrmn/arch_linux_wsl2
+```
+
 ## Firewall
 - Firewall can only be configured through Group Policy due to:
   - Disallowed globally open ports user preference merge
