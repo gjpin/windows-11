@@ -8,9 +8,21 @@
 5. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
 6. Set home network as Private
 7. Reboot
-8. Connect to WireGuard network
-9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
-10. Create NRPT rule: ```Add-DnsClientNrptRule -Namespace "." -NameServers "10.0.0.1"```
+8. Install ArchLinux in WSL
+```powershell
+# Install ArchLinux WSL
+New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
+Invoke-WebRequest -Uri "https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst" -OutFile "archlinux-bootstrap-x86_64.tar.zst"
+wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux .\archlinux-bootstrap-x86_64.tar.zst
+```
+9. Connect to Tailscale network
+10. Set Tailscale network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'Tailscale' -NetworkCategory 'Private'```
+
+## Debug
+- If winget is failing:
+```powershell
+Add-AppxPackage -Path https://cdn.winget.microsoft.com/cache/source.msix
+```
 
 ## Firewall
 - Firewall can only be configured through Group Policy due to:

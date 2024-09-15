@@ -23,19 +23,6 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 # Install WSL
 wsl --install --no-distribution
 
-# Install ArchLinux WSL
-New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
-Invoke-WebRequest -Uri "https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst" -OutFile "archlinux-bootstrap-x86_64.tar.zst"
-wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux .\archlinux-bootstrap-x86_64.tar.zst
-
-# Install AlmaLinux WSL
-# $url = "https://wsl.almalinux.org/9/AlmaLinuxOS-9_latest_x64.appx"
-# $outputPath = "$env:USERPROFILE\Downloads\AlmaLinuxOS-9_latest_x64.appx"
-
-# Invoke-WebRequest -Uri $url -OutFile $outputPath
-# Add-AppxPackage -Path $outputPath
-# Remove-Item -Path $outputPath -Force
-
 ################################################
 ##### Powershell
 ################################################
@@ -235,9 +222,9 @@ winget install -e --source winget --id EpicGames.EpicGamesLauncher
 # winget install -e --source winget --id PlayStation.PSPlus
 
 # VR
-winget install -e --source winget --id Meta.Oculus
+# winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
-winget install -e --source winget --id SideQuestVR.SideQuest
+# winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
 ################################################
@@ -279,7 +266,6 @@ $credential = Get-Credential -credential "$env:USERNAME"
 $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
-    "& code --install-extension golang.Go"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -295,17 +281,17 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
 # Install .NET SDK 8
-winget install -e --source winget --id Microsoft.DotNet.SDK.8
+# winget install -e --source winget --id Microsoft.DotNet.SDK.8
 
 #
 # Trust ASP.NET Core HTTPS certificate
 # MUST BE DONE IN A NEW SHELL AFTER SDK IS INSTALLED
 #
-dotnet --info
-dotnet dev-certs https --trust
+# dotnet --info
+# dotnet dev-certs https --trust
 
 # Install Go
-winget install -e --source winget --id GoLang.Go
+# winget install -e --source winget --id GoLang.Go
 
 # Install Docker
 winget install -e --source winget --id Docker.DockerDesktop
@@ -313,23 +299,23 @@ winget install -e --source winget --id Docker.DockerDesktop
 # winget install -e --source winget --id RedHat.Podman-Desktop
 
 # Install Kubernetes CLIs
-winget install -e --source winget --id Kubernetes.kubectl
-winget install -e --source winget --id ahmetb.kubectx
-winget install -e --source winget --id Derailed.k9s
+# winget install -e --source winget --id Kubernetes.kubectl
+# winget install -e --source winget --id ahmetb.kubectx
+# winget install -e --source winget --id Derailed.k9s
 
 # Install Kind
 # winget install -e --source winget --id Kubernetes.kind
 
 # Install JDK Temurin
-winget install -e --id EclipseAdoptium.Temurin.17.JDK
+# winget install -e --id EclipseAdoptium.Temurin.17.JDK
 # winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
 
 # Install Android Studio
-winget install -e --id Google.AndroidStudio
+# winget install -e --id Google.AndroidStudio
 
 # Add Android platform tools and emulator to path
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
+# [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
+# [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
