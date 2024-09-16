@@ -115,8 +115,12 @@ useradd -m -G wheel -s /usr/bin/zsh wsl
 passwd wsl
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
-# Set new user as default
-tee /etc/wsl.conf << EOF
+# Configure WSL
+# https://learn.microsoft.com/en-us/windows/wsl/wsl-config#change-the-default-user-for-a-distribution
+tee /etc/wsl.conf << 'EOF'
+[boot]
+systemd=true
+
 [user]
 default=wsl
 EOF
