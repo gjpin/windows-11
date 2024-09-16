@@ -1079,6 +1079,11 @@ New-NetFirewallRule -DisplayName "The Division 2 - EAC" -Group "User Application
     -Program "C:\Program Files (x86)\steam\steamapps\common\tom clancy's the division 2\eaclaunch.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Gunfire Reborn
+New-NetFirewallRule -DisplayName "Gunfire Reborn" -Group "User Applications" `
+    -Program "C:\Program Files (x86)\steam\steamapps\common\gunfire reborn\gunfire reborn.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # Podman
 New-NetFirewallRule -DisplayName "Podman" -Group "User Applications" `
     -Program "C:\Program Files\redhat\podman\podman.exe" `
