@@ -115,6 +115,12 @@ useradd -m -G wheel -s /usr/bin/zsh wsl
 passwd wsl
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
+# Set new user as default
+tee /etc/wsl.conf << EOF
+[user]
+default=wsl
+EOF
+
 # Create SSH directory and config file
 mkdir -p /home/wsl/.ssh
 
