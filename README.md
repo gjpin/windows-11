@@ -147,8 +147,40 @@ curl https://raw.githubusercontent.com/gjpin/arch-linux/main/configs/zsh/.p10k.z
 # Make sure that all /home/wsl actually belongs to wsl
 chown -R wsl:wsl /home/wsl
 
-# Install other packages
-pacman -S --noconfirm kubectl cilium talosctl k9s go nodejs npm
+# Install kubernetes-related packages
+pacman -S --noconfirm kubectl cilium-cli talosctl k9s
+
+# Set git configurations
+git config --global init.defaultBranch main
+
+# Create dev tools directory
+mkdir -p ${HOME}/.devtools
+
+# Install JS packages
+sudo pacman -S --noconfirm nodejs npm deno
+
+# Change npm's default directory
+# https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+mkdir ${HOME}/.devtools/npm-global
+npm config set prefix "${HOME}/.devtools/npm-global"
+tee ${HOME}/.zshrc.d/npm << 'EOF'
+export PATH=$HOME/.devtools/npm-global/bin:$PATH
+EOF
+
+# Install Python and create alias for python venv
+sudo pacman -S --noconfirm python
+mkdir -p ${HOME}/.devtools/python
+python -m venv ${HOME}/.devtools/python/dev
+tee ${HOME}/.zshrc.d/python << 'EOF'
+alias pydev="source ${HOME}/.devtools/python/dev/bin/activate"
+EOF
+
+# Install Go
+sudo pacman -S --noconfirm go go-tools gopls
+mkdir -p ${HOME}/.devtools/go
+tee ${HOME}/.zshrc.d/go << 'EOF'
+export GOPATH="$HOME/.devtools/go"
+EOF
 ```
 
 ## Debug
