@@ -1093,6 +1093,10 @@ New-NetFirewallRule -DisplayName "Podman Desktop" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\programs\podman-desktop\podman desktop.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Podman - gvproxy" -Group "User Applications" `
+    -Program "C:\Program Files\redhat\podman\gvproxy.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 # k9s
 New-NetFirewallRule -DisplayName "k9s" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\local\microsoft\winget\packages\derailed.k9s_microsoft.winget.source_8wekyb3d8bbwe\k9s.exe" `
@@ -1129,6 +1133,11 @@ New-NetFirewallRule -DisplayName "Playstation Plus - AGL" -Group "User Applicati
 # Playstation Remote Play
 New-NetFirewallRule -DisplayName "Playstation Remote Play" -Group "User Applications" `
     -Program "C:\program files (x86)\sony\ps remote play\remoteplay.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# ALVR Launcher
+New-NetFirewallRule -DisplayName "ALVR Launcher" -Group "User Applications" `
+    -Program "$env:USERPROFILE\apps\alvr-launcher\alvr launcher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
 ################################################
@@ -1231,6 +1240,11 @@ New-NetFirewallRule -DisplayName "Virtual Desktop - Streamer" -Group "User Appli
 # Podman
 New-NetFirewallRule -DisplayName "Podman" -Group "User Applications" `
     -Program "C:\Program Files\redhat\podman\podman.exe" `
+    -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
+
+# Tailscale
+New-NetFirewallRule -DisplayName "Tailscale - Wireguard" -Group "User Applications" `
+    -Program "C:\Program Files\Tailscale\tailscaled.exe" `
     -Enabled True -Action Allow -Direction Inbound -PolicyStore "$env:COMPUTERNAME"
 
 # Update group policy settings

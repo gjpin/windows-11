@@ -218,13 +218,14 @@ winget install -e --source winget --id Spotify.Spotify
 # Gaming
 winget install -e --source winget --id Valve.Steam
 winget install -e --source winget --id EpicGames.EpicGamesLauncher
+winget install -e --source winget --id GOG.Galaxy
 # winget install -e --source winget --id PlayStation.PSRemotePlay
 # winget install -e --source winget --id PlayStation.PSPlus
 
 # VR
 # winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
-# winget install -e --source winget --id SideQuestVR.SideQuest
+winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
 ################################################
@@ -294,7 +295,7 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # winget install -e --source winget --id GoLang.Go
 
 # Install Docker
-winget install -e --source winget --id Docker.DockerDesktop
+# winget install -e --source winget --id Docker.DockerDesktop
 # winget install -e --source winget --id RedHat.Podman
 # winget install -e --source winget --id RedHat.Podman-Desktop
 
@@ -316,6 +317,10 @@ winget install -e --source winget --id Docker.DockerDesktop
 # Add Android platform tools and emulator to path
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
+
+# Install databases GUIs
+winget install -e --id beekeeper-studio.beekeeper-studio
+winget install -e --id DBBrowserForSQLite.DBBrowserForSQLite
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)
