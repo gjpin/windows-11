@@ -1140,6 +1140,16 @@ New-NetFirewallRule -DisplayName "ALVR Launcher" -Group "User Applications" `
     -Program "$env:USERPROFILE\apps\alvr-launcher\alvr launcher.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+# Python uv
+New-NetFirewallRule -DisplayName "Python uv" -Group "User Applications" `
+    -Program "$env:USERPROFILE\appdata\local\microsoft\winget\packages\astral-sh.uv_microsoft.winget.source_8wekyb3d8bbwe\uv.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
+# Miniconda
+New-NetFirewallRule -DisplayName "Miniconda" -Group "User Applications" `
+    -Program "$env:USERPROFILE\miniconda3\python.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### Inbound
 ################################################

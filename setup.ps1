@@ -318,6 +318,15 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
 
+# Install Python's uv
+winget install -e --id astral-sh.uv
+
+# Install miniconda
+# winget install -e --id Anaconda.Miniconda3
+# [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\miniconda3", "User")
+# [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\miniconda3\Scripts", "User")
+# [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\miniconda3\Library\bin", "User")
+
 # Install databases GUIs
 winget install -e --id beekeeper-studio.beekeeper-studio
 winget install -e --id DBBrowserForSQLite.DBBrowserForSQLite
