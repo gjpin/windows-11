@@ -80,6 +80,16 @@ Add-AppxPackage -Path https://cdn.winget.microsoft.com/cache/source.msix
 
 ## Others
 
+### DLNA
+Windows search needs to be enabled, since it's a dependency
+```
+; Windows Search (indexing) service
+Computer
+SYSTEM\CurrentControlSet\Services\WSearch
+Start
+DWORD:2
+```
+
 ### No connection in WSL
 ```bash
 sudo tee /etc/wsl.conf << EOF
