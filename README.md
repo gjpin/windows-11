@@ -8,8 +8,8 @@
 5. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
 6. Set home network as Private
 7. Reboot
-8. Connect to Tailscale network
-9. Set Tailscale network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'Tailscale' -NetworkCategory 'Private'```
+8. Connect to WireGuard network
+9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
 10. Download Arch Linux
 ```bash
 # Download from https://github.com/gjpin/windows-11/releases/download/archlinux-2024.09.01/arch_bootstrap.tar.gz
@@ -31,6 +31,7 @@ wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux $env:USERPROFILE\Downloads
 12. Make sure WSL runs ArchLinux with the new user
   - Windows Terminal -> Settings -> ArchLinux -> Command line: C:\Windows\system32\wsl.exe -d ArchLinux -u wsl
 13. Configure Arch Linux (see wsl-arch-linux.sh)
+14. Add SSH private key to ssh-agent: ```ssh-add ~/.ssh/id_ecdsa```
 
 
 ## Debug

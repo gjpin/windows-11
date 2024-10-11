@@ -148,5 +148,16 @@ tee /home/wsl/.zshrc.d/go << 'EOF'
 export GOPATH="$HOME/.devtools/go"
 EOF
 
+# ssh-agent
+# https://wiki.archlinux.org/title/SSH_keys#SSH_agents
+tee /home/wsl/.zshrc.d/python << 'EOF'
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+EOF
+
 # Make sure that all /home/wsl actually belongs to wsl
 chown -R wsl:wsl /home/wsl
