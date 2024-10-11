@@ -240,6 +240,10 @@ New-NetFirewallRule -DisplayName "Android Studio - Java" -Group "User Applicatio
     -Program "C:\Program Files\Android\Android Studio\jre\bin\java.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "Android Studio - JetBrains Runtime" -Group "User Applications" `
+    -Program "C:\program files\android\android studio\jbr\bin\java.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 New-NetFirewallRule -DisplayName "Android Studio - Emulator" -Group "User Applications" `
     -Program "$env:USERPROFILE\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"

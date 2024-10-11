@@ -312,7 +312,7 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
 
 # Install Android Studio
-# winget install -e --id Google.AndroidStudio
+winget install -e --id Google.AndroidStudio
 
 # Add Android platform tools and emulator to path
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
