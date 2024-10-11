@@ -68,7 +68,8 @@ pacman -S --noconfirm \
     gawk \
     fzf \
     findutils \
-    net-tools
+    net-tools \
+    bind
 
 # Install ZSH and dependencies
 pacman -S --noconfirm zsh
