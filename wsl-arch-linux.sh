@@ -90,6 +90,9 @@ systemd=true
 
 [user]
 default=wsl
+
+[automount]
+enabled=false
 EOF
 
 # Create SSH directory and config file
