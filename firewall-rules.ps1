@@ -136,6 +136,10 @@ New-NetFirewallRule -DisplayName "Microsoft Store" -Group "Windows Services" `
     -Program "$storePath\winstore.app.exe" `
     -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
 
+New-NetFirewallRule -DisplayName "LSASS" -Group "Windows Services" `
+    -Program "%SYSTEMROOT%\System32\lsass.exe" `
+    -Enabled True -Action Allow -Direction Outbound -PolicyStore "$env:COMPUTERNAME"
+
 ################################################
 ##### User services and applications
 ################################################
