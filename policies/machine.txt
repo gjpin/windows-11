@@ -1123,22 +1123,22 @@ SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
 DefaultInboundAction
 DWORD:1
 
-; Set default outbound action (block traffic)
+; Set default outbound action (allow traffic)
 ; https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpfas/bccac98d-1973-49d0-9100-aceb3bf557df
 Computer
 SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
 DefaultOutboundAction
-DWORD:1
+DWORD:0
 
 Computer
 SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile
 DefaultOutboundAction
-DWORD:1
+DWORD:0
 
 Computer
 SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
 DefaultOutboundAction
-DWORD:1
+DWORD:0
 
 ; Disallow globally open ports user preference merge
 ; https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpfas/e032e09e-acce-4989-9dc5-f42a9913ab0e
@@ -1230,13 +1230,13 @@ DWORD:0
 Computer
 SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR
 ExploitGuard_ASR_Rules
-DWORD:2
+DWORD:1
 
 ; Block abuse of exploited vulnerable signed drivers
 Computer
 SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules
 56a863a9-875e-4185-98a7-b882c64b5ce5
-SZ:1
+SZ:0
 
 ; Block untrusted and unsigned processes that run from USB
 Computer
