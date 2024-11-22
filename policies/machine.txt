@@ -985,6 +985,11 @@ SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot
 TurnOffWindowsCopilot
 DWORD:1
 
+Computer
+SOFTWARE\Policies\Microsoft\Windows\Explorer
+DisableSearchBoxSuggestions
+DWORD:1
+
 ; ----------------------------------------------------------------------
 ; Enable virtualization-based protection of code integrity, System Guard Launch and Credential Guard
 ; https://learn.microsoft.com/en-us/windows/security/threat-protection/device-guard/enable-virtualization-based-protection-of-code-integrity
@@ -998,17 +1003,17 @@ SYSTEM\CurrentControlSet\Control\DeviceGuard
 EnableVirtualizationBasedSecurity
 DWORD:1
 
+; Turns on VBS with Secure Boot
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard
+RequirePlatformSecurityFeatures
+DWORD:1
+
 ; Enable VBS with UEFI lock
 Computer
 SYSTEM\CurrentControlSet\Control\DeviceGuard
 Locked
 DWORD:1
-
-; Turns on VBS with Secure Boot and direct memory access (DMA)
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard
-RequirePlatformSecurityFeatures
-DWORD:3
 
 ; Enable virtualization-based protection of Code Integrity policies
 Computer
@@ -1650,3 +1655,26 @@ Computer
 SOFTWARE\Microsoft\PolicyManager\default\Settings\AllowYourAccount
 Value
 DWORD:0
+
+; Disable grouping in Downloads directory
+Computer
+SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderTypes\{885a186e-a440-4ada-812b-db871b942259}\TopViews\{00000000-0000-0000-0000-000000000000}
+GroupBy
+SZ:""
+
+; Disable Recall
+Computer
+SOFTWARE\Microsoft\PolicyManager\default\WindowsAI
+DisableAIDataAnalysis
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableAIDataAnalysis
+DWORD:1
+
+; Enable sudo
+Computer
+SOFTWARE\Policies\Microsoft\Windows\Sudo
+Enabled
+DWORD:1

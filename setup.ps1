@@ -427,6 +427,26 @@ Invoke-WebRequest `
     -OutFile "C:\Program Files\Sunshine\config\sunshine.conf"
 
 ################################################
+##### Disable grouping by date in Downloads directory
+################################################
+
+# References:
+# https://answers.microsoft.com/en-us/windows/forum/all/completely-disable-file-grouping-always-everywhere/ac31a227-f585-4b0a-ab2e-a557828eaec5
+
+$RegExe = "$env:SystemRoot\System32\Reg.exe" 
+$File = "$env:Temp\Temp.reg" 
+$Key = 'HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderTypes\{885a186e-a440-4ada-812b-db871b942259}' 
+& $RegExe Export $Key $File /y 
+$Data = Get-Content $File 
+$Data = $Data -Replace 'HKEY_LOCAL_MACHINE', 'HKEY_CURRENT_USER' 
+$Data = $Data -Replace '"GroupBy"="System.DateModified"', '"GroupBy"=""' 
+$Data | Out-File $File 
+& $RegExe Import $File 
+$Key = 'HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell' 
+& $RegExe Delete "$Key\BagMRU" /f 
+& $RegExe Delete "$Key\Bags" /f
+
+################################################
 ##### Apply local group policies
 ################################################
 
@@ -466,3 +486,6 @@ Invoke-WebRequest `
 # Import settings from policy files
 & "$env:USERPROFILE\lgpo\LGPO.exe" `
     /g "$env:USERPROFILE\lgpo\policies"
+
+# Update computer and user policies
+gpupdate /force
