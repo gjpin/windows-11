@@ -213,7 +213,7 @@ winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id 7zip.7zip
 winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id Spotify.Spotify
-# winget install -e --source winget --id Brave.Brave
+winget install -e --source winget --id Brave.Brave
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
@@ -223,7 +223,7 @@ winget install -e --source winget --id GOG.Galaxy
 # winget install -e --source winget --id PlayStation.PSPlus
 
 # VR
-# winget install -e --source winget --id Meta.Oculus
+winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
 winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
@@ -282,7 +282,8 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
 # Install .NET SDK 8
-# winget install -e --source winget --id Microsoft.DotNet.SDK.8
+winget install -e --source winget --id Microsoft.DotNet.SDK.9
+winget install -e --source winget --id Microsoft.DotNet.Runtime.9
 
 #
 # Trust ASP.NET Core HTTPS certificate
@@ -312,14 +313,14 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
 
 # Install Android Studio
-winget install -e --id Google.AndroidStudio
+# winget install -e --id Google.AndroidStudio
 
 # Add Android platform tools and emulator to path
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
 
 # Install Python's uv
-winget install -e --id astral-sh.uv
+# winget install -e --id astral-sh.uv
 
 # Install miniconda
 # winget install -e --id Anaconda.Miniconda3
@@ -328,8 +329,8 @@ winget install -e --id astral-sh.uv
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\miniconda3\Library\bin", "User")
 
 # Install databases GUIs
-winget install -e --id beekeeper-studio.beekeeper-studio
-winget install -e --id DBBrowserForSQLite.DBBrowserForSQLite
+# winget install -e --id beekeeper-studio.beekeeper-studio
+# winget install -e --id DBBrowserForSQLite.DBBrowserForSQLite
 
 ################################################
 ##### Syncthing (installation + autostart + autoupdate)

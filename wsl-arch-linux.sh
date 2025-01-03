@@ -135,13 +135,13 @@ tee /home/wsl/.zshrc.d/npm << 'EOF'
 export PATH=$HOME/.devtools/npm-global/bin:$PATH
 EOF
 
-# Install Python and create alias for python venv
-pacman -S --noconfirm python
-mkdir -p /home/wsl/.devtools/python
-chown -R wsl:wsl /home/wsl/.devtools/python
-python -m venv /home/wsl/.devtools/python/dev
+# Install Python uv
+pacman -S --noconfirm --needed uv
+
 tee /home/wsl/.zshrc.d/python << 'EOF'
-alias pydev="source ${HOME}/.devtools/python/dev/bin/activate"
+# uv shell autocompletion
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
 EOF
 
 # Install Go
@@ -149,6 +149,7 @@ pacman -S --noconfirm go go-tools gopls
 mkdir -p /home/wsl/.devtools/go
 tee /home/wsl/.zshrc.d/go << 'EOF'
 export GOPATH="$HOME/.devtools/go"
+export PATH="$GOPATH/bin:$PATH"
 EOF
 
 # ssh-agent
