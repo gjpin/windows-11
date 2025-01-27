@@ -14,11 +14,6 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \/C DisplaySwitch 4",
-                    "undo": "cmd \/C DisplaySwitch 1",
-                    "elevated": "false"
-                },
-                {
                     "do": "cmd \/C resolution-manager.exe 1280 800 60",
                     "undo": "",
                     "elevated": "false"
@@ -37,11 +32,6 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \/C DisplaySwitch 4",
-                    "undo": "cmd \/C DisplaySwitch 1",
-                    "elevated": "false"
-                },
-                {
                     "do": "cmd \/C resolution-manager.exe 1920 1080 60",
                     "undo": "",
                     "elevated": "false"
@@ -59,11 +49,6 @@
             "wait-all": "true",
             "exit-timeout": "5",
             "prep-cmd": [
-                {
-                    "do": "cmd \/C DisplaySwitch 4",
-                    "undo": "cmd \/C DisplaySwitch 1",
-                    "elevated": "false"
-                },
                 {
                     "do": "cmd \/C resolution-manager.exe 2560 1440 60",
                     "undo": "",

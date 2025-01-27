@@ -12,6 +12,12 @@
 9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
 10. Enable HDR and Auto HDR (System -> Display -> HDR)
 11. Run Windows HDR Calibration
+12. Create custom resolutions in Adrenalin:
+```
+Settings -> Display -> Create new custom resolution
+2560x1440
+Timing Standard: CVT - Reduced Blanking
+```
 
 ## Debug
 - If winget is failing:
