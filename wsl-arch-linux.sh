@@ -1,3 +1,26 @@
+# 10. Download Arch Linux
+# ```bash
+# # Download from https://github.com/gjpin/windows-11/releases/download/archlinux-2024.09.01/arch_bootstrap.tar.gz
+# # or prepare new root filesystem in a linux env:
+# curl -LO https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst
+# sudo apt install -y zstd
+# sudo su
+# zstd -d archlinux-bootstrap-x86_64.tar.zst
+# tar -xvf archlinux-bootstrap-x86_64.tar
+# tar -zcvf arch_bootstrap.tar.gz -C root.x86_64 .
+# # Move arch_bootstrap.tar.gz to $env:USERPROFILE\Downloads
+# ```
+# 11. Install Arch Linux in WSL
+# ```powershell
+# # Install ArchLinux WSL
+# New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
+# wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux $env:USERPROFILE\Downloads\arch_bootstrap.tar.gz
+# ```
+# 12. Make sure WSL runs ArchLinux with the new user
+#   - Windows Terminal -> Settings -> ArchLinux -> Command line: C:\Windows\system32\wsl.exe -d ArchLinux -u wsl
+# 13. Configure Arch Linux (see wsl-arch-linux.sh)
+# 14. Add SSH private key to ssh-agent: ```ssh-add ~/.ssh/id_ecdsa```
+
 # wsl -d ArchLinux
 
 # Init and populate keyring

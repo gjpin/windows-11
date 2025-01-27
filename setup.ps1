@@ -23,6 +23,9 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 # Install WSL
 wsl --install --no-distribution
 
+# Install AlmaLinux 9 WSL2 distro
+winget install 9P5RWLM70SN9 --accept-source-agreements --accept-package-agreements
+
 ################################################
 ##### Powershell
 ################################################
@@ -201,19 +204,19 @@ Remove-Item -Force "$env:USERPROFILE\OneDrive"
 # Install packages in a non-admin powershell
 
 winget install -e --source winget --id Microsoft.PowerShell
-winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
 winget install -e --source winget --id Microsoft.VCRedist.2013.x64
+winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
 winget install -e --source winget --id Git.Git
 winget install -e --source winget --id GitHub.GitHubDesktop
-winget install -e --source winget --id VideoLAN.VLC
 winget install -e --source winget --id DominikReichl.KeePass
-winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id 7zip.7zip
 winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id Spotify.Spotify
 winget install -e --source winget --id Brave.Brave
+# winget install -e --source winget --id VideoLAN.VLC
+# winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
@@ -225,7 +228,7 @@ winget install -e --source winget --id GOG.Galaxy
 # VR
 winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
-winget install -e --source winget --id SideQuestVR.SideQuest
+# winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
 ################################################
@@ -267,6 +270,7 @@ $credential = Get-Credential -credential "$env:USERNAME"
 $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
+    "& code --install-extension ms-dotnettools.csharp"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -398,7 +402,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRes
 Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 
 # Enable Windows Sandbox 
-Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
+Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online -NoRestart
 
 ################################################
 ##### Sunshine
