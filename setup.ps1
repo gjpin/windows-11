@@ -231,6 +231,9 @@ winget install -e --source winget --id VirtualDesktop.Streamer
 # winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
+# Hardware support
+winget install -e --source winget --id SteelSeries.GG
+
 ################################################
 ##### Firefox
 ################################################

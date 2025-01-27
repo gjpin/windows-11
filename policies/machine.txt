@@ -136,7 +136,7 @@ DWORD:0
 Computer
 SOFTWARE\Policies\Microsoft\Windows Defender\Spynet
 SpynetReporting
-DWORD:0
+DWORD:1
 
 Computer
 SOFTWARE\Policies\Microsoft\Windows Defender\Spynet
