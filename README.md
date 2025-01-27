@@ -10,6 +10,8 @@
 7. Reboot
 8. Connect to WireGuard network
 9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
+10. Enable HDR and Auto HDR (System -> Display -> HDR)
+11. Run Windows HDR Calibration
 
 ## Debug
 - If winget is failing:

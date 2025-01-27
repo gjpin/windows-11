@@ -202,7 +202,6 @@ Remove-Item -Force "$env:USERPROFILE\OneDrive"
 [Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', 'Machine')
 
 # Install packages in a non-admin powershell
-
 winget install -e --source winget --id Microsoft.PowerShell
 winget install -e --source winget --id Microsoft.VCRedist.2013.x64
 winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
@@ -228,11 +227,15 @@ winget install -e --source winget --id GOG.Galaxy
 # VR
 winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
+winget install 9PCNZPD0ZW44 --accept-source-agreements --accept-package-agreements # Mixed Reality Link
 # winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
 # Hardware support
 winget install -e --source winget --id SteelSeries.GG
+
+# Install Windows HDR Calibration
+winget install 9N7F2SM5D1LR --accept-source-agreements --accept-package-agreements
 
 ################################################
 ##### Firefox
