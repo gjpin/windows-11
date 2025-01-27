@@ -1039,6 +1039,17 @@ SYSTEM\CurrentControlSet\Control\Lsa
 LsaCfgFlags
 DWORD:1
 
+; Enable Kernel-mode Hardware-enforced Stack Protection (ShadowStack)
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
+Enabled
+DWORD:1
+
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
+WasEnabledBy
+DWORD:2
+
 ; ----------------------------------------------------------------------
 ; Windows Firewall
 ; ----------------------------------------------------------------------
