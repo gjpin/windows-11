@@ -237,6 +237,10 @@ winget install -e --source winget --id SteelSeries.GG
 # Install Windows HDR Calibration
 winget install 9N7F2SM5D1LR --accept-source-agreements --accept-package-agreements
 
+# Game Dev
+winget install -e --source winget --id Unity.UnityHub
+winget install -e --source winget --id Microsoft.VisualStudio.2022.Community
+
 ################################################
 ##### Firefox
 ################################################
