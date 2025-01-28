@@ -205,8 +205,6 @@ Remove-Item -Force "$env:USERPROFILE\OneDrive"
 winget install -e --source winget --id Microsoft.PowerShell
 winget install -e --source winget --id Microsoft.VCRedist.2013.x64
 winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
-winget install -e --source winget --id Git.Git
-winget install -e --source winget --id GitHub.GitHubDesktop
 winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Discord.Discord
@@ -216,6 +214,11 @@ winget install -e --source winget --id Spotify.Spotify
 winget install -e --source winget --id Brave.Brave
 # winget install -e --source winget --id VideoLAN.VLC
 # winget install -e --source winget --id TheDocumentFoundation.LibreOffice
+
+# Git and Github Desktop
+winget install -e --source winget --id Git.Git
+winget install -e --source winget --id GitHub.GitHubDesktop
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:/Program Files/Git/bin", "Machine")
 
 # Gaming
 winget install -e --source winget --id Valve.Steam
