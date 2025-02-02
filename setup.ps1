@@ -26,6 +26,9 @@ wsl --install --no-distribution
 # Install AlmaLinux 9 WSL2 distro
 winget install 9P5RWLM70SN9 --accept-source-agreements --accept-package-agreements
 
+# # Install Ubuntu 24.04 WSL2 distro
+# winget install -e --source winget --id Canonical.Ubuntu.2404
+
 ################################################
 ##### Powershell
 ################################################
@@ -429,6 +432,11 @@ Invoke-WebRequest `
     -OutFile "$env:USERPROFILE\apps\resolution-manager\resolution-manager.exe"
 
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\apps\resolution-manager", "Machine")
+
+# Helper to toggle HDR
+# Invoke-WebRequest `
+#     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/toggle-hdr.ps1" `
+#     -OutFile "$env:USERPROFILE\scripts\toggle-hdr.ps1"
 
 # Install Sunshine and ViGEmBus
 winget install -e --source winget --id LizardByte.Sunshine

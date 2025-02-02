@@ -1,38 +1,18 @@
-# 10. Download Arch Linux
-# ```bash
-# # Download from https://github.com/gjpin/windows-11/releases/download/archlinux-2024.09.01/arch_bootstrap.tar.gz
-# # or prepare new root filesystem in a linux env:
-# curl -LO https://archive.archlinux.org/iso/2024.09.01/archlinux-bootstrap-x86_64.tar.zst
-# sudo apt install -y zstd
-# sudo su
-# zstd -d archlinux-bootstrap-x86_64.tar.zst
-# tar -xvf archlinux-bootstrap-x86_64.tar
-# tar -zcvf arch_bootstrap.tar.gz -C root.x86_64 .
-# # Move arch_bootstrap.tar.gz to $env:USERPROFILE\Downloads
-# ```
-# 11. Install Arch Linux in WSL
-# ```powershell
-# # Install ArchLinux WSL
-# New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
-# wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux $env:USERPROFILE\Downloads\arch_bootstrap.tar.gz
-# ```
-# 12. Make sure WSL runs ArchLinux with the new user
-#   - Windows Terminal -> Settings -> ArchLinux -> Command line: C:\Windows\system32\wsl.exe -d ArchLinux -u wsl
-# 13. Configure Arch Linux (see wsl-arch-linux.sh)
-# 14. Add SSH private key to ssh-agent: ```ssh-add ~/.ssh/id_ecdsa```
-
-# wsl -d ArchLinux
+# Configure mirrorlist
+tee /etc/pacman.d/mirrorlist << 'EOF'
+Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
+Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
+EOF
 
 # Init and populate keyring
 pacman-key --init
 pacman-key --populate
 
-# Configure mirrorlist
-tee /etc/pacman.d/mirrorlist << 'EOF'
-Server = https://europe.mirror.pkgbuild.com/$repo/os/$arch
-Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
-Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
-EOF
+# Configure Pacman
+sed -i "s|^#Color|Color|g" /etc/pacman.conf
+sed -i "s|^#VerbosePkgLists|VerbosePkgLists|g" /etc/pacman.conf
+sed -i "s|^#ParallelDownloads.*|ParallelDownloads = 5|g" /etc/pacman.conf
+sed -i "/ParallelDownloads = 5/a ILoveCandy" /etc/pacman.conf
 
 # Update packages
 pacman -Syu --noconfirm
@@ -114,8 +94,8 @@ systemd=true
 [user]
 default=wsl
 
-[automount]
-enabled=false
+# [automount]
+# enabled=false
 EOF
 
 # Create SSH directory and config file
@@ -138,7 +118,7 @@ curl https://raw.githubusercontent.com/gjpin/arch-linux/main/configs/zsh/.zshrc 
 curl https://raw.githubusercontent.com/gjpin/arch-linux/main/configs/zsh/.p10k.zsh -o /home/wsl/.p10k.zsh
 
 # Install cloud related packages
-pacman -S --noconfirm kubectl cilium-cli talosctl k9s opentofu
+pacman -S --noconfirm kubectl krew helm k9s kubectx cilium-cli talosctl opentofu
 
 # Set git configurations
 git config --global init.defaultBranch main
@@ -159,7 +139,7 @@ export PATH=$HOME/.devtools/npm-global/bin:$PATH
 EOF
 
 # Install Python uv
-pacman -S --noconfirm --needed uv
+pacman -S --noconfirm uv
 
 tee /home/wsl/.zshrc.d/python << 'EOF'
 # uv shell autocompletion

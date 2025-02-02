@@ -18,11 +18,39 @@ Settings -> Display -> Create new custom resolution
 2560x1440
 Timing Standard: CVT - Reduced Blanking
 ```
+13. Download Arch Linux https://github.com/gjpin/windows-11/releases/download/archlinux-2025.02.01/arch_bootstrap.tar.gz
+14. Install Arch Linux in WSL
+```powershell
+# Install ArchLinux WSL
+New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
+wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux $env:USERPROFILE\Downloads\arch_bootstrap.tar.gz
+```
+15. Make sure WSL runs ArchLinux with the new user
+  - Windows Terminal -> Settings -> ArchLinux -> Command line: C:\Windows\system32\wsl.exe -d ArchLinux -u wsl
+16. Run in Powershell `wsl -d ArchLinux`
+16. Configure Arch Linux (see wsl-arch-linux.sh)
+17. Copy SSH key to /home/wsl/.ssh and set correct permissions. example:
+```bash
+chmod 600 /home/wsl/.ssh/id_ecdsa
+chmod 644 /home/wsl/.ssh/id_ecdsa.pub
+```
+18. Add SSH private key to ssh-agent: ```ssh-add ~/.ssh/id_ecdsa```
 
 ## Debug
 - If winget is failing:
 ```powershell
 Add-AppxPackage -Path https://cdn.winget.microsoft.com/cache/source.msix
+```
+
+## Generate newer Arch Linux images
+```bash
+curl -LO https://archive.archlinux.org/iso/2025.02.01/archlinux-bootstrap-x86_64.tar.zst
+sudo apt install -y zstd
+sudo su
+zstd -d archlinux-bootstrap-x86_64.tar.zst
+tar -xvf archlinux-bootstrap-x86_64.tar
+tar -zcvf arch_bootstrap.tar.gz -C root.x86_64 .
+# Move arch_bootstrap.tar.gz to $env:USERPROFILE\Downloads
 ```
 
 ## Firewall
