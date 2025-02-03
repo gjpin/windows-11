@@ -20,14 +20,11 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 ##### WSL
 ################################################
 
-# Install WSL
-wsl --install --no-distribution
+# Install WSL with Ubuntu 24.04
+wsl --install Ubuntu-24.04
 
 # Install AlmaLinux 9 WSL2 distro
-winget install 9P5RWLM70SN9 --accept-source-agreements --accept-package-agreements
-
-# # Install Ubuntu 24.04 WSL2 distro
-# winget install -e --source winget --id Canonical.Ubuntu.2404
+# winget install 9P5RWLM70SN9 --accept-source-agreements --accept-package-agreements
 
 ################################################
 ##### Powershell
