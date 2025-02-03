@@ -53,3 +53,10 @@ sudo apt update
 
 # Install Docker
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Create docker group
+sudo groupadd docker
+
+# Add user to docker group
+sudo usermod -aG docker $USER
+newgrp docker
