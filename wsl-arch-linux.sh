@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 # Configure mirrorlist
 tee /etc/pacman.d/mirrorlist << 'EOF'
 Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
