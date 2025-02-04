@@ -24,10 +24,18 @@ sudo apt install -y python3-venv
 
 # Install and source nfm
 curl -o- https://fnm.vercel.app/install | bash
-source /home/zero/.bashrc
+source $HOME/.bashrc
 
 # Install latest Node LTS
 fnm install --lts
+
+# Install podman
+# sudo apt install -y podman podman-compose
+# tee -a $HOME/.bashrc << EOF
+
+# # Podman
+# alias docker=podman
+# EOF
 
 ################################################
 ##### Docker
