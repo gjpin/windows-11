@@ -284,6 +284,7 @@ $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
     "& code --install-extension ms-dotnettools.csharp"
+    "& code --install-extension ms-python.black-formatter"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -298,9 +299,15 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # Disable .NET telemetry
 [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
-# Install .NET SDK 8
+# Install .NET SDK
 winget install -e --source winget --id Microsoft.DotNet.SDK.9
 winget install -e --source winget --id Microsoft.DotNet.Runtime.9
+
+# Install Ollama
+winget install -e --source winget --id Ollama.Ollama
+
+# Install Beekeper Studio
+winget install -e --source winget --id beekeeper-studio.beekeeper-studio
 
 #
 # Trust ASP.NET Core HTTPS certificate
