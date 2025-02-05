@@ -163,6 +163,7 @@ $apps = "Microsoft.BingNews", `
     "Microsoft.WindowsMaps", `
     "Microsoft.YourPhone", `
     "MicrosoftTeams", `
+    "Microsoft.Teams", `
     "Microsoft.WindowsFeedbackHub", `
     "MicrosoftCorporationII.QuickAssist", `
     "Microsoft.WindowsCamera", `
