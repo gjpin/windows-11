@@ -309,6 +309,13 @@ winget install -e --source winget --id Ollama.Ollama
 # Install Beekeper Studio
 winget install -e --source winget --id beekeeper-studio.beekeeper-studio
 
+# Install Python and uv
+# Settings -> Apps -> Advanced app settings -> App Execution Aliases -> Disabled python/python3
+winget install -e --source winget --id Python.Python.3.13
+
+winget install -e --id astral-sh.uv
+& "$env:USERPROFILE\AppData\Local\Microsoft\WinGet\Packages\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe\uv.exe" python install 3.13
+
 #
 # Trust ASP.NET Core HTTPS certificate
 # MUST BE DONE IN A NEW SHELL AFTER SDK IS INSTALLED
@@ -342,9 +349,6 @@ winget install -e --source winget --id beekeeper-studio.beekeeper-studio
 # Add Android platform tools and emulator to path
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\platform-tools", "Machine")
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\AppData\Local\Android\Sdk\emulator", "Machine")
-
-# Install Python's uv
-# winget install -e --id astral-sh.uv
 
 # Install miniconda
 # winget install -e --id Anaconda.Miniconda3
