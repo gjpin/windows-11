@@ -193,6 +193,9 @@ foreach ($app in $apps) {
 # Delete OneDrive folder
 Remove-Item -Force "$env:USERPROFILE\OneDrive"
 
+# Uninstall Edge
+winget uninstall Microsoft.Edge
+
 ################################################
 ##### Install applications
 ################################################
