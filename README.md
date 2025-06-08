@@ -1,6 +1,7 @@
 # Windows 11 setup
 
 ## How to:
+0. Install Windows in unattended mode - see [unattend-generator](https://schneegans.de/windows/unattend-generator/). Upload autounattend.xml as a basis and modify settings according to your needs
 1. Update system
 2. Reboot
 3. Apply setup.ps1
