@@ -967,10 +967,10 @@ MpCloudBlockLevel
 DWORD:2
 
 ; Disables Windows Game Recording and Broadcasting
-Computer
-SOFTWARE\Policies\Microsoft\Windows\GameDVR
-AllowGameDVR
-DWORD:0
+; Computer
+; SOFTWARE\Policies\Microsoft\Windows\GameDVR
+; AllowGameDVR
+; DWORD:0
 
 ; Disables SmartScreen automatic data collection
 ; https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-webthreatdefense#automaticdatacollection
@@ -1003,11 +1003,11 @@ SYSTEM\CurrentControlSet\Control\DeviceGuard
 EnableVirtualizationBasedSecurity
 DWORD:1
 
-; Turns on VBS with Secure Boot
+; Turns on VBS with Secure Boot and DMA protection
 Computer
 SYSTEM\CurrentControlSet\Control\DeviceGuard
 RequirePlatformSecurityFeatures
-DWORD:1
+DWORD:3
 
 ; Enable VBS with UEFI lock
 Computer
