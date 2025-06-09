@@ -46,7 +46,7 @@ Add-AppxPackage -Path https://cdn.winget.microsoft.com/cache/source.msix
 
 ## Generate newer Arch Linux images
 ```bash
-curl -LO https://archive.archlinux.org/iso/2025.02.01/archlinux-bootstrap-x86_64.tar.zst
+curl -LO https://archive.archlinux.org/iso/2025.06.01/archlinux-bootstrap-x86_64.tar.zst
 sudo apt install -y zstd
 sudo su
 zstd -d archlinux-bootstrap-x86_64.tar.zst
