@@ -2,8 +2,8 @@
 
 # Configure mirrorlist
 tee /etc/pacman.d/mirrorlist << 'EOF'
-Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
 Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch
+Server = https://geo.mirror.pkgbuild.com/$repo/os/$arch
 EOF
 
 # Init and populate keyring
@@ -76,14 +76,36 @@ pacman -S --noconfirm \
     net-tools \
     bind
 
-# Install ZSH and dependencies
-pacman -S --noconfirm zsh
+# Create local bin directory
+mkdir -p /home/wsl/.local/bin
+
+# Install bash
+pacman -S --noconfirm bash
+
+# Create bash configs directory
+mkdir -p /home/wsl/.bashrc.d
+
+# Configure bash
+tee -a /home/wsl/.bashrc << 'EOF'
+
+# Add .local.bin to path
+PATH=$PATH:/home/wsl/.local/bin
+
+# Source .bashrc.d files
+if [ -d ~/.bashrc.d ]; then
+        for rc in ~/.bashrc.d/*; do
+                if [ -f "$rc" ]; then
+                        . "$rc"
+                fi
+        done
+fi
+EOF
 
 # Change root password
 passwd
 
 # Setup user
-useradd -m -G wheel -s /usr/bin/zsh wsl
+useradd -m -G wheel -s /usr/bin/bash wsl
 passwd wsl
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
@@ -102,22 +124,19 @@ EOF
 
 # Create SSH directory and config file
 mkdir -p /home/wsl/.ssh
-
 chown 700 /home/wsl/.ssh
-
 tee /home/wsl/.ssh/config << EOF
 Host *
     ServerAliveInterval 60
 EOF
 
-# Create zsh configs directory
-mkdir -p /home/wsl/.zshrc.d
-
-# Configure ZSH
-curl https://raw.githubusercontent.com/gjpin/arch-linux/main/configs/zsh/.zshrc -o /home/wsl/.zshrc
-
-# Configure powerlevel10k zsh theme
-curl https://raw.githubusercontent.com/gjpin/arch-linux/main/configs/zsh/.p10k.zsh -o /home/wsl/.p10k.zsh
+# Install oh-my-posh
+curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /home/wsl/.local/bin
+mkdir -p /etc/oh-my-posh/themes
+curl https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/powerlevel10k_lean.omp.json -o /etc/oh-my-posh/themes/powerlevel10k_lean.omp.json
+tee /home/wsl/.bashrc.d/oh-my-posh << 'EOF'
+eval "$(oh-my-posh init bash --config /etc/oh-my-posh/themes/powerlevel10k_lean.omp.json)"
+EOF
 
 # Install cloud related packages
 pacman -S --noconfirm kubectl krew helm k9s kubectx cilium-cli talosctl opentofu
@@ -136,14 +155,14 @@ pacman -S --noconfirm nodejs npm deno
 mkdir /home/wsl/.devtools/npm-global
 chown -R wsl:wsl /home/wsl/.devtools/npm-global
 npm config set prefix "/home/wsl/.devtools/npm-global"
-tee /home/wsl/.zshrc.d/npm << 'EOF'
+tee /home/wsl/.bashrc.d/npm << 'EOF'
 export PATH=$HOME/.devtools/npm-global/bin:$PATH
 EOF
 
 # Install Python uv
 pacman -S --noconfirm uv
 
-tee /home/wsl/.zshrc.d/python << 'EOF'
+tee /home/wsl/.bashrc.d/python << 'EOF'
 # uv shell autocompletion
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
@@ -152,14 +171,14 @@ EOF
 # Install Go
 pacman -S --noconfirm go go-tools gopls
 mkdir -p /home/wsl/.devtools/go
-tee /home/wsl/.zshrc.d/go << 'EOF'
+tee /home/wsl/.bashrc.d/go << 'EOF'
 export GOPATH="$HOME/.devtools/go"
 export PATH="$GOPATH/bin:$PATH"
 EOF
 
 # ssh-agent
 # https://wiki.archlinux.org/title/SSH_keys#SSH_agents
-tee /home/wsl/.zshrc.d/python << 'EOF'
+tee /home/wsl/.bashrc.d/python << 'EOF'
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
