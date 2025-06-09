@@ -738,34 +738,34 @@ SOFTWARE\Policies\Microsoft\Edge\Recommended
 ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled
 DWORD:1
 
-Computer
-SOFTWARE\Policies\Microsoft\Edge\ExtensionSettings
-ExtensionSettings
-SZ:{"update_url:https://clients2.google.com/service/update2/crx":{"installation_mode":"allowed"}}
+; Computer
+; SOFTWARE\Policies\Microsoft\Edge\ExtensionSettings
+; ExtensionSettings
+; SZ:{"update_url:https://clients2.google.com/service/update2/crx":{"installation_mode":"allowed"}}
 
 ; uBlock Origin extension
-Computer
-SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm
-update_url
-SZ:https://clients2.google.com/service/update2/crx
+; Computer
+; SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\cjpalhdlnbpafiamejdnhcphjbkeiagm
+; update_url
+; SZ:https://clients2.google.com/service/update2/crx
 
 ; Bitwarden extension
-Computer
-SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\nngceckbapebfimnlniiiahkandclblb
-update_url
-SZ:https://clients2.google.com/service/update2/crx
+; Computer
+; SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\nngceckbapebfimnlniiiahkandclblb
+; update_url
+; SZ:https://clients2.google.com/service/update2/crx
 
 ; Floccus extension
-Computer
-SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\fnaicdffflnofjppbagibeoednhnbjhg
-update_url
-SZ:https://clients2.google.com/service/update2/crx
+; Computer
+; SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\fnaicdffflnofjppbagibeoednhnbjhg
+; update_url
+; SZ:https://clients2.google.com/service/update2/crx
 
 ; Empty New Tab Page extension
-Computer
-SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\dpjamkmjmigaoobjbekmfgabipmfilij
-update_url
-SZ:https://clients2.google.com/service/update2/crx
+; Computer
+; SOFTWARE\WOW6432Node\Microsoft\Edge\Extensions\dpjamkmjmigaoobjbekmfgabipmfilij
+; update_url
+; SZ:https://clients2.google.com/service/update2/crx
 
 Computer
 SOFTWARE\Policies\Microsoft\Edge

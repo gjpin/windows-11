@@ -15,16 +15,12 @@
 	"workbench.enableExperiments": false,
 	"extensions.ignoreRecommendations": true,
 	"telemetry.telemetryLevel": "off",
+	"telemetry.feedback.enabled": false,
 	"update.showReleaseNotes": false,
 	"workbench.welcomePage.walkthroughs.openOnInstall": false,
 	"workbench.colorCustomizations": {
 		"[Default Dark Modern]": {
 			"editor.background": "#181818"
 		}
-	},
-	"chat.commandCenter.enabled": false,
-	"[python]": {
-		"editor.defaultFormatter": "ms-python.black-formatter",
-		"editor.formatOnSave": true
 	}
 }

@@ -35,7 +35,7 @@ wsl --install Ubuntu-24.04
 # https://learn.microsoft.com/en-us/windows/terminal/tutorials/custom-prompt-setup
 
 # Change powershell execution policy to RemoteSigned
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy -ExecutionPolicy 'RemoteSigned'
 
 # Create powershell profile files
 New-Item -type file -path $profile -force
@@ -232,9 +232,9 @@ winget install -e --source winget --id GOG.Galaxy
 # winget install -e --source winget --id PlayStation.PSPlus
 
 # VR
-winget install -e --source winget --id Meta.Oculus
 winget install -e --source winget --id VirtualDesktop.Streamer
-winget install 9PCNZPD0ZW44 --accept-source-agreements --accept-package-agreements # Mixed Reality Link
+# winget install -e --source winget --id Meta.Oculus
+# winget install 9PCNZPD0ZW44 --accept-source-agreements --accept-package-agreements # Mixed Reality Link
 # winget install -e --source winget --id SideQuestVR.SideQuest
 # Download ADB drivers: https://developer.oculus.com/downloads/package/oculus-adb-drivers/
 
@@ -288,7 +288,6 @@ $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
     "& code --install-extension ms-dotnettools.csharp"
-    "& code --install-extension ms-python.black-formatter"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -308,17 +307,16 @@ winget install -e --source winget --id Microsoft.DotNet.SDK.9
 winget install -e --source winget --id Microsoft.DotNet.Runtime.9
 
 # Install Ollama
-winget install -e --source winget --id Ollama.Ollama
+# winget install -e --source winget --id Ollama.Ollama
 
 # Install Beekeper Studio
-winget install -e --source winget --id beekeeper-studio.beekeeper-studio
+# winget install -e --source winget --id beekeeper-studio.beekeeper-studio
 
 # Install Python and uv
 # Settings -> Apps -> Advanced app settings -> App Execution Aliases -> Disabled python/python3
-winget install -e --source winget --id Python.Python.3.13
-
-winget install -e --id astral-sh.uv
-& "$env:USERPROFILE\AppData\Local\Microsoft\WinGet\Packages\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe\uv.exe" python install 3.13
+# winget install -e --source winget --id Python.Python.3.13
+# winget install -e --id astral-sh.uv
+# & "$env:USERPROFILE\AppData\Local\Microsoft\WinGet\Packages\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe\uv.exe" python install 3.13
 
 #
 # Trust ASP.NET Core HTTPS certificate
