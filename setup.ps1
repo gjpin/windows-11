@@ -451,7 +451,7 @@ Invoke-WebRequest `
 #     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/toggle-hdr.ps1" `
 #     -OutFile "$env:USERPROFILE\scripts\toggle-hdr.ps1"
 
-# Install Sunshine and ViGEmBus
+# Install Sunshine
 winget install -e --source winget --id LizardByte.Sunshine
 
 # Import Sunshine configurations
