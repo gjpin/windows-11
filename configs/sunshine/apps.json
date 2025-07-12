@@ -15,7 +15,7 @@
             "prep-cmd": [
                 {
                     "do": "cmd \/C resolution-manager.exe 1280 800 60",
-                    "undo": "",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -33,7 +33,7 @@
             "prep-cmd": [
                 {
                     "do": "cmd \/C resolution-manager.exe 1920 1080 60",
-                    "undo": "",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
@@ -51,7 +51,7 @@
             "prep-cmd": [
                 {
                     "do": "cmd \/C resolution-manager.exe 2560 1440 60",
-                    "undo": "",
+                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
                     "elevated": "false"
                 }
             ],
