@@ -6,36 +6,35 @@
 2. Reboot
 3. Apply setup.ps1
 4. Apply firewall-rules.ps1
-5. Change start menu folders: Settings -> Personalization -> Start -> Folders -> Settings / File Explorer
-6. Set home network as Private
-7. Reboot
-8. Connect to WireGuard network
-9. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
-10. Enable HDR and Auto HDR (System -> Display -> HDR)
-11. Run Windows HDR Calibration
-12. Create custom resolutions in Adrenalin:
+5. Set home network as Private
+6. Reboot
+7. Connect to WireGuard network
+8. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
+9. Enable HDR and Auto HDR (System -> Display -> HDR)
+10. Run Windows HDR Calibration
+11. Create custom resolutions in Adrenalin:
 ```
 Settings -> Display -> Create new custom resolution
 2560x1440
 Timing Standard: CVT - Reduced Blanking
 ```
-13. Download Arch Linux https://github.com/gjpin/windows-11/releases/download/archlinux-2025.02.01/arch_bootstrap.tar.gz
-14. Install Arch Linux in WSL
+12. Download Arch Linux https://github.com/gjpin/windows-11/releases/download/archlinux-2025.02.01/arch_bootstrap.tar.gz
+13. Install Arch Linux in WSL
 ```powershell
 # Install ArchLinux WSL
 New-Item -Path $env:USERPROFILE\WSL\ArchLinux -ItemType directory
 wsl --import ArchLinux $env:USERPROFILE\WSL\ArchLinux $env:USERPROFILE\Downloads\arch_bootstrap.tar.gz
 ```
-15. Make sure WSL runs ArchLinux with the new user
+14. Make sure WSL runs ArchLinux with the new user
   - Windows Terminal -> Settings -> ArchLinux -> Command line: C:\Windows\system32\wsl.exe -d ArchLinux -u wsl
-16. Run in Powershell `wsl -d ArchLinux`
-17. Configure Arch Linux (see wsl-arch-linux.sh)
-18. Copy SSH key to /home/wsl/.ssh and set correct permissions. example:
+15. Run in Powershell `wsl -d ArchLinux`
+16. Configure Arch Linux (see wsl-arch-linux.sh)
+17. Copy SSH key to /home/wsl/.ssh and set correct permissions. example:
 ```bash
 chmod 600 /home/wsl/.ssh/id_ecdsa
 chmod 644 /home/wsl/.ssh/id_ecdsa.pub
 ```
-19. Add SSH private key to ssh-agent: `ssh-add ~/.ssh/id_ecdsa`
+18. Add SSH private key to ssh-agent: `ssh-add ~/.ssh/id_ecdsa`
 
 ## Debug
 - If winget is failing:

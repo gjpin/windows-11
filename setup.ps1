@@ -197,7 +197,7 @@ foreach ($app in $apps) {
 Remove-Item -Force "$env:USERPROFILE\OneDrive"
 
 # Uninstall Edge
-winget uninstall Microsoft.Edge
+# winget uninstall Microsoft.Edge
 
 ################################################
 ##### Install applications
@@ -305,9 +305,9 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # Disable .NET telemetry
 [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
-# Install .NET SDK
-winget install -e --source winget --id Microsoft.DotNet.SDK.9
-winget install -e --source winget --id Microsoft.DotNet.Runtime.9
+# Install .NET SDK (LTS)
+winget install -e --source winget --id Microsoft.DotNet.SDK.8
+winget install -e --source winget --id Microsoft.DotNet.Runtime.8
 
 # Install Ollama
 # winget install -e --source winget --id Ollama.Ollama
@@ -369,51 +369,16 @@ winget install -e --source winget --id Microsoft.DotNet.Runtime.9
 ##### Syncthing (installation + autostart + autoupdate)
 ################################################
 
-# Download latest syncthing version
-# https://copdips.com/2019/12/Using-Powershell-to-retrieve-latest-package-url-from-github-releases.html
-$url = 'https://github.com/syncthing/syncthing/releases/latest'
-$request = [System.Net.WebRequest]::Create($url)
-$response = $request.GetResponse()
-$realTagUrl = $response.ResponseUri.OriginalString
-$response.Dispose()
-$version = $realTagUrl.split('/')[-1].Trim('v')
-$filename = "syncthing-windows-amd64-v$version.zip"
-$downloadUrl = $realTagUrl.Replace('tag', 'download') + '/' + $filename
-Invoke-WebRequest `
-    -Uri "$downloadUrl" `
-    -OutFile "$env:USERPROFILE\apps\$filename"
-
-# Extract zip
-Expand-Archive `
-    -LiteralPath "$env:USERPROFILE\apps\$filename" `
-    -DestinationPath "$env:USERPROFILE\apps"
-
-# Remove syncthing zip
-Remove-Item "$env:USERPROFILE\apps\$filename"
-
-# Rename syncthing folder
-Get-ChildItem "$env:USERPROFILE\apps\syncthing-windows-amd64-v*" | Rename-Item -NewName "syncthing"
+# Install Syncthing
+winget install -e --id Syncthing.Syncthing
 
 # Autostart syncthing
-$action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Argument "--no-console --no-browser"
-$trigger = New-ScheduledTaskTrigger -AtLogon -User "$env:USERNAME"
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -ExecutionTimeLimit 0
-$principal = New-ScheduledTaskPrincipal -UserID "$env:USERNAME" -LogonType S4U
-$task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
-Register-ScheduledTask -TaskName "Syncthing" -InputObject $task
-
-# Download autoupdater script
-Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/syncthing-autoupdater.ps1" `
-    -OutFile "$env:USERPROFILE\scripts\syncthing-autoupdater.ps1"
-
-# Add autoupdater to task scheduler
-$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-executionpolicy bypass -file $env:USERPROFILE\scripts\syncthing-autoupdater.ps1"
-$trigger = New-ScheduledTaskTrigger -AtLogon -User "$env:USERNAME"
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -ExecutionTimeLimit (New-TimeSpan -Hours 1)
-$principal = New-ScheduledTaskPrincipal -UserID "$env:USERNAME" -LogonType S4U
-$task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
-Register-ScheduledTask -TaskName "Syncthing autoupdater" -InputObject $task
+# $action = New-ScheduledTaskAction -Execute "$env:USERPROFILE\apps\syncthing\syncthing.exe" -Argument "--no-console --no-browser"
+# $trigger = New-ScheduledTaskTrigger -AtLogon -User "$env:USERNAME"
+# $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -ExecutionTimeLimit 0
+# $principal = New-ScheduledTaskPrincipal -UserID "$env:USERNAME" -LogonType S4U
+# $task = New-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -Principal $principal
+# Register-ScheduledTask -TaskName "Syncthing" -InputObject $task
 
 ################################################
 ##### Virtualization
@@ -431,7 +396,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRes
 Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 
 # Enable Windows Sandbox 
-Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online -NoRestart
+# Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online -NoRestart
 
 ################################################
 ##### Sunshine

@@ -15,7 +15,7 @@
             "prep-cmd": [
                 {
                     "do": "cmd \/C resolution-manager.exe 1280 800 60",
-                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
+                    "undo": "cmd \/C resolution-manager.exe 3840 2160 60",
                     "elevated": "false"
                 }
             ],
@@ -33,7 +33,7 @@
             "prep-cmd": [
                 {
                     "do": "cmd \/C resolution-manager.exe 1920 1080 60",
-                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
+                    "undo": "cmd \/C resolution-manager.exe 3840 2160 60",
                     "elevated": "false"
                 }
             ],
@@ -51,7 +51,25 @@
             "prep-cmd": [
                 {
                     "do": "cmd \/C resolution-manager.exe 2560 1440 60",
-                    "undo": "cmd \/C resolution-manager.exe 3440 1440 144",
+                    "undo": "cmd \/C resolution-manager.exe 3840 2160 60",
+                    "elevated": "false"
+                }
+            ],
+            "image-path": ""
+        },
+        {
+            "name": "Desktop 2160p",
+            "output": "",
+            "cmd": "",
+            "exclude-global-prep-cmd": "false",
+            "elevated": "false",
+            "auto-detach": "true",
+            "wait-all": "true",
+            "exit-timeout": "5",
+            "prep-cmd": [
+                {
+                    "do": "cmd \/C resolution-manager.exe 2560 1440 60",
+                    "undo": "cmd \/C resolution-manager.exe 3840 2160 60",
                     "elevated": "false"
                 }
             ],
