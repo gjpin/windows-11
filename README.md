@@ -47,7 +47,13 @@ powercfg /deviceenablewake "device name"
 # https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/turn-on-automatic-logon
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d "username" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "password" /
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "password" /f
+
+# Don't require password after sleep
+# Settings -> Accounts -> Sign-in options -> If you've been away, when should Windows require you to sign in again? -> Never
+
+# Disable Xbox Game Bar
+# Settings -> Gaming -> Game Bar -> Alloy your controller to open Game Bar -> Off
 ```
 
 ## Debug
