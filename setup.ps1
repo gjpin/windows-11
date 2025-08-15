@@ -403,7 +403,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 ################################################
 
 # Helper to set resolution/frequency/HDR
-Install-Module -Name WindowsDisplayManager -RequiredVersion 1.1.1
+Install-Module -Name WindowsDisplayManager -RequiredVersion 1.1.1 -Scope AllUsers
 
 # Install Sunshine
 winget install -e --source winget --id LizardByte.Sunshine
