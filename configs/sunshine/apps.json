@@ -32,8 +32,8 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \/C resolution-manager.exe 1920 1080 60",
-                    "undo": "cmd \/C resolution-manager.exe 3840 2160 60",
+                    "do": "cmd \\/C powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(1920,1080,60) -and $p.DisableHdr(); Write-Host ('Update Successful?: ' + $ok); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "undo": "cmd \\/C powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.EnableHdr(); Write-Host ('Update Successful?: ' + $ok); if ($ok) { exit 0 } else { exit 1 } }\"",
                     "elevated": "false"
                 }
             ],

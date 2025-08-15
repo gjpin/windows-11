@@ -402,19 +402,8 @@ Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 ##### Sunshine
 ################################################
 
-# Helper executable to set resolution/frequency
-New-Item -Path $env:USERPROFILE\apps\resolution-manager -ItemType directory
-
-Invoke-WebRequest `
-    -Uri "https://github.com/gjpin/resolution-manager/releases/download/v1.0.0/resolution-manager.exe" `
-    -OutFile "$env:USERPROFILE\apps\resolution-manager\resolution-manager.exe"
-
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$env:USERPROFILE\apps\resolution-manager", "Machine")
-
-# Helper to toggle HDR
-# Invoke-WebRequest `
-#     -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/toggle-hdr.ps1" `
-#     -OutFile "$env:USERPROFILE\scripts\toggle-hdr.ps1"
+# Helper to set resolution/frequency/HDR
+Install-Module -Name WindowsDisplayManager -RequiredVersion 1.1.1
 
 # Install Sunshine
 winget install -e --source winget --id LizardByte.Sunshine
