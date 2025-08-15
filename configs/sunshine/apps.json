@@ -32,9 +32,9 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \\/C powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(1920,1080,60) -and $p.DisableHdr(); Write-Host ('Update Successful?: ' + $ok); if ($ok) { exit 0 } else { exit 1 } }\"",
-                    "undo": "cmd \\/C powershell -NoProfile -ExecutionPolicy Bypass -Command \"& { $Log='C:\\Windows\\Temp\\sunshine_undo_log.txt'; '--- Start: ' + (Get-Date) | Out-File $Log -Append; $imported=$false; try { $m = Get-Module -ListAvailable -Name WindowsDisplayManager -ErrorAction SilentlyContinue; if ($m) { 'Found module at: ' + $m[0].ModuleBase | Out-File $Log -Append; Import-Module WindowsDisplayManager -Force -ErrorAction Stop; $imported=$true } else { 'Module not in PSModulePath' | Out-File $Log -Append; $paths=@('C:\\Program Files\\WindowsDisplayManager','C:\\Program Files (x86)\\WindowsDisplayManager'); foreach ($p in $paths) { $d = Join-Path $p 'WindowsDisplayManager.psd1'; if (Test-Path $d) { 'Importing ' + $d | Out-File $Log -Append; Import-Module $d -Force -ErrorAction Stop; $imported=$true; break } } } if (-not $imported) { 'Trying to load DLL fallback' | Out-File $Log -Append; $dll='C:\\Program Files\\WindowsDisplayManager\\WindowsDisplayManager.dll'; if (Test-Path $dll) { [Reflection.Assembly]::LoadFile($dll) | Out-Null; $imported=$true; 'Loaded ' + $dll | Out-File $Log -Append } } if (-not $imported) { 'IMPORT FAILED' | Out-File $Log -Append; exit 1 } $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.EnableHdr(); 'Update Successful?: ' + $ok | Out-File $Log -Append; if ($ok) { exit 0 } else { exit 1 } } catch { $_ | Out-File $Log -Append; exit 1 } }\"",
-                    "elevated": "false"
+                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(1920,1080,60) -and $p.DisableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.EnableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "elevated": "true"
                 }
             ],
             "image-path": ""
