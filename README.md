@@ -36,6 +36,20 @@ chmod 644 /home/wsl/.ssh/id_ecdsa.pub
 ```
 18. Add SSH private key to ssh-agent: `ssh-add ~/.ssh/id_ecdsa`
 
+
+## Console-like features
+```powershell
+# Wake PC with controller
+powercfg /devicequery wake_programmable
+powercfg /deviceenablewake "device name"
+
+# Autologin
+# https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/turn-on-automatic-logon
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultUserName /t REG_SZ /d "username" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v DefaultPassword /t REG_SZ /d "password" /
+```
+
 ## Debug
 - If winget is failing:
 ```powershell
