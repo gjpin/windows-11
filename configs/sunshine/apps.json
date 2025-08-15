@@ -14,8 +14,8 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(1280,800,60) -and $p.DisableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
-                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.EnableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(1280,800,60); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60); if ($ok) { exit 0 } else { exit 1 } }\"",
                     "elevated": "false"
                 }
             ],
@@ -32,8 +32,8 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(1920,1080,60) -and $p.DisableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
-                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.EnableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(1920,1080,60); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60); if ($ok) { exit 0 } else { exit 1 } }\"",
                     "elevated": "false"
                 }
             ],
@@ -50,8 +50,8 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(2560,1440,60) -and $p.DisableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
-                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.EnableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(2560,1440,60); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60); if ($ok) { exit 0 } else { exit 1 } }\"",
                     "elevated": "false"
                 }
             ],
@@ -68,8 +68,8 @@
             "exit-timeout": "5",
             "prep-cmd": [
                 {
-                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.DisableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
-                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60) -and $p.EnableHdr(); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "do": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60); if ($ok) { exit 0 } else { exit 1 } }\"",
+                    "undo": "cmd \\/C powershell.exe -ExecutionPolicy Bypass -Command \"& { Import-Module WindowsDisplayManager; $p = WindowsDisplayManager\\GetPrimaryDisplay; $ok = $p.SetResolution(3840,2160,60); if ($ok) { exit 0 } else { exit 1 } }\"",
                     "elevated": "false"
                 }
             ],
