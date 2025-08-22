@@ -236,6 +236,7 @@ winget install -e --source winget --id GOG.Galaxy
 
 # VR
 winget install -e --source winget --id VirtualDesktop.Streamer
+winget install -e --source winget --id Zagrios.BSManager
 # winget install -e --source winget --id Meta.Oculus
 # winget install 9PCNZPD0ZW44 --accept-source-agreements --accept-package-agreements # Mixed Reality Link
 # winget install -e --source winget --id SideQuestVR.SideQuest
