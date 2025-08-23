@@ -309,6 +309,7 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # Install .NET SDK (LTS)
 winget install -e --source winget --id Microsoft.DotNet.SDK.8
 winget install -e --source winget --id Microsoft.DotNet.Runtime.8
+winget install -e --source winget --id Microsoft.DotNet.DesktopRuntime.8
 
 # Install Ollama
 # winget install -e --source winget --id Ollama.Ollama
