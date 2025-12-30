@@ -13,6 +13,7 @@
 8. Set WireGuard network as Private: ```Set-NetConnectionProfile -InterfaceAlias 'wg0' -NetworkCategory 'Private'```
 9. Enable HDR and Auto HDR (System -> Display -> HDR)
 10. Run Windows HDR Calibration
+11. Confirm memory integrity and VBS are enabled: [LINK](https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-hvci-enablement)
 
 ## Console-like features
 ```powershell

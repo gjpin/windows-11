@@ -979,12 +979,6 @@ SOFTWARE\Policies\Microsoft\Windows\WTDS\Components
 CaptureThreatWindow
 DWORD:0
 
-; Disables Windows Copilot
-Computer
-SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot
-TurnOffWindowsCopilot
-DWORD:1
-
 Computer
 SOFTWARE\Policies\Microsoft\Windows\Explorer
 DisableSearchBoxSuggestions
@@ -992,63 +986,64 @@ DWORD:1
 
 ; ----------------------------------------------------------------------
 ; Enable virtualization-based protection of code integrity, System Guard Launch and Credential Guard
+; https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-hvci-enablement
 ; https://learn.microsoft.com/en-us/windows/security/threat-protection/device-guard/enable-virtualization-based-protection-of-code-integrity
 ; https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-system-guard/system-guard-secure-launch-and-smm-protection
 ; https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/credential-guard-manage
 ; ----------------------------------------------------------------------
 
 ; Enable VBS
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard
-EnableVirtualizationBasedSecurity
-DWORD:1
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard
+; EnableVirtualizationBasedSecurity
+; DWORD:1
 
 ; Turns on VBS with Secure Boot and DMA protection
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard
-RequirePlatformSecurityFeatures
-DWORD:3
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard
+; RequirePlatformSecurityFeatures
+; DWORD:3
 
 ; Enable VBS with UEFI lock
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard
-Locked
-DWORD:1
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard
+; Locked
+; DWORD:1
 
 ; Enable virtualization-based protection of Code Integrity policies
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
-Enabled
-DWORD:1
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
+; Enabled
+; DWORD:1
 
 ; Enable virtualization-based protection of Code Integrity policies with UEFI lock
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
-Locked
-DWORD:1
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
+; Locked
+; DWORD:1
 
 ; Enable System Guard Secure Launch
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\SystemGuard
-Enabled
-DWORD:1
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\SystemGuard
+; Enabled
+; DWORD:1
 
 ; Enable Windows Defender Credential Guard
-Computer
-SYSTEM\CurrentControlSet\Control\Lsa
-LsaCfgFlags
-DWORD:1
+; Computer
+; SYSTEM\CurrentControlSet\Control\Lsa
+; LsaCfgFlags
+; DWORD:1
 
 ; Enable Kernel-mode Hardware-enforced Stack Protection (ShadowStack)
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
-Enabled
-DWORD:1
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
+; Enabled
+; DWORD:1
 
-Computer
-SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
-WasEnabledBy
-DWORD:2
+; Computer
+; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
+; WasEnabledBy
+; DWORD:2
 
 ; ----------------------------------------------------------------------
 ; Windows Firewall
@@ -1485,6 +1480,66 @@ Value
 DWORD:0
 
 ; ----------------------------------------------------------------------
+; Disable WindowsAI
+; https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai
+; ----------------------------------------------------------------------
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+AllowRecallEnablement
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+AllowRecallExport
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableAIDataAnalysis
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableClickToDo
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableCocreator
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableGenerativeFill
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableImageCreator
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableRecallDataProviders
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+DisableSettingsAgent
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+SetDataLossPreventionProvider
+DWORD:1
+
+Computer
+SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot
+TurnOffWindowsCopilot
+DWORD:1
+
+; ----------------------------------------------------------------------
 ; Misc
 ; ----------------------------------------------------------------------
 
@@ -1672,17 +1727,6 @@ Computer
 SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderTypes\{885a186e-a440-4ada-812b-db871b942259}\TopViews\{00000000-0000-0000-0000-000000000000}
 GroupBy
 SZ:""
-
-; Disable Recall
-Computer
-SOFTWARE\Microsoft\PolicyManager\default\WindowsAI
-DisableAIDataAnalysis
-DWORD:1
-
-Computer
-SOFTWARE\Policies\Microsoft\Windows\WindowsAI
-DisableAIDataAnalysis
-DWORD:1
 
 ; Enable sudo
 Computer
