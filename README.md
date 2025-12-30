@@ -2,6 +2,7 @@
 
 ## How to:
 0. Install Windows in unattended mode - see [unattend-generator](https://schneegans.de/windows/unattend-generator/). Upload autounattend.xml as a basis and modify settings according to your needs
+   - At least "mycomputer, VK7JG-NPHTM-C97JM-9MPGT-3V66T, myuser, mypassword" and the location/region
 1. Update system
 2. Reboot
 3. Apply setup.ps1

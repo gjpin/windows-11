@@ -38,7 +38,7 @@ wsl --install --no-distribution
 # https://learn.microsoft.com/en-us/windows/terminal/tutorials/custom-prompt-setup
 
 # Change powershell execution policy to RemoteSigned
-Set-ExecutionPolicy -ExecutionPolicy 'RemoteSigned'
+# Set-ExecutionPolicy -ExecutionPolicy 'RemoteSigned'
 
 # Create powershell profile files
 New-Item -type file -path $profile -force
