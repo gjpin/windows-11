@@ -23,6 +23,9 @@ auditpol /set /category:"Object Access" /success:disable /failure:enable
 # Install WSL without distro
 wsl --install --no-distribution
 
+# Install Arch Linux in WSL
+wsl --install archlinux
+
 # Install WSL with Ubuntu 24.04
 # wsl --install Ubuntu-24.04
 
@@ -37,26 +40,13 @@ wsl --install --no-distribution
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.4
 # https://learn.microsoft.com/en-us/windows/terminal/tutorials/custom-prompt-setup
 
-# Change powershell execution policy to RemoteSigned
+# Change powershell execution policy to RemoteSigned (already done by autounattend install)
 # Set-ExecutionPolicy -ExecutionPolicy 'RemoteSigned'
 
 # Create powershell profile files
 New-Item -type file -path $profile -force
 powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-
 New-Item -type file -path "$env:USERPROFILE\Documents\PowerShell\Profile.ps1" -force
-
-# Add function for firewall events
-Add-Content -Path $profile -Value "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
-Add-Content -Path "$env:USERPROFILE\Documents\PowerShell\Profile.ps1" -Value "function Get-FwEvents { Get-WinEvent -FilterHashtable @{LogName = 'Security' } -MaxEvents 50 | Where-Object -Property Message -Match `"Outbound:*`" | Select-Object -Unique -ExpandProperty Message }"
-
-# Add function to autoupdate firewall rules
-Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/scripts/update-firewall-rules.ps1" `
-    -OutFile "$env:USERPROFILE\scripts\update-firewall-rules.ps1"
-
-Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content $profile
-Get-Content "$env:USERPROFILE\scripts\update-firewall-rules.ps1" | Add-Content "$env:USERPROFILE\Documents\PowerShell\Profile.ps1"
 
 # Install in a non-admin powershell
 winget install -e --source winget --id JanDeDobbeleer.OhMyPosh
@@ -212,13 +202,13 @@ Remove-Item -Force "$env:USERPROFILE\OneDrive"
 winget install -e --source winget --id Microsoft.PowerShell
 winget install -e --source winget --id Microsoft.VCRedist.2013.x64
 winget install -e --source winget --id Microsoft.VCRedist.2015+.x64
-winget install -e --source winget --id DominikReichl.KeePass
 winget install -e --source winget --id WireGuard.WireGuard
 winget install -e --source winget --id Discord.Discord
 winget install -e --source winget --id 7zip.7zip
 winget install -e --source winget --id Obsidian.Obsidian
 winget install -e --source winget --id Spotify.Spotify
 winget install -e --source winget --id Brave.Brave
+# winget install -e --source winget --id DominikReichl.KeePass
 # winget install -e --source winget --id VideoLAN.VLC
 # winget install -e --source winget --id TheDocumentFoundation.LibreOffice
 
@@ -231,8 +221,15 @@ winget install -e --source winget --id GitHub.GitHubDesktop
 winget install -e --source winget --id Valve.Steam
 winget install -e --source winget --id EpicGames.EpicGamesLauncher
 winget install -e --source winget --id GOG.Galaxy
+winget install -e --source winget --id Playnite.Playnite
+
+# Playstation
 # winget install -e --source winget --id PlayStation.PSRemotePlay
 # winget install -e --source winget --id PlayStation.PSPlus
+
+# Emulators
+winget install -e --source winget --id Stenzek.DuckStation
+winget install -e --source winget --id PCSX2Team.PCSX2
 
 # VR
 winget install -e --source winget --id VirtualDesktop.Streamer
@@ -251,25 +248,6 @@ winget install 9N7F2SM5D1LR --accept-source-agreements --accept-package-agreemen
 # Game Dev
 # winget install -e --source winget --id Unity.UnityHub
 # winget install -e --source winget --id Microsoft.VisualStudio.2022.Community
-
-################################################
-##### Firefox
-################################################
-
-# Install Firefox
-winget install -e --source winget --id Mozilla.Firefox
-
-#
-# OPEN FIREFOX
-#
-
-# Get profile path
-$FirefoxProfilePath = Get-ChildItem -Directory -Path "$env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles" -Filter "*.default-release" -Name
-
-# Import Firefox configs to profile path
-Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/gjpin/windows-11/main/configs/firefox/user.js" `
-    -OutFile "$env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles\$FirefoxProfilePath"
 
 ################################################
 ##### VSCode
@@ -291,7 +269,6 @@ $credential = Get-Credential -credential "$env:USERNAME"
 $commands = @'
     "& code --install-extension ms-vscode-remote.remote-wsl"
     "& code --install-extension ms-vscode.powershell"
-    "& code --install-extension ms-dotnettools.csharp"
 '@
 Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -ArgumentList '-Command', $commands
 
@@ -306,10 +283,10 @@ Start-Process -FilePath Powershell -LoadUserProfile -Credential $credential -Arg
 # Disable .NET telemetry
 [Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT', 'true', 'Machine')
 
-# Install .NET SDK (LTS)
-winget install -e --source winget --id Microsoft.DotNet.SDK.8
-winget install -e --source winget --id Microsoft.DotNet.Runtime.8
-winget install -e --source winget --id Microsoft.DotNet.DesktopRuntime.8
+# Install .NET SDK/Runtimes (LTS)
+winget install -e --source winget --id Microsoft.DotNet.SDK.10
+winget install -e --source winget --id Microsoft.DotNet.Runtime.10
+winget install -e --source winget --id Microsoft.DotNet.DesktopRuntime.10
 
 # Install Ollama
 # winget install -e --source winget --id Ollama.Ollama
@@ -346,9 +323,8 @@ winget install -e --source winget --id Microsoft.DotNet.DesktopRuntime.8
 # Install Kind
 # winget install -e --source winget --id Kubernetes.kind
 
-# Install JDK Temurin
-# winget install -e --id EclipseAdoptium.Temurin.17.JDK
-# winget install -e --id EclipseAdoptium.Temurin.21.JDK # or Microsoft.OpenJDK.21
+# Install JDK Temurin LTS
+# winget install -e --id EclipseAdoptium.Temurin.25.JDK
 
 # Install Android Studio
 # winget install -e --id Google.AndroidStudio
@@ -405,7 +381,11 @@ Enable-WindowsOptionalFeature -Online -FeatureName HypervisorPlatform -NoRestart
 ################################################
 
 # Helper to set resolution/frequency/HDR
-Install-Module -Name WindowsDisplayManager -RequiredVersion 1.1.1 -Scope AllUsers
+# Install-Module -Name WindowsDisplayManager -RequiredVersion 1.1.1 -Scope AllUsers
+
+# Download and install WindowsDisplayManager powershell module
+Invoke-WebRequest -Uri "https://github.com/gjpin/WindowsDisplayManager/archive/refs/heads/main.zip" -OutFile "$env:TEMP\WindowsDisplayManager.zip"
+Expand-Archive -Path "$env:TEMP\WindowsDisplayManager.zip" -DestinationPath "C:\Program Files\WindowsPowerShell\Modules\WindowsDisplayManager" -Force
 
 # Install Sunshine
 winget install -e --source winget --id LizardByte.Sunshine
