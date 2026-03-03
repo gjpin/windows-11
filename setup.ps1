@@ -17,6 +17,50 @@ powercfg /setacvalueindex scheme_current 238c9fa8-0aad-41ed-83f4-97be242c8f20 bd
 auditpol /set /category:"Object Access" /success:disable /failure:enable
 
 ################################################
+##### Tweaks
+################################################
+
+# References:
+# https://github.com/ChrisTitusTech/winutil/blob/main/config/tweaks.json
+
+# Remove widgets
+Stop-Process -Name Widgets
+Get-AppxPackage Microsoft.WidgetsPlatformRuntime -AllUsers | Remove-AppxPackage -AllUsers
+Get-AppxPackage MicrosoftWindows.Client.WebExperience -AllUsers | Remove-AppxPackage -AllUsers
+
+# Gray out the memory integrity UI and display the message This setting is managed by your administrator
+reg delete HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity /v "WasEnabledBy" /f
+
+################################################
+##### Disable Explorer Automatic Folder Discoverys
+################################################
+
+# Previously detected folders
+$bags = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\Bags\"
+
+# Folder types lookup table
+$bagMRU = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU\"
+
+# Flush Explorer view database
+Remove-Item -Path $bags -Recurse -Force
+Write-Host \"Removed $bags\"
+
+Remove-Item -Path $bagMRU -Recurse -Force
+Write-Host \"Removed $bagMRU\"
+
+# Every folder
+$allFolders = \"HKCU:\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\Bags\\AllFolders\\Shell\"
+
+if (!(Test-Path $allFolders)) {
+New-Item -Path $allFolders -Force
+Write-Host \"Created $allFolders\"
+}
+
+# Generic view
+New-ItemProperty -Path $allFolders -Name \"FolderType\" -Value \"NotSpecified\" -PropertyType String -Force
+Write-Host \"Set FolderType to NotSpecified\"
+
+################################################
 ##### WSL
 ################################################
 

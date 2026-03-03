@@ -986,6 +986,7 @@ DWORD:1
 
 ; ----------------------------------------------------------------------
 ; Enable virtualization-based protection of code integrity, System Guard Launch and Credential Guard
+; https://learn.microsoft.com/en-us/windows/security/hardware-security/enable-virtualization-based-protection-of-code-integrity?tabs=reg
 ; https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-hvci-enablement
 ; https://learn.microsoft.com/en-us/windows/security/threat-protection/device-guard/enable-virtualization-based-protection-of-code-integrity
 ; https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-system-guard/system-guard-secure-launch-and-smm-protection
@@ -993,57 +994,57 @@ DWORD:1
 ; ----------------------------------------------------------------------
 
 ; Enable VBS
-; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard
-; EnableVirtualizationBasedSecurity
-; DWORD:1
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard
+EnableVirtualizationBasedSecurity
+DWORD:1
 
-; Turns on VBS with Secure Boot and DMA protection
-; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard
-; RequirePlatformSecurityFeatures
-; DWORD:3
+; Turns on VBS with Secure Boot protection (DMA support will be automatically enabled in PCs with IOMMUs)
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard
+RequirePlatformSecurityFeatures
+DWORD:1
 
 ; Enable VBS with UEFI lock
-; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard
-; Locked
-; DWORD:1
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard
+Locked
+DWORD:1
 
 ; Enable virtualization-based protection of Code Integrity policies
-; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
-; Enabled
-; DWORD:1
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
+Enabled
+DWORD:1
 
 ; Enable virtualization-based protection of Code Integrity policies with UEFI lock
-; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
-; Locked
-; DWORD:1
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity
+Locked
+DWORD:1
 
 ; Enable System Guard Secure Launch
-; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\SystemGuard
-; Enabled
-; DWORD:1
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\SystemGuard
+Enabled
+DWORD:1
 
 ; Enable Windows Defender Credential Guard
-; Computer
-; SYSTEM\CurrentControlSet\Control\Lsa
-; LsaCfgFlags
-; DWORD:1
+Computer
+SYSTEM\CurrentControlSet\Control\Lsa
+LsaCfgFlags
+DWORD:1
 
 ; Enable Kernel-mode Hardware-enforced Stack Protection (ShadowStack)
-; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
-; Enabled
-; DWORD:1
+Computer
+SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
+Enabled
+DWORD:1
 
 ; Computer
-; SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
-; WasEnabledBy
-; DWORD:2
+SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks
+WasEnabledBy
+DWORD:2
 
 ; ----------------------------------------------------------------------
 ; Windows Firewall
@@ -1540,6 +1541,40 @@ TurnOffWindowsCopilot
 DWORD:1
 
 ; ----------------------------------------------------------------------
+; Brave
+; ----------------------------------------------------------------------
+
+; Disable Brave Rewards
+Computer
+SOFTWARE\Policies\BraveSoftware\Brave
+BraveRewardsDisabled
+DWORD:1
+
+; Disable Brave Wallet
+Computer
+SOFTWARE\Policies\BraveSoftware\Brave
+BraveWalletDisabled
+DWORD:1
+
+; Disable Brave VPN
+Computer
+SOFTWARE\Policies\BraveSoftware\Brave
+BraveVPNDisabled
+DWORD:1
+
+; Disable AI Chat
+Computer
+SOFTWARE\Policies\BraveSoftware\Brave
+BraveAIChatEnabled
+DWORD:1
+
+; Disable Stats Ping
+Computer
+SOFTWARE\Policies\BraveSoftware\Brave
+BraveStatsPingEnabled
+DWORD:1
+
+; ----------------------------------------------------------------------
 ; Misc
 ; ----------------------------------------------------------------------
 
@@ -1732,4 +1767,63 @@ SZ:""
 Computer
 SOFTWARE\Policies\Microsoft\Windows\Sudo
 Enabled
+DWORD:1
+
+; Set services autostart to manual
+Computer
+SYSTEM\CurrentControlSet\Services\CDPSvc
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\InventorySvc
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\PcaSvc
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\StorSvc
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\UsoSvc
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\WSAIFabricSvc
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\WpnService
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\camsvc
+Start
+DWORD:3
+
+Computer
+SYSTEM\CurrentControlSet\Services\edgeupdate
+Start
+DWORD:3
+
+; Disable Windows Platform Binary Table (WPBT)
+Computer
+SYSTEM\CurrentControlSet\Control\Session Manager
+DisableWpbtExecution
+DWORD:1
+
+; Disable AI features in notepad
+; https://learn.microsoft.com/en-us/windows/client-management/manage-notepad?tabs=reg
+Computer
+SOFTWARE\Policies\WindowsNotepad
+DisableAIFeatures
 DWORD:1
