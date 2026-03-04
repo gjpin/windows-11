@@ -32,7 +32,7 @@ Get-AppxPackage MicrosoftWindows.Client.WebExperience -AllUsers | Remove-AppxPac
 reg delete HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity /v "WasEnabledBy" /f
 
 ################################################
-##### Disable Explorer Automatic Folder Discoverys
+##### Disable Explorer Automatic Folder Discovery
 ################################################
 
 # Previously detected folders
