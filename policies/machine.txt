@@ -178,10 +178,10 @@ SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
 LetAppsAccessCallHistory
 DWORD:2
 
-; Computer
-; SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
-; LetAppsAccessCamera
-; DWORD:2
+Computer
+SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
+LetAppsAccessCamera
+DWORD:2
 
 Computer
 SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
@@ -203,10 +203,10 @@ SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
 LetAppsAccessMessaging
 DWORD:2
 
-; Computer
-; SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
-; LetAppsAccessMicrophone
-; DWORD:2
+Computer
+SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
+LetAppsAccessMicrophone
+DWORD:2
 
 Computer
 SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
@@ -431,7 +431,7 @@ DWORD:1
 Computer
 SOFTWARE\Policies\Microsoft\WindowsFirewall\FirewallRules
 {0DE40C8E-C126-4A27-9371-A27DAB1039F7}
-SZ:v2.25|Action=Block|Active=TRUE|Dir=Out|Protocol=6|App=%windir%\\SystemApps\\Microsoft.Windows.Cortana_cw5n1h2txyewy\\searchUI.exe|Name=Block outbound Cortana|
+SZ:v2.25|Action=Block|Active=TRUE|Dir=Out|Protocol=6|App=%windir%\\SystemApps\\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\\SearchHost.exe|Name=Block outbound Windows Search|
 
 Computer
 SOFTWARE\Policies\Microsoft\WindowsStore
@@ -498,10 +498,10 @@ SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
 LetAppsActivateWithVoiceAboveLock
 DWORD:2
 
-; Computer
-; SOFTWARE\Policies\Microsoft\Edge
-; SearchSuggestEnabled
-; DWORD:0
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+SearchSuggestEnabled
+DWORD:0
 
 Computer
 SOFTWARE\Policies\Microsoft\Edge
@@ -888,6 +888,83 @@ Computer
 SOFTWARE\Policies\Microsoft\Edge
 LocalBrowserDataShareEnabled
 DWORD:0
+
+; Disable Copilot and AI features
+; https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+Microsoft365CopilotChatIconEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+CopilotPageContext
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+EdgeEntraCopilotPageContext
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+AllowBrowsingWithCopilot
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+CopilotNewTabPageEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+CopilotAddressBarSuggestionsEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+NewTabPageBingChatEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+ComposeInlineEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+EdgeHistoryAISearchEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+ShareBrowsingHistoryWithCopilotSearchAllowed
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+AIGenThemesEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+BuiltInAIAPIsEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+TabServicesEnabled
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+RemixAvailability
+DWORD:0
+
+Computer
+SOFTWARE\Policies\Microsoft\Edge
+GenAILocalFoundationalModelSettings
+DWORD:1
 
 ; ----------------------------------------------------------------------
 ; Windows security baseline
@@ -1506,17 +1583,17 @@ DisableClickToDo
 DWORD:1
 
 Computer
-SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+Software\Microsoft\Windows\CurrentVersion\Policies\Paint
 DisableCocreator
 DWORD:1
 
 Computer
-SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+Software\Microsoft\Windows\CurrentVersion\Policies\Paint
 DisableGenerativeFill
 DWORD:1
 
 Computer
-SOFTWARE\Policies\Microsoft\Windows\WindowsAI
+Software\Microsoft\Windows\CurrentVersion\Policies\Paint
 DisableImageCreator
 DWORD:1
 
@@ -1528,11 +1605,6 @@ DWORD:1
 Computer
 SOFTWARE\Policies\Microsoft\Windows\WindowsAI
 DisableSettingsAgent
-DWORD:1
-
-Computer
-SOFTWARE\Policies\Microsoft\Windows\WindowsAI
-SetDataLossPreventionProvider
 DWORD:1
 
 Computer
@@ -1566,13 +1638,13 @@ DWORD:1
 Computer
 SOFTWARE\Policies\BraveSoftware\Brave
 BraveAIChatEnabled
-DWORD:1
+DWORD:0
 
 ; Disable Stats Ping
 Computer
 SOFTWARE\Policies\BraveSoftware\Brave
 BraveStatsPingEnabled
-DWORD:1
+DWORD:0
 
 ; ----------------------------------------------------------------------
 ; Misc
